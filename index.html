@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hệ Thống Thi Đua Học Đường - TDHD</title>
+    <!-- Google Fonts: Montserrat, Roboto & PT Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Roboto:wght@100;300;400;500;700;900&family=PT+Mono&display=swap" rel="stylesheet">
+    <!-- Google Material Symbols (Icons) -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="dark-theme">
+    <div class="app-container">
+        
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <span class="material-symbols-rounded brand-icon">school</span>
+                <div class="brand-text">
+                    <h1>TDHD System</h1>
+                    <p>Thi đua học đường</p>
+                </div>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <button class="nav-item active" data-tab="dashboard">
+                    <span class="material-symbols-rounded">leaderboard</span>
+                    <span>Bảng Xếp Hạng</span>
+                </button>
+                <button class="nav-item" data-tab="scoring" id="nav-scoring">
+                    <span class="material-symbols-rounded">edit_note</span>
+                    <span>Ghi Sổ Trực</span>
+                </button>
+                <button class="nav-item" data-tab="violation-summary">
+                    <span class="material-symbols-rounded">analytics</span>
+                    <span>Tổng Hợp Vi Phạm</span>
+                </button>
+                <button class="nav-item" data-tab="assignments" id="nav-assignments">
+                    <span class="material-symbols-rounded">calendar_month</span>
+                    <span>Phân Công Trực</span>
+                </button>
+                <button class="nav-item" data-tab="regulations">
+                    <span class="material-symbols-rounded">gavel</span>
+                    <span>Quy Định Thi Đua</span>
+                </button>
+                <button class="nav-item" data-tab="students">
+                    <span class="material-symbols-rounded">group</span>
+                    <span>Hồ Sơ Học Sinh</span>
+                </button>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <div class="user-profile-widget">
+                    <div class="avatar">
+                        <span class="material-symbols-rounded">person</span>
+                    </div>
+                    <div class="profile-info">
+                        <h4 id="user-display-name">Admin Tuan</h4>
+                        <p id="user-display-role">Quản Trị Hệ Thống</p>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Body -->
+        <main class="main-content">
+            
+            <!-- Header Section -->
+            <header class="app-header">
+                <div class="header-search">
+                    <span class="material-symbols-rounded">search</span>
+                    <input type="text" placeholder="Tìm kiếm lớp, học sinh, tiêu chí..." id="global-search">
+                </div>
+                
+                <div class="header-actions">
+                    <!-- Week Selector -->
+                    <div class="week-selector">
+                        <span class="material-symbols-rounded">event</span>
+                        <select id="select-week">
+                            <option value="1" selected>Tuần 1</option>
+                            <option value="2">Tuần 2</option>
+                            <option value="3">Tuần 3</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Role Switcher (Simulator Only) -->
+                    <div class="role-switcher-widget">
+                        <span class="switcher-label">Đóng vai:</span>
+                        <select id="role-selector" class="role-dropdown">
+                            <option value="ADMIN">ADMIN (Quản trị viên)</option>
+                            <option value="CO_DO">CỜ ĐỎ (Học sinh trực tuần)</option>
+                            <option value="GIAO_VIEN">GIÁO VIÊN (GVCN lớp 11A)</option>
+                            <option value="HOC_SINH">HỌC SINH (Học sinh lớp 11A)</option>
+                        </select>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Tab: Dashboard -->
+            <section class="tab-view active" id="tab-dashboard">
+                <div class="view-header">
+                    <h2>Bảng Tổng Sắp Thi Đua Tuần</h2>
+                    <p>Cập nhật số liệu tự động và trực quan từ sổ trực hàng ngày</p>
+                </div>
+
+                <!-- TOP 3 Podium -->
+                <div class="podium-section">
+                    <!-- 2nd Place -->
+                    <div class="podium-card silver" id="podium-2">
+                        <div class="podium-plaque silver-plaque">2ND PLACE</div>
+                        <div class="podium-rank">2</div>
+                        <div class="podium-details">
+                            <h3 class="class-name">11B</h3>
+                            <p class="score"><span class="score-value">98.5</span> điểm</p>
+                            <p class="stats">Cộng: +20 | Trừ: -21.5</p>
+                        </div>
+                    </div>
+                    <!-- 1st Place -->
+                    <div class="podium-card gold" id="podium-1">
+                        <div class="crown-icon">
+                            <svg viewBox="0 0 24 24" width="36" height="36" fill="var(--primary-color)" style="filter: drop-shadow(0 0 10px var(--primary-color));">
+                                <path d="M2 22h20v-3H2v3zm10-18L9.5 9 4 5.5 7 16h10l3-10.5-5.5 3.5L12 4z"/>
+                            </svg>
+                        </div>
+                        <div class="podium-plaque gold-plaque">CHAMPION</div>
+                        <div class="podium-rank">1</div>
+                        <div class="podium-details">
+                            <h3 class="class-name">11C</h3>
+                            <p class="score"><span class="score-value">113.0</span> điểm</p>
+                            <p class="stats">Cộng: +25 | Trừ: -12.0</p>
+                        </div>
+                    </div>
+                    <!-- 3rd Place -->
+                    <div class="podium-card bronze" id="podium-3">
+                        <div class="podium-plaque bronze-plaque">3RD PLACE</div>
+                        <div class="podium-rank">3</div>
+                        <div class="podium-details">
+                            <h3 class="class-name">11A</h3>
+                            <p class="score"><span class="score-value">93.0</span> điểm</p>
+                            <p class="stats">Cộng: +25 | Trừ: -32.0</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Main Dashboard Grid -->
+                <div class="dashboard-grid">
+                    
+                    <!-- Weekly Rankings Table -->
+                    <div class="dashboard-card main-table-card">
+                        <div class="card-header">
+                            <h3>Bảng Xếp Hạng Đầy Đủ</h3>
+                            <button class="btn btn-sm btn-outline" id="btn-recalculate">
+                                <span class="material-symbols-rounded">sync</span> Tính lại điểm
+                            </button>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Thứ Hạng</th>
+                                        <th>Lớp</th>
+                                        <th>Khối</th>
+                                        <th>Điểm Gốc</th>
+                                        <th>Tổng Cộng</th>
+                                        <th>Tổng Trừ</th>
+                                        <th>Điểm Tổng Kết</th>
+                                        <th>Chi Tiết</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="rankings-tbody">
+                                    <!-- Populated dynamically via JS -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Statistics Sidebar inside Dashboard -->
+                    <div class="dashboard-sidebar-grid">
+                        <!-- Penalty Breakdown -->
+                        <div class="dashboard-card stats-card">
+                            <div class="card-header">
+                                <h3>Lỗi Vi Phạm Phổ Biến</h3>
+                            </div>
+                            <div class="stats-list" id="penalties-breakdown-list">
+                                <!-- Populated dynamically -->
+                            </div>
+                        </div>
+
+                        <!-- Achievements Breakdown -->
+                        <div class="dashboard-card stats-card">
+                            <div class="card-header">
+                                <h3>Hoạt Động Tích Cực</h3>
+                            </div>
+                            <div class="stats-list" id="achievements-breakdown-list">
+                                <!-- Populated dynamically -->
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Nhóm 3 Lớp Cần Nỗ Lực Cải Thiện Nề Nếp Hơn (Bottom 3 Podium) -->
+                <div class="bottom-podium-header" style="margin-top: 3.5rem; text-align: center;">
+                    <div style="display: inline-flex; align-items: center; gap: 0.5rem; justify-content: center;">
+                        <span class="material-symbols-rounded" style="color:var(--danger-color); font-size:2rem; vertical-align: middle;">trending_down</span>
+                        <h3 style="font-family:var(--font-heading); font-size:1.4rem; font-weight:700; color:var(--text-primary); margin:0;">
+                            Nhóm 3 Lớp Cần Nỗ Lực Cải Thiện Nề Nếp Hơn
+                        </h3>
+                    </div>
+                    <p style="color:var(--text-muted); font-size:0.9rem; margin-top:0.35rem;">
+                        Hãy cùng nỗ lực chấn chỉnh nề nếp và xây dựng phong trào tốt trong tuần tới nhé!
+                    </p>
+                </div>
+
+                <div class="podium-section" style="margin-top: 1.5rem; margin-bottom: 3.5rem; border-bottom: none; padding-bottom: 0; min-height: 270px; align-items: flex-end;">
+                    <!-- Bottom 2nd (Rank 12) -->
+                    <div class="podium-card warn-2" id="bottom-podium-2" style="opacity: 0;">
+                        <div class="warn-icon-wrapper"><span class="material-symbols-rounded text-danger" style="font-size: 2.2rem; margin-bottom: 0.5rem;">warning</span></div>
+                        <div class="podium-rank" style="background:var(--danger-bg); color:var(--danger-color); border: 1px solid var(--danger-color); font-size:0.95rem; width:32px; height:32px; font-weight:700;">12</div>
+                        <div class="podium-details">
+                            <h3 class="class-name">11C</h3>
+                            <p class="score"><span class="score-value">85.0</span> điểm</p>
+                            <p class="stats">Cộng: +5 | Trừ: -20</p>
+                        </div>
+                    </div>
+                    <!-- Bottom 1st (Rank 13 - Thấp nhất) -->
+                    <div class="podium-card warn-1" id="bottom-podium-1" style="opacity: 0;">
+                        <div class="warn-icon-wrapper" style="animation: pulseRed 1.5s infinite; display: inline-flex;"><span class="material-symbols-rounded text-danger" style="font-size: 2.5rem; margin-bottom: 0.5rem;">error</span></div>
+                        <div class="podium-rank" style="background:var(--danger-bg); color:var(--danger-color); border: 2px solid var(--danger-color); font-size:1.05rem; width:36px; height:36px; font-weight:800;">13</div>
+                        <div class="podium-details">
+                            <h3 class="class-name">10B</h3>
+                            <p class="score"><span class="score-value">72.0</span> điểm</p>
+                            <p class="stats">Cộng: +2 | Trừ: -30</p>
+                        </div>
+                    </div>
+                    <!-- Bottom 3rd (Rank 11) -->
+                    <div class="podium-card warn-3" id="bottom-podium-3" style="opacity: 0;">
+                        <div class="warn-icon-wrapper"><span class="material-symbols-rounded text-warning" style="font-size: 2.2rem; margin-bottom: 0.5rem;">eco</span></div>
+                        <div class="podium-rank" style="background:var(--warning-bg); color:var(--warning-color); border: 1px solid var(--warning-color); font-size:0.95rem; width:32px; height:32px; font-weight:700;">11</div>
+                        <div class="podium-details">
+                            <h3 class="class-name">12C</h3>
+                            <p class="score"><span class="score-value">88.0</span> điểm</p>
+                            <p class="stats">Cộng: +10 | Trừ: -22</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bảng Tổng Hợp Điểm Trừ Toàn Trường -->
+                <div class="dashboard-card matrix-card" style="margin-top: 2rem; width: 100%;">
+                    <div class="card-header">
+                        <div class="card-title-icon red"><span class="material-symbols-rounded">grid_on</span></div>
+                        <h3>Bảng Tổng Hợp Điểm Trừ Toàn Trường (Trong Tuần)</h3>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="matrix-table" id="dashboard-violation-summary-table">
+                            <thead>
+                                <tr id="dashboard-violation-summary-thead-tr">
+                                    <!-- Dynamic column headers (Classes, totals) populated via JS -->
+                                </tr>
+                            </thead>
+                            <tbody id="dashboard-violation-summary-tbody">
+                                <!-- Dynamic rows (Criteria, daily logs) populated via JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Bảng Tổng Hợp Điểm Cộng Toàn Trường -->
+                <div class="dashboard-card matrix-card" style="margin-top: 2rem; width: 100%;">
+                    <div class="card-header">
+                        <div class="card-title-icon green"><span class="material-symbols-rounded">playlist_add_check</span></div>
+                        <h3>Bảng Tổng Hợp Điểm Cộng Toàn Trường (Trong Tuần)</h3>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="matrix-table" id="dashboard-achievement-summary-table">
+                            <thead>
+                                <tr id="dashboard-achievement-summary-thead-tr">
+                                    <!-- Dynamic column headers (Criteria, totals) populated via JS -->
+                                </tr>
+                            </thead>
+                            <tbody id="dashboard-achievement-summary-tbody">
+                                <!-- Dynamic rows (Classes, daily achievements) populated via JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tab: Ghi Sổ Trực (Cờ đỏ & Giám thị) -->
+            <section class="tab-view" id="tab-scoring">
+                <div class="view-header">
+                    <h2>Bảng Lưới Ghi Nhận Thi Đua Hàng Ngày</h2>
+                    <p>Chọn Tuần trực và Lớp chấm điểm chéo bên dưới để ghi nhận hàng loạt lỗi vi phạm hoặc thành tích trong tuần</p>
+                </div>
+
+                <!-- Lớp và Tuần Selector -->
+                <div class="dashboard-card scoring-filter-card">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="scoring-select-week">Tuần Nhập Điểm <span class="required">*</span></label>
+                            <select id="scoring-select-week" class="form-control-large">
+                                <option value="1" selected>Tuần 1</option>
+                                <option value="2">Tuần 2</option>
+                                <option value="3">Tuần 3</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="scoring-select-lop">Lớp Được Chấm Điểm <span class="required">*</span></label>
+                            <select id="scoring-select-lop" class="form-control-large">
+                                <option value="" disabled selected>-- Chọn lớp cần ghi sổ --</option>
+                                <!-- Dynamic options -->
+                            </select>
+                            <span class="helper-text" id="scoring-assignment-helper"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ma trận ghi điểm (Chỉ hiển thị khi đã chọn Lớp) -->
+                <div id="scoring-matrix-container" style="display: none;">
+                    
+                    <!-- Section I: Bảng vi phạm (Điểm trừ) -->
+                    <div class="dashboard-card matrix-card">
+                        <div class="card-header">
+                            <div class="card-title-icon red"><span class="material-symbols-rounded">remove_circle</span></div>
+                            <h3>I. BẢNG GHI NHẬN VI PHẠM (ĐIỂM TRỪ)</h3>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="matrix-table">
+                                <thead>
+                                    <tr>
+                                        <th style="min-width: 250px;">Nội Dung Vi Phạm Quy Chế</th>
+                                        <th>Thứ 2</th>
+                                        <th>Thứ 3</th>
+                                        <th>Thứ 4</th>
+                                        <th>Thứ 5</th>
+                                        <th>Thứ 6</th>
+                                        <th>Thứ 7</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="violation-matrix-tbody">
+                                    <!-- Populated dynamically via JS -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Section II: Bảng điểm cộng (Thành tích) -->
+                    <div class="dashboard-card matrix-card">
+                        <div class="card-header" style="flex-wrap: wrap; gap: 1rem;">
+                            <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                <div class="card-title-icon green"><span class="material-symbols-rounded">add_circle</span></div>
+                                <h3>II. BẢNG GHI NHẬN THÀNH TÍCH (ĐIỂM CỘNG)</h3>
+                            </div>
+                            <span class="helper-text" style="color: var(--text-muted); font-size: 0.85rem; background: oklch(100% 0 0 / 2%); padding: 6px 12px; border-radius: 10px; border: 1px solid var(--border-card); font-weight: 500; display: inline-flex; align-items: center; gap: 4px;">
+                                <span class="material-symbols-rounded" style="font-size: 1.15rem; color: var(--primary-color);">info</span> <strong>Quy định số tiết</strong>: Tối đa 5 tiết/ngày (Thứ 2 & 7 tối đa 4 tiết). Đạt đủ tiết Tốt tự động tính là <strong>Buổi học tốt</strong> (+30đ).
+                            </span>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="matrix-table">
+                                <thead>
+                                    <tr>
+                                        <th style="min-width: 250px;">Nội Dung Thành Tích Học Tập</th>
+                                        <th>Thứ 2</th>
+                                        <th>Thứ 3</th>
+                                        <th>Thứ 4</th>
+                                        <th>Thứ 5</th>
+                                        <th>Thứ 6</th>
+                                        <th>Thứ 7</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="achievement-matrix-tbody">
+                                    <!-- Populated dynamically via JS -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Action Save Matrix Button -->
+                    <div class="matrix-actions-bar">
+                        <button class="btn btn-lg btn-primary" id="btn-save-matrix">
+                            <span class="material-symbols-rounded">save</span> Lưu Toàn Bộ Bảng Điểm
+                        </button>
+                    </div>
+
+                </div>
+
+                <!-- Recent Logs List Card -->
+                <div class="dashboard-card list-card" style="margin-top: 2rem;">
+                    <div class="card-header">
+                        <h3>Nhật Ký Ghi Nhận Chấm Điểm Gần Đây</h3>
+                    </div>
+                    <div class="log-entries-list" id="recent-logs-list">
+                        <!-- Populated dynamically via JS -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tab: Tổng Hợp Vi Phạm (Báo cáo nề nếp) -->
+            <section class="tab-view" id="tab-violation-summary">
+                <div class="view-header">
+                    <h2>Bảng Tổng Hợp Vi Phạm Nề Nếp Tuần</h2>
+                    <p>Tra cứu số lượng lỗi vi phạm tổng hợp chi tiết theo từng thứ và tiêu chí nề nếp</p>
+                </div>
+
+                <!-- Lớp và Tuần Selector -->
+                <div class="dashboard-card scoring-filter-card">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="summary-select-week">Chọn Tuần Học</label>
+                            <select id="summary-select-week" class="form-control-large">
+                                <option value="1" selected>Tuần 1</option>
+                                <option value="2">Tuần 2</option>
+                                <option value="3">Tuần 3</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="summary-select-lop">Chọn Lớp Học</label>
+                            <select id="summary-select-lop" class="form-control-large">
+                                <option value="" disabled selected>-- Chọn lớp xem thống kê --</option>
+                                <!-- Populated dynamically -->
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ma trận tổng hợp vi phạm -->
+                <div id="summary-matrix-container" style="display: none;">
+                    <div class="dashboard-card matrix-card">
+                        <div class="card-header">
+                            <div class="card-title-icon red"><span class="material-symbols-rounded">bar_chart</span></div>
+                            <h3 id="summary-matrix-title">BẢNG SỐ LIỆU TỔNG HỢP LỖI PHẠT</h3>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="matrix-table">
+                                <thead>
+                                    <tr>
+                                        <th style="min-width: 250px;">Tiêu Chí Vi Phạm Quy Chế</th>
+                                        <th>Thứ 2</th>
+                                        <th>Thứ 3</th>
+                                        <th>Thứ 4</th>
+                                        <th>Thứ 5</th>
+                                        <th>Thứ 6</th>
+                                        <th>Thứ 7</th>
+                                        <th style="background: oklch(60% 0.19 25 / 10%); color: var(--danger-color); font-weight: 700; text-align: center; width: 100px;">Tổng Lỗi</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="summary-matrix-tbody">
+                                    <!-- Populated dynamically via JS -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tab: Phân Công Trực (PhanCongCoDo) -->
+            <section class="tab-view" id="tab-assignments">
+                <div class="view-header">
+                    <h2>Lịch Phân Công Trực Luân Phiên</h2>
+                    <p>Admin phân công Cờ đỏ đi chấm điểm chéo các lớp học theo từng tuần trực</p>
+                </div>
+
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h3>Lịch Trực Tuần Hiện Tại</h3>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Cờ Đỏ Trực</th>
+                                    <th>Lớp Học Bản Thân</th>
+                                    <th>Tuần Trực</th>
+                                    <th>Lớp Phân Công Chấm</th>
+                                    <th>Quy Tắc An Toàn</th>
+                                    <th>Thao Tác</th>
+                                </tr>
+                            </thead>
+                            <tbody id="assignments-tbody">
+                                <!-- Populated dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- Nút lưu phân công trực chéo -->
+                    <div class="matrix-actions-bar" style="margin-top: 1.5rem; border-top: 1px solid var(--border-card); padding-top: 1.5rem; display: flex; justify-content: flex-end;">
+                        <button class="btn btn-primary" id="btn-save-assignments" style="display: none;">
+                            <span class="material-symbols-rounded">save</span> Lưu Phân Công
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tab: Quy Định Thi Đua (QuyDinhThiDua) -->
+            <section class="tab-view" id="tab-regulations">
+                <div class="view-header">
+                    <h2>Bộ Tiêu Chí & Quy Định Thi Đua</h2>
+                    <p>Tiêu chuẩn điểm cộng/trừ chốt cứng áp dụng cho toàn bộ năm học (Chỉ Admin được chỉnh sửa)</p>
+                </div>
+
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h3>Bộ Quy Chế Điểm Thi đua</h3>
+                        <button class="btn btn-sm btn-primary" id="btn-add-criterion" style="display:none;">
+                            <span class="material-symbols-rounded">add</span> Thêm tiêu chí mới
+                        </button>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Mã Tiêu Chí</th>
+                                    <th>Nội Dung Quy Định</th>
+                                    <th>Loại Điểm</th>
+                                    <th>Điểm Quy Đổi</th>
+                                    <th>Đơn Vị Tính</th>
+                                    <th>Quyền Thao Tác</th>
+                                </tr>
+                            </thead>
+                            <tbody id="criteria-tbody">
+                                <!-- Populated dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- Nút lưu thực hiện quy chế thi đua -->
+                    <div class="matrix-actions-bar" style="margin-top: 1.5rem; border-top: 1px solid var(--border-card); padding-top: 1.5rem; display: flex; justify-content: flex-end;">
+                        <button class="btn btn-primary" id="btn-save-regulations" style="display: none;">
+                            <span class="material-symbols-rounded">save</span> Lưu thực hiện
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tab: Hồ Sơ Học Sinh & Lớp học -->
+            <section class="tab-view" id="tab-students">
+                <div class="view-header">
+                    <h2>Danh Sách Học Sinh & Lớp Học</h2>
+                    <p>Quản lý danh sách học sinh và tra cứu thi đua cá nhân</p>
+                </div>
+
+                <div class="students-container-layout">
+                    <!-- Class sidebar selector -->
+                    <div class="dashboard-card list-sidebar-card">
+                        <div class="card-header">
+                            <h3>Lớp Học</h3>
+                        </div>
+                        <div class="list-group-items" id="class-sidebar-list">
+                            <!-- Populated dynamically -->
+                        </div>
+                    </div>
+                    
+                    <!-- Students list table -->
+                    <div class="dashboard-card students-table-card">
+                        <div class="card-header" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
+                            <h3 id="class-student-title" style="margin: 0;">Danh sách học sinh lớp 11A</h3>
+                            <div class="admin-student-actions" style="display: flex; gap: 0.5rem;">
+                                <button class="btn btn-sm btn-outline" id="btn-download-template-student" style="display:none;">
+                                    <span class="material-symbols-rounded">download</span> Tải Excel Mẫu
+                                </button>
+                                <button class="btn btn-sm btn-outline" id="btn-import-student-modal" style="display:none;">
+                                    <span class="material-symbols-rounded">upload_file</span> Nhập Excel
+                                </button>
+                                <button class="btn btn-sm btn-primary" id="btn-add-student" style="display:none;">
+                                    <span class="material-symbols-rounded">person_add</span> Thêm học sinh
+                                </button>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Mã HS</th>
+                                        <th>Họ Và Tên</th>
+                                        <th>Lớp</th>
+                                        <th>Ngày Sinh</th>
+                                        <th>Giới Tính</th>
+                                        <th>Lượt Lỗi (Tuần)</th>
+                                        <th>Lượt Cộng (Tuần)</th>
+                                        <th>Quyền Thao Tác</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="students-tbody">
+                                    <!-- Populated dynamically -->
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- Nút lưu thực hiện học sinh -->
+                        <div class="matrix-actions-bar" style="margin-top: 1.5rem; border-top: 1px solid var(--border-card); padding-top: 1.5rem; display: flex; justify-content: flex-end;">
+                            <button class="btn btn-primary" id="btn-save-students" style="display: none;">
+                                <span class="material-symbols-rounded">save</span> Lưu thực hiện
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- Native Dialog / Modal for Assignment Alert -->
+    <dialog id="alert-dialog" class="glass-dialog">
+        <div class="dialog-content">
+            <span class="material-symbols-rounded warning-dialog-icon">warning</span>
+            <h3 id="alert-dialog-title">Phát hiện Vi Phạm Quy Tắc!</h3>
+            <p id="alert-dialog-desc">Không cho phép phân công Cờ đỏ trực tuần chấm điểm cho chính lớp chủ quản của họ để đảm bảo tính khách quan.</p>
+            <div class="dialog-actions">
+                <button class="btn btn-primary" id="btn-close-dialog">Tôi Đã Hiểu</button>
+            </div>
+        </div>
+    </dialog>
+
+    <!-- Dialog: Add Assignment Form -->
+    <dialog id="assignment-form-dialog" class="glass-dialog form-dialog">
+        <div class="dialog-content">
+            <h3>Phân Công Trực Cờ Đỏ Mới</h3>
+            <form id="assignment-dialog-form">
+                <div class="form-group">
+                    <label for="assign-codo">Cờ Đỏ Trực Tuần <span class="required">*</span></label>
+                    <select id="assign-codo" required>
+                        <option value="" disabled selected>-- Chọn học sinh Cờ đỏ --</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="assign-week">Tuần Trực <span class="required">*</span></label>
+                    <select id="assign-week" required>
+                        <option value="1">Tuần 1</option>
+                        <option value="2">Tuần 2</option>
+                        <option value="3">Tuần 3</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="assign-lop">Lớp Phân Công Đi Chấm <span class="required">*</span></label>
+                    <select id="assign-lop" required>
+                        <option value="" disabled selected>-- Chọn lớp phân chấm chéo --</option>
+                    </select>
+                </div>
+                <div class="dialog-actions">
+                    <button type="button" class="btn btn-outline" id="btn-cancel-assign-dialog">Hủy</button>
+                    <button type="submit" class="btn btn-primary">Lưu Phân Công</button>
+                </div>
+            </form>
+        </div>
+    </dialog>
+
+    <!-- Dialog: Violation Details Breakdown -->
+    <dialog id="violation-detail-dialog" class="glass-dialog form-dialog" style="max-width: 600px; width: 95%;">
+        <div class="dialog-content" style="align-items: stretch; text-align: left;">
+            <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-card); padding-bottom: 0.75rem; margin-bottom: 1rem; gap: 1rem;">
+                <h3 id="violation-detail-title" style="margin: 0; font-family: var(--font-heading); font-size: 1.2rem;">Thống Kê Chi Tiết Vi Phạm</h3>
+                <button class="btn btn-icon btn-sm btn-outline" id="btn-close-violation-detail" style="border: none; padding: 4px; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; border-radius: 50%; width: 28px; height: 28px;">
+                    <span class="material-symbols-rounded" style="font-size: 1.25rem;">close</span>
+                </button>
+            </div>
+            <div class="table-responsive" style="max-height: 400px; overflow-y: auto;">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Học sinh</th>
+                            <th>Lớp</th>
+                            <th style="text-align: center; width: 150px;">Số lượt vi phạm</th>
+                        </tr>
+                    </thead>
+                    <tbody id="violation-detail-tbody">
+                        <!-- Dynamic rows populated via JS -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </dialog>
+
+    <!-- Dialog: Add Emulation Criterion Form -->
+    <dialog id="criterion-form-dialog" class="glass-dialog form-dialog">
+        <div class="dialog-content">
+            <h3>Thêm Tiêu Chí Thi Đua Mới</h3>
+            <form id="criterion-dialog-form">
+                <div class="form-group">
+                    <label for="criterion-content">Nội Dung Quy Định <span class="required">*</span></label>
+                    <input type="text" id="criterion-content" placeholder="Ví dụ: Đi học muộn, Giờ học: Tốt..." required style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-card); background: var(--bg-card); color: var(--text-primary); margin-top: 6px;">
+                </div>
+                <div class="form-group" style="margin-top: 1rem;">
+                    <label for="criterion-type">Loại Điểm <span class="required">*</span></label>
+                    <select id="criterion-type" required style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-card); background: var(--bg-card); color: var(--text-primary); margin-top: 6px;">
+                        <option value="TRU">Điểm Trừ (Vi phạm)</option>
+                        <option value="CONG">Điểm Cộng (Thành tích)</option>
+                    </select>
+                </div>
+                <div class="form-group" style="margin-top: 1rem;">
+                    <label for="criterion-score">Điểm Quy Đổi <span class="required">*</span></label>
+                    <input type="number" id="criterion-score" min="1" max="100" placeholder="Ví dụ: 5, 10..." required style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-card); background: var(--bg-card); color: var(--text-primary); margin-top: 6px;">
+                </div>
+                <div class="form-group" style="margin-top: 1rem;">
+                    <label for="criterion-unit">Đơn Vị Tính <span class="required">*</span></label>
+                    <input type="text" id="criterion-unit" placeholder="Ví dụ: /HS, /lớp, /tiết, /buổi..." required style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-card); background: var(--bg-card); color: var(--text-primary); margin-top: 6px;">
+                </div>
+                <div class="dialog-actions" style="display: flex; justify-content: flex-end; gap: 0.75rem; margin-top: 1.5rem;">
+                    <button type="button" class="btn btn-outline" id="btn-cancel-criterion-dialog">Hủy</button>
+                    <button type="submit" class="btn btn-primary">Lưu Tiêu Chí</button>
+                </div>
+            </form>
+        </div>
+    </dialog>
+
+    <!-- Dialog: Add Student Form -->
+    <dialog id="student-form-dialog" class="glass-dialog form-dialog">
+        <div class="dialog-content">
+            <h3>Thêm Học Sinh Mới</h3>
+            <form id="student-dialog-form">
+                <div class="form-group">
+                    <label for="student-name">Họ Và Tên <span class="required">*</span></label>
+                    <input type="text" id="student-name" placeholder="Ví dụ: Nguyễn Văn A" required style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-card); background: var(--bg-card); color: var(--text-primary); margin-top: 6px;">
+                </div>
+                <div class="form-group" style="margin-top: 1rem;">
+                    <label for="student-dob">Ngày Sinh <span class="required">*</span></label>
+                    <input type="date" id="student-dob" required style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-card); background: var(--bg-card); color: var(--text-primary); margin-top: 6px;">
+                </div>
+                <div class="form-group" style="margin-top: 1rem;">
+                    <label for="student-gender">Giới Tính <span class="required">*</span></label>
+                    <select id="student-gender" required style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-card); background: var(--bg-card); color: var(--text-primary); margin-top: 6px;">
+                        <option value="Nam">Nam</option>
+                        <option value="Nữ">Nữ</option>
+                    </select>
+                </div>
+                <div class="dialog-actions" style="display: flex; justify-content: flex-end; gap: 0.75rem; margin-top: 1.5rem;">
+                    <button type="button" class="btn btn-outline" id="btn-cancel-student-dialog">Hủy</button>
+                    <button type="submit" class="btn btn-primary">Lưu Học Sinh</button>
+                </div>
+            </form>
+        </div>
+    </dialog>
+
+    <!-- Dialog: Import Student Form -->
+    <dialog id="student-import-dialog" class="glass-dialog form-dialog" style="max-width: 550px; width: 95%;">
+        <div class="dialog-content">
+            <h3>Nhập Học Sinh Từ Excel</h3>
+            <p style="color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 1rem;">
+                Vui lòng chọn file CSV/Excel mẫu đã nhập dữ liệu học sinh (Họ tên, Ngày sinh dạng DD/MM/YYYY, Giới tính).
+            </p>
+            <form id="student-import-form">
+                <div class="form-group">
+                    <label for="student-file-input">Chọn File Dữ Liệu <span class="required">*</span></label>
+                    <input type="file" id="student-file-input" accept=".csv" required style="width: 100%; padding: 8px; border-radius: 6px; border: 1px solid var(--border-card); background: var(--bg-card); color: var(--text-primary); margin-top: 6px;">
+                </div>
+                
+                <!-- Preview Area -->
+                <div id="import-preview-container" style="display: none; margin-top: 1.2rem;">
+                    <h4 style="font-size: 0.9rem; margin-bottom: 0.5rem; color: var(--primary-color);">Xem trước dữ liệu nhập mẫu</h4>
+                    <div class="table-responsive" style="max-height: 200px; overflow-y: auto; border: 1px solid var(--border-card); border-radius: 6px;">
+                        <table class="data-table" style="font-size: 0.8rem; width: 100%;">
+                            <thead>
+                                <tr>
+                                    <th>Họ Và Tên</th>
+                                    <th>Ngày Sinh</th>
+                                    <th>Giới Tính</th>
+                                </tr>
+                            </thead>
+                            <tbody id="import-preview-tbody">
+                                <!-- Populated dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <p id="import-summary-text" style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.5rem;"></p>
+                </div>
+
+                <div class="dialog-actions" style="display: flex; justify-content: flex-end; gap: 0.75rem; margin-top: 1.5rem;">
+                    <button type="button" class="btn btn-outline" id="btn-cancel-import-dialog">Hủy</button>
+                    <button type="submit" class="btn btn-primary" id="btn-submit-import-students" disabled>Cập Nhật</button>
+                </div>
+            </form>
+        </div>
+    </dialog>
+
+    <!-- Supabase JS Client SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="app.js"></script>
+</body>
+</html>

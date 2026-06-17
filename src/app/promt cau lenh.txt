@@ -1,0 +1,12 @@
+[REDACTED_SUPABASE_TOKEN]
+
+Câu lệnh 
+Yêu cầu:
+- Sử dụng Supabase MCP để tạo bảng cho cơ sở dữ liệu.
+- Dùng Supabase để xác thực người dùng  
+- Người dùng phải đăng nhập thành công vào hệ thống để thực hiện các chức năng.
+- Các biến môi trường phải được lưu trong file .env
+- Thiết kế responsive (hoạt động tốt trên cả điện thoại và máy tính) 
+- Giao diện hoàn toàn bằng tiếng Việt.
+- Áp dụng giao diện hiện đại, sạch sẽ với Tailwind CSS  
+- Sử dụng React

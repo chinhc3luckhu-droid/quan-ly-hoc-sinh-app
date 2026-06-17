@@ -1,0 +1,5126 @@
+{
+    "TDHD_DanhMucLop": [
+        {
+            "MaLop": 1,
+            "TenLop": "10A",
+            "Khoi": 10,
+            "NamHoc": "2025-2026",
+            "BaseScore": 100
+        },
+        {
+            "MaLop": 2,
+            "TenLop": "10B",
+            "Khoi": 10,
+            "NamHoc": "2025-2026",
+            "BaseScore": 100
+        },
+        {
+            "MaLop": 3,
+            "TenLop": "10C",
+            "Khoi": 10,
+            "NamHoc": "2025-2026",
+            "BaseScore": 100
+        },
+        {
+            "MaLop": 4,
+            "TenLop": "10D",
+            "Khoi": 10,
+            "NamHoc": "2025-2026",
+            "BaseScore": 100
+        },
+        {
+            "MaLop": 5,
+            "TenLop": "11A",
+            "Khoi": 11,
+            "NamHoc": "2025-2026",
+            "BaseScore": 100
+        },
+        {
+            "MaLop": 6,
+            "TenLop": "11B",
+            "Khoi": 11,
+            "NamHoc": "2025-2026",
+            "BaseScore": 100
+        },
+        {
+            "MaLop": 7,
+            "TenLop": "11C",
+            "Khoi": 11,
+            "NamHoc": "2025-2026",
+            "BaseScore": 100
+        },
+        {
+            "MaLop": 8,
+            "TenLop": "11D",
+            "Khoi": 11,
+            "NamHoc": "2025-2026",
+            "BaseScore": 100
+        },
+        {
+            "MaLop": 9,
+            "TenLop": "12A",
+            "Khoi": 12,
+            "NamHoc": "2025-2026",
+            "BaseScore": 100
+        },
+        {
+            "MaLop": 10,
+            "TenLop": "12B",
+            "Khoi": 12,
+            "NamHoc": "2025-2026",
+            "BaseScore": 100
+        },
+        {
+            "MaLop": 11,
+            "TenLop": "12C",
+            "Khoi": 12,
+            "NamHoc": "2025-2026",
+            "BaseScore": 100
+        },
+        {
+            "MaLop": 12,
+            "TenLop": "12D",
+            "Khoi": 12,
+            "NamHoc": "2025-2026",
+            "BaseScore": 100
+        },
+        {
+            "MaLop": 13,
+            "TenLop": "12E",
+            "Khoi": 12,
+            "NamHoc": "2025-2026",
+            "BaseScore": 100
+        }
+    ],
+    "TDHD_DanhMucTuan": [
+        {
+            "MaTuan": 1,
+            "TenTuan": "Tuần 1",
+            "NgayBatDau": "2025-09-01",
+            "NgayKetThuc": "2025-09-06"
+        },
+        {
+            "MaTuan": 2,
+            "TenTuan": "Tuần 2",
+            "NgayBatDau": "2025-09-08",
+            "NgayKetThuc": "2025-09-13"
+        },
+        {
+            "MaTuan": 3,
+            "TenTuan": "Tuần 3",
+            "NgayBatDau": "2025-09-15",
+            "NgayKetThuc": "2025-09-20"
+        }
+    ],
+    "TDHD_QuyDinhThiDua": [
+        {
+            "MaTieuChi": 1,
+            "NoiDung": "Tập trung thứ 2 (Theo buổi)",
+            "Loai": "TRU",
+            "DiemChuyenDoi": 10,
+            "DonViTinh": "/buổi"
+        },
+        {
+            "MaTieuChi": 2,
+            "NoiDung": "Tập trung thứ 2 (Theo học sinh)",
+            "Loai": "TRU",
+            "DiemChuyenDoi": 2,
+            "DonViTinh": "/HS"
+        },
+        {
+            "MaTieuChi": 3,
+            "NoiDung": "Thể dục giữa giờ (Theo lớp)",
+            "Loai": "TRU",
+            "DiemChuyenDoi": 10,
+            "DonViTinh": "/lớp"
+        },
+        {
+            "MaTieuChi": 4,
+            "NoiDung": "Đồng phục, áo Đoàn",
+            "Loai": "TRU",
+            "DiemChuyenDoi": 3,
+            "DonViTinh": "/HS"
+        },
+        {
+            "MaTieuChi": 5,
+            "NoiDung": "Đi học muộn, vào lớp muộn",
+            "Loai": "TRU",
+            "DiemChuyenDoi": 5,
+            "DonViTinh": "/HS"
+        },
+        {
+            "MaTieuChi": 6,
+            "NoiDung": "Vệ sinh lớp, khu vực",
+            "Loai": "TRU",
+            "DiemChuyenDoi": 10,
+            "DonViTinh": "/buổi"
+        },
+        {
+            "MaTieuChi": 7,
+            "NoiDung": "Sinh hoạt 15' (Không sinh hoạt)",
+            "Loai": "TRU",
+            "DiemChuyenDoi": 10,
+            "DonViTinh": "/buổi"
+        },
+        {
+            "MaTieuChi": 8,
+            "NoiDung": "Sinh hoạt 15' (Theo học sinh làm ồn)",
+            "Loai": "TRU",
+            "DiemChuyenDoi": 3,
+            "DonViTinh": "/HS"
+        },
+        {
+            "MaTieuChi": 9,
+            "NoiDung": "Hành vi: Hút thuốc",
+            "Loai": "TRU",
+            "DiemChuyenDoi": 20,
+            "DonViTinh": "/HS"
+        },
+        {
+            "MaTieuChi": 10,
+            "NoiDung": "Hành vi: Nói tục, chửi bậy",
+            "Loai": "TRU",
+            "DiemChuyenDoi": 20,
+            "DonViTinh": "/HS"
+        },
+        {
+            "MaTieuChi": 11,
+            "NoiDung": "Hành vi: Đánh nhau, trộm cắp, phá tài sản",
+            "Loai": "TRU",
+            "DiemChuyenDoi": 50,
+            "DonViTinh": "/HS"
+        },
+        {
+            "MaTieuChi": 12,
+            "NoiDung": "Hành vi: Vô lễ với giáo viên",
+            "Loai": "TRU",
+            "DiemChuyenDoi": 50,
+            "DonViTinh": "/HS"
+        },
+        {
+            "MaTieuChi": 13,
+            "NoiDung": "Thiếu đồ dùng học tập",
+            "Loai": "TRU",
+            "DiemChuyenDoi": 2,
+            "DonViTinh": "/HS"
+        },
+        {
+            "MaTieuChi": 14,
+            "NoiDung": "Không đội mũ bảo hiểm",
+            "Loai": "TRU",
+            "DiemChuyenDoi": 5,
+            "DonViTinh": "/HS"
+        },
+        {
+            "MaTieuChi": 15,
+            "NoiDung": "Nghỉ học không phép (KP)",
+            "Loai": "TRU",
+            "DiemChuyenDoi": 5,
+            "DonViTinh": "/HS/buổi"
+        },
+        {
+            "MaTieuChi": 16,
+            "NoiDung": "Nghỉ học có phép",
+            "Loai": "TRU",
+            "DiemChuyenDoi": 2,
+            "DonViTinh": "/HS/buổi"
+        },
+        {
+            "MaTieuChi": 17,
+            "NoiDung": "Bỏ tiết, sử dụng điện thoại trong giờ",
+            "Loai": "TRU",
+            "DiemChuyenDoi": 10,
+            "DonViTinh": "/HS/tiết"
+        },
+        {
+            "MaTieuChi": 18,
+            "NoiDung": "Không chuẩn bị bài ở nhà (Theo lớp)",
+            "Loai": "TRU",
+            "DiemChuyenDoi": 30,
+            "DonViTinh": "/lớp"
+        },
+        {
+            "MaTieuChi": 19,
+            "NoiDung": "Không chuẩn bị bài ở nhà (Theo học sinh)",
+            "Loai": "TRU",
+            "DiemChuyenDoi": 3,
+            "DonViTinh": "/HS"
+        },
+        {
+            "MaTieuChi": 20,
+            "NoiDung": "Kiểm tra miệng: Kém",
+            "Loai": "TRU",
+            "DiemChuyenDoi": 5,
+            "DonViTinh": "/HS"
+        },
+        {
+            "MaTieuChi": 21,
+            "NoiDung": "Kiểm tra miệng: Yếu",
+            "Loai": "TRU",
+            "DiemChuyenDoi": 2,
+            "DonViTinh": "/HS"
+        },
+        {
+            "MaTieuChi": 22,
+            "NoiDung": "Giờ học: Yếu",
+            "Loai": "TRU",
+            "DiemChuyenDoi": 15,
+            "DonViTinh": "/tiết"
+        },
+        {
+            "MaTieuChi": 23,
+            "NoiDung": "Giờ học: Trung bình",
+            "Loai": "TRU",
+            "DiemChuyenDoi": 10,
+            "DonViTinh": "/tiết"
+        },
+        {
+            "MaTieuChi": 24,
+            "NoiDung": "Làm việc riêng (Theo lớp)",
+            "Loai": "TRU",
+            "DiemChuyenDoi": 30,
+            "DonViTinh": "/lớp"
+        },
+        {
+            "MaTieuChi": 25,
+            "NoiDung": "Làm việc riêng (Theo học sinh)",
+            "Loai": "TRU",
+            "DiemChuyenDoi": 3,
+            "DonViTinh": "/HS"
+        },
+        {
+            "MaTieuChi": 26,
+            "NoiDung": "Quy định khác: Không đeo thẻ học sinh",
+            "Loai": "TRU",
+            "DiemChuyenDoi": 5,
+            "DonViTinh": "/HS"
+        },
+        {
+            "MaTieuChi": 27,
+            "NoiDung": "Quy định khác: Đỗ xe ở cổng trường",
+            "Loai": "TRU",
+            "DiemChuyenDoi": 5,
+            "DonViTinh": "/HS"
+        },
+        {
+            "MaTieuChi": 28,
+            "NoiDung": "Quy định khác: Tự ý đổi chỗ ngồi",
+            "Loai": "TRU",
+            "DiemChuyenDoi": 10,
+            "DonViTinh": "/HS/tiết"
+        },
+        {
+            "MaTieuChi": 29,
+            "NoiDung": "Quy định khác: Ngủ gật trong giờ học",
+            "Loai": "TRU",
+            "DiemChuyenDoi": 3,
+            "DonViTinh": "/HS"
+        },
+        {
+            "MaTieuChi": 101,
+            "NoiDung": "Điểm kiểm tra miệng: Giỏi",
+            "Loai": "CONG",
+            "DiemChuyenDoi": 10,
+            "DonViTinh": "/HS"
+        },
+        {
+            "MaTieuChi": 102,
+            "NoiDung": "Điểm kiểm tra miệng: Khá",
+            "Loai": "CONG",
+            "DiemChuyenDoi": 3,
+            "DonViTinh": "/HS"
+        },
+        {
+            "MaTieuChi": 103,
+            "NoiDung": "Giờ học: Tốt",
+            "Loai": "CONG",
+            "DiemChuyenDoi": 5,
+            "DonViTinh": "/tiết"
+        },
+        {
+            "MaTieuChi": 104,
+            "NoiDung": "Giờ học: Khá",
+            "Loai": "CONG",
+            "DiemChuyenDoi": 2,
+            "DonViTinh": "/tiết"
+        },
+        {
+            "MaTieuChi": 105,
+            "NoiDung": "Đạt buổi học tốt",
+            "Loai": "CONG",
+            "DiemChuyenDoi": 30,
+            "DonViTinh": "/buổi"
+        }
+    ],
+    "TDHD_DanhSachHocSinh": [
+        {
+            "MaHocSinh": 1,
+            "MaLop": 1,
+            "HoTen": "Nguyễn Văn An",
+            "NgaySinh": "2010-02-10",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 2,
+            "MaLop": 1,
+            "HoTen": "Lê Thị Bình",
+            "NgaySinh": "2010-05-17",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 3,
+            "MaLop": 1,
+            "HoTen": "Trần Phương Huyền",
+            "NgaySinh": "2010-07-11",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 4,
+            "MaLop": 1,
+            "HoTen": "Phạm Quỳnh Tú",
+            "NgaySinh": "2010-01-27",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 5,
+            "MaLop": 1,
+            "HoTen": "Bùi Mai Yến",
+            "NgaySinh": "2010-08-28",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 6,
+            "MaLop": 1,
+            "HoTen": "Nguyễn Ngọc Vy",
+            "NgaySinh": "2010-06-18",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 7,
+            "MaLop": 1,
+            "HoTen": "Vũ Hồng Huyền",
+            "NgaySinh": "2010-07-13",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 8,
+            "MaLop": 1,
+            "HoTen": "Vũ Khánh Trang",
+            "NgaySinh": "2010-01-24",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 9,
+            "MaLop": 1,
+            "HoTen": "Phan Đức Hùng",
+            "NgaySinh": "2010-05-29",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 10,
+            "MaLop": 1,
+            "HoTen": "Vũ Anh Liêm",
+            "NgaySinh": "2010-02-11",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 11,
+            "MaLop": 1,
+            "HoTen": "Hoàng Đức Nam",
+            "NgaySinh": "2010-02-22",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 12,
+            "MaLop": 1,
+            "HoTen": "Vũ Ngọc Phương",
+            "NgaySinh": "2010-06-16",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 13,
+            "MaLop": 1,
+            "HoTen": "Trần Anh Minh",
+            "NgaySinh": "2010-09-17",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 14,
+            "MaLop": 1,
+            "HoTen": "Phan Hoài Hân",
+            "NgaySinh": "2010-04-20",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 15,
+            "MaLop": 1,
+            "HoTen": "Nguyễn Minh Cường",
+            "NgaySinh": "2010-06-22",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 16,
+            "MaLop": 1,
+            "HoTen": "Phạm Khánh Hà",
+            "NgaySinh": "2010-04-25",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 17,
+            "MaLop": 1,
+            "HoTen": "Đỗ Ngọc Trang",
+            "NgaySinh": "2010-03-17",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 18,
+            "MaLop": 1,
+            "HoTen": "Bùi Tiến Tuấn",
+            "NgaySinh": "2010-07-28",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 19,
+            "MaLop": 1,
+            "HoTen": "Phạm Ngọc Tú",
+            "NgaySinh": "2010-08-12",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 20,
+            "MaLop": 1,
+            "HoTen": "Trần Quang Minh",
+            "NgaySinh": "2010-07-29",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 21,
+            "MaLop": 2,
+            "HoTen": "Trần Quốc Cường",
+            "NgaySinh": "2010-02-22",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 22,
+            "MaLop": 2,
+            "HoTen": "Phạm Minh Đạt",
+            "NgaySinh": "2010-07-29",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 23,
+            "MaLop": 2,
+            "HoTen": "Bùi Tiến Hùng",
+            "NgaySinh": "2010-01-13",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 24,
+            "MaLop": 2,
+            "HoTen": "Bùi Tiến Sơn",
+            "NgaySinh": "2010-02-19",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 25,
+            "MaLop": 2,
+            "HoTen": "Đỗ Thị Trang",
+            "NgaySinh": "2010-09-15",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 26,
+            "MaLop": 2,
+            "HoTen": "Trần Tiến Thắng",
+            "NgaySinh": "2010-04-14",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 27,
+            "MaLop": 2,
+            "HoTen": "Lê Phương Tú",
+            "NgaySinh": "2010-01-29",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 28,
+            "MaLop": 2,
+            "HoTen": "Nguyễn Hồng Phương",
+            "NgaySinh": "2010-05-17",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 29,
+            "MaLop": 2,
+            "HoTen": "Trịnh Hồng Huyền",
+            "NgaySinh": "2010-08-12",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 30,
+            "MaLop": 2,
+            "HoTen": "Bùi Quang Khải",
+            "NgaySinh": "2010-08-27",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 31,
+            "MaLop": 2,
+            "HoTen": "Bùi Khánh Vy",
+            "NgaySinh": "2010-04-27",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 32,
+            "MaLop": 2,
+            "HoTen": "Phạm Tiến Việt",
+            "NgaySinh": "2010-06-24",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 33,
+            "MaLop": 2,
+            "HoTen": "Đỗ Đức Nam",
+            "NgaySinh": "2010-04-12",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 34,
+            "MaLop": 2,
+            "HoTen": "Trịnh Phương Yến",
+            "NgaySinh": "2010-04-10",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 35,
+            "MaLop": 2,
+            "HoTen": "Nguyễn Quỳnh Huyền",
+            "NgaySinh": "2010-01-20",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 36,
+            "MaLop": 2,
+            "HoTen": "Phạm Hoài Vân",
+            "NgaySinh": "2010-04-27",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 37,
+            "MaLop": 2,
+            "HoTen": "Trịnh Khánh Vân",
+            "NgaySinh": "2010-04-25",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 38,
+            "MaLop": 2,
+            "HoTen": "Phạm Đức Hải",
+            "NgaySinh": "2010-07-21",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 39,
+            "MaLop": 2,
+            "HoTen": "Đỗ Thị Lan",
+            "NgaySinh": "2010-01-22",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 40,
+            "MaLop": 2,
+            "HoTen": "Trần Minh Liêm",
+            "NgaySinh": "2010-04-27",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 41,
+            "MaLop": 3,
+            "HoTen": "Hoàng Thu Giang",
+            "NgaySinh": "2010-08-14",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 42,
+            "MaLop": 3,
+            "HoTen": "Đỗ Duy Hải",
+            "NgaySinh": "2010-07-15",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 43,
+            "MaLop": 3,
+            "HoTen": "Phạm Hồng Nhi",
+            "NgaySinh": "2010-09-13",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 44,
+            "MaLop": 3,
+            "HoTen": "Bùi Thị Huyền",
+            "NgaySinh": "2010-04-15",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 45,
+            "MaLop": 3,
+            "HoTen": "Đỗ Quỳnh Thảo",
+            "NgaySinh": "2010-01-15",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 46,
+            "MaLop": 3,
+            "HoTen": "Phan Hoài Nhi",
+            "NgaySinh": "2010-05-23",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 47,
+            "MaLop": 3,
+            "HoTen": "Bùi Thành Khải",
+            "NgaySinh": "2010-04-19",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 48,
+            "MaLop": 3,
+            "HoTen": "Nguyễn Khánh Hân",
+            "NgaySinh": "2010-01-20",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 49,
+            "MaLop": 3,
+            "HoTen": "Trịnh Cát Tú",
+            "NgaySinh": "2010-09-15",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 50,
+            "MaLop": 3,
+            "HoTen": "Bùi Hồng Oanh",
+            "NgaySinh": "2010-02-29",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 51,
+            "MaLop": 3,
+            "HoTen": "Phạm Mai Lan",
+            "NgaySinh": "2010-04-28",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 52,
+            "MaLop": 3,
+            "HoTen": "Trịnh Đức Anh",
+            "NgaySinh": "2010-09-20",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 53,
+            "MaLop": 3,
+            "HoTen": "Phạm Hữu Nam",
+            "NgaySinh": "2010-05-22",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 54,
+            "MaLop": 3,
+            "HoTen": "Hoàng Cát Hà",
+            "NgaySinh": "2010-02-10",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 55,
+            "MaLop": 3,
+            "HoTen": "Trịnh Hồng Huyền",
+            "NgaySinh": "2010-09-16",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 56,
+            "MaLop": 3,
+            "HoTen": "Lê Hữu Đạt",
+            "NgaySinh": "2010-04-21",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 57,
+            "MaLop": 3,
+            "HoTen": "Đỗ Phương Linh",
+            "NgaySinh": "2010-09-10",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 58,
+            "MaLop": 3,
+            "HoTen": "Bùi Tiến Hải",
+            "NgaySinh": "2010-03-18",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 59,
+            "MaLop": 3,
+            "HoTen": "Trần Phương Mai",
+            "NgaySinh": "2010-05-19",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 60,
+            "MaLop": 3,
+            "HoTen": "Vũ Minh Phúc",
+            "NgaySinh": "2010-09-25",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 61,
+            "MaLop": 4,
+            "HoTen": "Vũ Khánh Huyền",
+            "NgaySinh": "2010-05-11",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 62,
+            "MaLop": 4,
+            "HoTen": "Bùi Quang Khải",
+            "NgaySinh": "2010-02-23",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 63,
+            "MaLop": 4,
+            "HoTen": "Nguyễn Văn Sơn",
+            "NgaySinh": "2010-03-18",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 64,
+            "MaLop": 4,
+            "HoTen": "Đỗ Phương Vy",
+            "NgaySinh": "2010-09-10",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 65,
+            "MaLop": 4,
+            "HoTen": "Lê Phương Giang",
+            "NgaySinh": "2010-06-28",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 66,
+            "MaLop": 4,
+            "HoTen": "Phan Quang Cường",
+            "NgaySinh": "2010-05-21",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 67,
+            "MaLop": 4,
+            "HoTen": "Nguyễn Hữu Liêm",
+            "NgaySinh": "2010-04-13",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 68,
+            "MaLop": 4,
+            "HoTen": "Bùi Mai Diệp",
+            "NgaySinh": "2010-03-17",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 69,
+            "MaLop": 4,
+            "HoTen": "Lê Xuân An",
+            "NgaySinh": "2010-03-20",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 70,
+            "MaLop": 4,
+            "HoTen": "Phan Minh Phúc",
+            "NgaySinh": "2010-03-13",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 71,
+            "MaLop": 4,
+            "HoTen": "Nguyễn Cát Yến",
+            "NgaySinh": "2010-04-24",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 72,
+            "MaLop": 4,
+            "HoTen": "Phạm Quỳnh Bình",
+            "NgaySinh": "2010-04-22",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 73,
+            "MaLop": 4,
+            "HoTen": "Trần Hoài Phương",
+            "NgaySinh": "2010-09-22",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 74,
+            "MaLop": 4,
+            "HoTen": "Bùi Hữu An",
+            "NgaySinh": "2010-02-18",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 75,
+            "MaLop": 4,
+            "HoTen": "Hoàng Thị Lan",
+            "NgaySinh": "2010-07-21",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 76,
+            "MaLop": 4,
+            "HoTen": "Vũ Xuân Phong",
+            "NgaySinh": "2010-09-13",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 77,
+            "MaLop": 4,
+            "HoTen": "Trịnh Quỳnh Trang",
+            "NgaySinh": "2010-01-23",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 78,
+            "MaLop": 4,
+            "HoTen": "Bùi Quỳnh Phương",
+            "NgaySinh": "2010-07-12",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 79,
+            "MaLop": 4,
+            "HoTen": "Vũ Anh Sơn",
+            "NgaySinh": "2010-02-19",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 80,
+            "MaLop": 4,
+            "HoTen": "Phan Hữu Việt",
+            "NgaySinh": "2010-05-27",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 81,
+            "MaLop": 5,
+            "HoTen": "Trịnh Đức Minh",
+            "NgaySinh": "2009-03-16",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 82,
+            "MaLop": 5,
+            "HoTen": "Nguyễn Thị Lan",
+            "NgaySinh": "2009-07-22",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 83,
+            "MaLop": 5,
+            "HoTen": "Lê Anh Tuấn",
+            "NgaySinh": "2009-05-22",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 84,
+            "MaLop": 5,
+            "HoTen": "Nguyễn Tiến Quân",
+            "NgaySinh": "2009-04-23",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 85,
+            "MaLop": 5,
+            "HoTen": "Trịnh Hữu Bảo",
+            "NgaySinh": "2009-08-24",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 86,
+            "MaLop": 5,
+            "HoTen": "Bùi Thành Minh",
+            "NgaySinh": "2009-02-19",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 87,
+            "MaLop": 5,
+            "HoTen": "Trịnh Hữu Đạt",
+            "NgaySinh": "2009-04-19",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 88,
+            "MaLop": 5,
+            "HoTen": "Phạm Ngọc Bình",
+            "NgaySinh": "2009-01-17",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 89,
+            "MaLop": 5,
+            "HoTen": "Trịnh Đức Bảo",
+            "NgaySinh": "2009-07-28",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 90,
+            "MaLop": 5,
+            "HoTen": "Phan Cát Thảo",
+            "NgaySinh": "2009-04-14",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 91,
+            "MaLop": 5,
+            "HoTen": "Nguyễn Đức Anh",
+            "NgaySinh": "2009-04-15",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 92,
+            "MaLop": 5,
+            "HoTen": "Bùi Thành Cường",
+            "NgaySinh": "2009-09-17",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 93,
+            "MaLop": 5,
+            "HoTen": "Trần Thành Khải",
+            "NgaySinh": "2009-08-26",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 94,
+            "MaLop": 5,
+            "HoTen": "Trịnh Hữu Bảo",
+            "NgaySinh": "2009-09-23",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 95,
+            "MaLop": 5,
+            "HoTen": "Bùi Thành Minh",
+            "NgaySinh": "2009-08-24",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 96,
+            "MaLop": 5,
+            "HoTen": "Phạm Hoài Tú",
+            "NgaySinh": "2009-08-17",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 97,
+            "MaLop": 5,
+            "HoTen": "Trần Hoài Yến",
+            "NgaySinh": "2009-05-20",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 98,
+            "MaLop": 5,
+            "HoTen": "Bùi Hồng Mai",
+            "NgaySinh": "2009-03-17",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 99,
+            "MaLop": 5,
+            "HoTen": "Lê Quỳnh Huyền",
+            "NgaySinh": "2009-07-23",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 100,
+            "MaLop": 5,
+            "HoTen": "Đỗ Mai Giang",
+            "NgaySinh": "2009-04-23",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 101,
+            "MaLop": 6,
+            "HoTen": "Phan Thanh Liêm",
+            "NgaySinh": "2009-07-28",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 102,
+            "MaLop": 6,
+            "HoTen": "Ngô Quỳnh Mai",
+            "NgaySinh": "2009-01-28",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 103,
+            "MaLop": 6,
+            "HoTen": "Nguyễn Thu Linh",
+            "NgaySinh": "2009-07-23",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 104,
+            "MaLop": 6,
+            "HoTen": "Bùi Anh Nam",
+            "NgaySinh": "2009-08-17",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 105,
+            "MaLop": 6,
+            "HoTen": "Đỗ Thị Thảo",
+            "NgaySinh": "2009-06-22",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 106,
+            "MaLop": 6,
+            "HoTen": "Đỗ Quang Phong",
+            "NgaySinh": "2009-09-10",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 107,
+            "MaLop": 6,
+            "HoTen": "Trịnh Anh An",
+            "NgaySinh": "2009-02-23",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 108,
+            "MaLop": 6,
+            "HoTen": "Đỗ Ngọc Giang",
+            "NgaySinh": "2009-05-22",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 109,
+            "MaLop": 6,
+            "HoTen": "Đỗ Thu Hà",
+            "NgaySinh": "2009-07-18",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 110,
+            "MaLop": 6,
+            "HoTen": "Phan Tiến Đạt",
+            "NgaySinh": "2009-08-10",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 111,
+            "MaLop": 6,
+            "HoTen": "Nguyễn Hữu Nam",
+            "NgaySinh": "2009-02-11",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 112,
+            "MaLop": 6,
+            "HoTen": "Phạm Minh An",
+            "NgaySinh": "2009-03-17",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 113,
+            "MaLop": 6,
+            "HoTen": "Trần Khánh Uyên",
+            "NgaySinh": "2009-08-18",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 114,
+            "MaLop": 6,
+            "HoTen": "Lê Anh Phong",
+            "NgaySinh": "2009-02-15",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 115,
+            "MaLop": 6,
+            "HoTen": "Trần Anh An",
+            "NgaySinh": "2009-05-28",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 116,
+            "MaLop": 6,
+            "HoTen": "Phan Xuân Liêm",
+            "NgaySinh": "2009-02-28",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 117,
+            "MaLop": 6,
+            "HoTen": "Phạm Đức Quân",
+            "NgaySinh": "2009-02-28",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 118,
+            "MaLop": 6,
+            "HoTen": "Vũ Duy Anh",
+            "NgaySinh": "2009-06-12",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 119,
+            "MaLop": 6,
+            "HoTen": "Vũ Văn Anh",
+            "NgaySinh": "2009-08-13",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 120,
+            "MaLop": 6,
+            "HoTen": "Vũ Cát Mai",
+            "NgaySinh": "2009-07-15",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 121,
+            "MaLop": 7,
+            "HoTen": "Đặng Hoài Nam",
+            "NgaySinh": "2009-09-18",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 122,
+            "MaLop": 7,
+            "HoTen": "Võ Thị Oanh",
+            "NgaySinh": "2009-09-25",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 123,
+            "MaLop": 7,
+            "HoTen": "Trịnh Hoài Hà",
+            "NgaySinh": "2009-04-12",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 124,
+            "MaLop": 7,
+            "HoTen": "Đỗ Quỳnh Nhi",
+            "NgaySinh": "2009-07-20",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 125,
+            "MaLop": 7,
+            "HoTen": "Vũ Ngọc Vân",
+            "NgaySinh": "2009-04-21",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 126,
+            "MaLop": 7,
+            "HoTen": "Vũ Tiến Phong",
+            "NgaySinh": "2009-05-27",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 127,
+            "MaLop": 7,
+            "HoTen": "Phạm Hồng Yến",
+            "NgaySinh": "2009-07-25",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 128,
+            "MaLop": 7,
+            "HoTen": "Phạm Thành Dũng",
+            "NgaySinh": "2009-08-10",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 129,
+            "MaLop": 7,
+            "HoTen": "Phạm Mai Yến",
+            "NgaySinh": "2009-05-28",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 130,
+            "MaLop": 7,
+            "HoTen": "Bùi Phương Phương",
+            "NgaySinh": "2009-07-27",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 131,
+            "MaLop": 7,
+            "HoTen": "Đỗ Hoài Linh",
+            "NgaySinh": "2009-05-17",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 132,
+            "MaLop": 7,
+            "HoTen": "Phạm Thu Lan",
+            "NgaySinh": "2009-09-15",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 133,
+            "MaLop": 7,
+            "HoTen": "Đỗ Hoài Như",
+            "NgaySinh": "2009-09-29",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 134,
+            "MaLop": 7,
+            "HoTen": "Trần Quỳnh Linh",
+            "NgaySinh": "2009-04-21",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 135,
+            "MaLop": 7,
+            "HoTen": "Nguyễn Phương Mai",
+            "NgaySinh": "2009-05-11",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 136,
+            "MaLop": 7,
+            "HoTen": "Bùi Tiến Khải",
+            "NgaySinh": "2009-08-13",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 137,
+            "MaLop": 7,
+            "HoTen": "Trịnh Tiến Dũng",
+            "NgaySinh": "2009-08-24",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 138,
+            "MaLop": 7,
+            "HoTen": "Nguyễn Hoài Vân",
+            "NgaySinh": "2009-02-12",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 139,
+            "MaLop": 7,
+            "HoTen": "Trần Khánh Giang",
+            "NgaySinh": "2009-03-14",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 140,
+            "MaLop": 7,
+            "HoTen": "Hoàng Đức Nam",
+            "NgaySinh": "2009-02-27",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 141,
+            "MaLop": 8,
+            "HoTen": "Đỗ Hồng Phúc",
+            "NgaySinh": "2009-07-29",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 142,
+            "MaLop": 8,
+            "HoTen": "Bùi Công Phượng",
+            "NgaySinh": "2009-04-26",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 143,
+            "MaLop": 8,
+            "HoTen": "Đỗ Hoài Như",
+            "NgaySinh": "2009-07-19",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 144,
+            "MaLop": 8,
+            "HoTen": "Nguyễn Anh Hải",
+            "NgaySinh": "2009-04-16",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 145,
+            "MaLop": 8,
+            "HoTen": "Trần Ngọc Yến",
+            "NgaySinh": "2009-03-27",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 146,
+            "MaLop": 8,
+            "HoTen": "Nguyễn Mai Nhi",
+            "NgaySinh": "2009-08-19",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 147,
+            "MaLop": 8,
+            "HoTen": "Hoàng Hoài Nhi",
+            "NgaySinh": "2009-02-17",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 148,
+            "MaLop": 8,
+            "HoTen": "Trịnh Minh Anh",
+            "NgaySinh": "2009-02-27",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 149,
+            "MaLop": 8,
+            "HoTen": "Lê Hoài Mai",
+            "NgaySinh": "2009-02-11",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 150,
+            "MaLop": 8,
+            "HoTen": "Hoàng Khánh Như",
+            "NgaySinh": "2009-05-24",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 151,
+            "MaLop": 8,
+            "HoTen": "Hoàng Mai Trang",
+            "NgaySinh": "2009-09-27",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 152,
+            "MaLop": 8,
+            "HoTen": "Trần Khánh Giang",
+            "NgaySinh": "2009-07-20",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 153,
+            "MaLop": 8,
+            "HoTen": "Nguyễn Đức Nam",
+            "NgaySinh": "2009-01-18",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 154,
+            "MaLop": 8,
+            "HoTen": "Lê Thành Thắng",
+            "NgaySinh": "2009-08-18",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 155,
+            "MaLop": 8,
+            "HoTen": "Trịnh Mai Vân",
+            "NgaySinh": "2009-02-25",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 156,
+            "MaLop": 8,
+            "HoTen": "Vũ Thu Lan",
+            "NgaySinh": "2009-03-20",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 157,
+            "MaLop": 8,
+            "HoTen": "Đỗ Hoài Thảo",
+            "NgaySinh": "2009-09-11",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 158,
+            "MaLop": 8,
+            "HoTen": "Vũ Hoài Hà",
+            "NgaySinh": "2009-02-22",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 159,
+            "MaLop": 8,
+            "HoTen": "Nguyễn Duy Bảo",
+            "NgaySinh": "2009-07-11",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 160,
+            "MaLop": 8,
+            "HoTen": "Vũ Khánh Vân",
+            "NgaySinh": "2009-08-11",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 161,
+            "MaLop": 9,
+            "HoTen": "Nguyễn Minh Quân",
+            "NgaySinh": "2008-04-18",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 162,
+            "MaLop": 9,
+            "HoTen": "Lê Hồng Sơn",
+            "NgaySinh": "2008-09-14",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 163,
+            "MaLop": 9,
+            "HoTen": "Đỗ Thành Hải",
+            "NgaySinh": "2008-01-29",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 164,
+            "MaLop": 9,
+            "HoTen": "Lê Tiến Hùng",
+            "NgaySinh": "2008-01-27",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 165,
+            "MaLop": 9,
+            "HoTen": "Phạm Hồng Nhi",
+            "NgaySinh": "2008-02-14",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 166,
+            "MaLop": 9,
+            "HoTen": "Hoàng Phương Trang",
+            "NgaySinh": "2008-07-25",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 167,
+            "MaLop": 9,
+            "HoTen": "Phạm Thành Hùng",
+            "NgaySinh": "2008-03-22",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 168,
+            "MaLop": 9,
+            "HoTen": "Trịnh Phương Mai",
+            "NgaySinh": "2008-02-18",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 169,
+            "MaLop": 9,
+            "HoTen": "Phan Hữu Thắng",
+            "NgaySinh": "2008-05-10",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 170,
+            "MaLop": 9,
+            "HoTen": "Hoàng Khánh Như",
+            "NgaySinh": "2008-08-14",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 171,
+            "MaLop": 9,
+            "HoTen": "Đỗ Thu Hà",
+            "NgaySinh": "2008-09-27",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 172,
+            "MaLop": 9,
+            "HoTen": "Vũ Quỳnh Yến",
+            "NgaySinh": "2008-07-17",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 173,
+            "MaLop": 9,
+            "HoTen": "Phan Văn Sơn",
+            "NgaySinh": "2008-08-22",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 174,
+            "MaLop": 9,
+            "HoTen": "Lê Cát Giang",
+            "NgaySinh": "2008-03-26",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 175,
+            "MaLop": 9,
+            "HoTen": "Vũ Đức Bảo",
+            "NgaySinh": "2008-02-26",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 176,
+            "MaLop": 9,
+            "HoTen": "Nguyễn Quang Anh",
+            "NgaySinh": "2008-03-12",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 177,
+            "MaLop": 9,
+            "HoTen": "Hoàng Thu Diệp",
+            "NgaySinh": "2008-07-12",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 178,
+            "MaLop": 9,
+            "HoTen": "Bùi Xuân Sơn",
+            "NgaySinh": "2008-08-27",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 179,
+            "MaLop": 9,
+            "HoTen": "Trần Quỳnh Linh",
+            "NgaySinh": "2008-04-12",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 180,
+            "MaLop": 9,
+            "HoTen": "Trần Hồng Nhi",
+            "NgaySinh": "2008-03-19",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 181,
+            "MaLop": 10,
+            "HoTen": "Phạm Minh Tâm",
+            "NgaySinh": "2008-01-11",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 182,
+            "MaLop": 10,
+            "HoTen": "Trần Thu Uyên",
+            "NgaySinh": "2008-06-11",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 183,
+            "MaLop": 10,
+            "HoTen": "Vũ Mai Mai",
+            "NgaySinh": "2008-04-26",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 184,
+            "MaLop": 10,
+            "HoTen": "Lê Ngọc Oanh",
+            "NgaySinh": "2008-02-29",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 185,
+            "MaLop": 10,
+            "HoTen": "Trịnh Minh Dũng",
+            "NgaySinh": "2008-03-17",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 186,
+            "MaLop": 10,
+            "HoTen": "Hoàng Cát Trang",
+            "NgaySinh": "2008-01-24",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 187,
+            "MaLop": 10,
+            "HoTen": "Bùi Quang Đạt",
+            "NgaySinh": "2008-08-21",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 188,
+            "MaLop": 10,
+            "HoTen": "Hoàng Xuân Phúc",
+            "NgaySinh": "2008-08-19",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 189,
+            "MaLop": 10,
+            "HoTen": "Phan Cát Lan",
+            "NgaySinh": "2008-04-22",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 190,
+            "MaLop": 10,
+            "HoTen": "Trịnh Tiến Quân",
+            "NgaySinh": "2008-01-22",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 191,
+            "MaLop": 10,
+            "HoTen": "Trịnh Thị Diệp",
+            "NgaySinh": "2008-08-19",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 192,
+            "MaLop": 10,
+            "HoTen": "Phạm Anh Tâm",
+            "NgaySinh": "2008-04-16",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 193,
+            "MaLop": 10,
+            "HoTen": "Lê Đức Cường",
+            "NgaySinh": "2008-05-24",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 194,
+            "MaLop": 10,
+            "HoTen": "Vũ Ngọc Huyền",
+            "NgaySinh": "2008-05-20",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 195,
+            "MaLop": 10,
+            "HoTen": "Lê Minh Khải",
+            "NgaySinh": "2008-09-21",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 196,
+            "MaLop": 10,
+            "HoTen": "Hoàng Quang Phúc",
+            "NgaySinh": "2008-08-19",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 197,
+            "MaLop": 10,
+            "HoTen": "Vũ Đức Bảo",
+            "NgaySinh": "2008-02-14",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 198,
+            "MaLop": 10,
+            "HoTen": "Phạm Xuân Hùng",
+            "NgaySinh": "2008-06-12",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 199,
+            "MaLop": 10,
+            "HoTen": "Nguyễn Tiến Hùng",
+            "NgaySinh": "2008-02-24",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 200,
+            "MaLop": 10,
+            "HoTen": "Hoàng Khánh Thảo",
+            "NgaySinh": "2008-06-13",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 201,
+            "MaLop": 11,
+            "HoTen": "Vũ Hữu Việt",
+            "NgaySinh": "2008-04-25",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 202,
+            "MaLop": 11,
+            "HoTen": "Nguyễn Hải Yến",
+            "NgaySinh": "2008-01-29",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 203,
+            "MaLop": 11,
+            "HoTen": "Bùi Hữu Phong",
+            "NgaySinh": "2008-04-12",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 204,
+            "MaLop": 11,
+            "HoTen": "Đỗ Tiến Anh",
+            "NgaySinh": "2008-02-14",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 205,
+            "MaLop": 11,
+            "HoTen": "Nguyễn Hoài Vân",
+            "NgaySinh": "2008-02-13",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 206,
+            "MaLop": 11,
+            "HoTen": "Bùi Ngọc Thảo",
+            "NgaySinh": "2008-08-21",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 207,
+            "MaLop": 11,
+            "HoTen": "Bùi Xuân Tuấn",
+            "NgaySinh": "2008-03-23",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 208,
+            "MaLop": 11,
+            "HoTen": "Đỗ Anh Anh",
+            "NgaySinh": "2008-05-11",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 209,
+            "MaLop": 11,
+            "HoTen": "Phạm Thành Bảo",
+            "NgaySinh": "2008-04-21",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 210,
+            "MaLop": 11,
+            "HoTen": "Vũ Phương Phương",
+            "NgaySinh": "2008-01-22",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 211,
+            "MaLop": 11,
+            "HoTen": "Trần Cát Huyền",
+            "NgaySinh": "2008-04-29",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 212,
+            "MaLop": 11,
+            "HoTen": "Nguyễn Hữu Nam",
+            "NgaySinh": "2008-03-28",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 213,
+            "MaLop": 11,
+            "HoTen": "Bùi Quỳnh Như",
+            "NgaySinh": "2008-04-17",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 214,
+            "MaLop": 11,
+            "HoTen": "Lê Khánh Bình",
+            "NgaySinh": "2008-05-14",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 215,
+            "MaLop": 11,
+            "HoTen": "Bùi Tiến Minh",
+            "NgaySinh": "2008-02-10",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 216,
+            "MaLop": 11,
+            "HoTen": "Vũ Quỳnh Như",
+            "NgaySinh": "2008-06-10",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 217,
+            "MaLop": 11,
+            "HoTen": "Nguyễn Ngọc Vy",
+            "NgaySinh": "2008-09-13",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 218,
+            "MaLop": 11,
+            "HoTen": "Đỗ Thành Tâm",
+            "NgaySinh": "2008-09-28",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 219,
+            "MaLop": 11,
+            "HoTen": "Bùi Quỳnh Diệp",
+            "NgaySinh": "2008-01-26",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 220,
+            "MaLop": 11,
+            "HoTen": "Nguyễn Thị Vân",
+            "NgaySinh": "2008-07-23",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 221,
+            "MaLop": 12,
+            "HoTen": "Hoàng Trọng Anh",
+            "NgaySinh": "2008-02-25",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 222,
+            "MaLop": 12,
+            "HoTen": "Đặng Quốc Bảo",
+            "NgaySinh": "2008-08-12",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 223,
+            "MaLop": 12,
+            "HoTen": "Vũ Anh Khải",
+            "NgaySinh": "2008-02-14",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 224,
+            "MaLop": 12,
+            "HoTen": "Trịnh Phương Hà",
+            "NgaySinh": "2008-07-29",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 225,
+            "MaLop": 12,
+            "HoTen": "Đỗ Duy Phong",
+            "NgaySinh": "2008-07-13",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 226,
+            "MaLop": 12,
+            "HoTen": "Trần Duy Liêm",
+            "NgaySinh": "2008-07-24",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 227,
+            "MaLop": 12,
+            "HoTen": "Phan Hữu Bảo",
+            "NgaySinh": "2008-07-23",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 228,
+            "MaLop": 12,
+            "HoTen": "Vũ Xuân Sơn",
+            "NgaySinh": "2008-05-21",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 229,
+            "MaLop": 12,
+            "HoTen": "Đỗ Đức Đạt",
+            "NgaySinh": "2008-02-12",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 230,
+            "MaLop": 12,
+            "HoTen": "Vũ Ngọc Hân",
+            "NgaySinh": "2008-01-28",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 231,
+            "MaLop": 12,
+            "HoTen": "Bùi Hữu Hải",
+            "NgaySinh": "2008-07-21",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 232,
+            "MaLop": 12,
+            "HoTen": "Phan Văn Quân",
+            "NgaySinh": "2008-05-21",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 233,
+            "MaLop": 12,
+            "HoTen": "Bùi Quỳnh Mai",
+            "NgaySinh": "2008-08-17",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 234,
+            "MaLop": 12,
+            "HoTen": "Vũ Duy Tâm",
+            "NgaySinh": "2008-02-18",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 235,
+            "MaLop": 12,
+            "HoTen": "Phan Duy Phong",
+            "NgaySinh": "2008-09-10",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 236,
+            "MaLop": 12,
+            "HoTen": "Hoàng Văn Minh",
+            "NgaySinh": "2008-05-19",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 237,
+            "MaLop": 12,
+            "HoTen": "Vũ Văn Minh",
+            "NgaySinh": "2008-03-28",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 238,
+            "MaLop": 12,
+            "HoTen": "Trần Quang An",
+            "NgaySinh": "2008-02-26",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 239,
+            "MaLop": 12,
+            "HoTen": "Phan Cát Hà",
+            "NgaySinh": "2008-03-21",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 240,
+            "MaLop": 12,
+            "HoTen": "Vũ Khánh Diệp",
+            "NgaySinh": "2008-02-11",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 241,
+            "MaLop": 13,
+            "HoTen": "Bùi Tiến Dũng",
+            "NgaySinh": "2008-03-15",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 242,
+            "MaLop": 13,
+            "HoTen": "Nguyễn Hữu Thắng",
+            "NgaySinh": "2008-01-12",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 243,
+            "MaLop": 13,
+            "HoTen": "Phan Cát Diệp",
+            "NgaySinh": "2008-08-23",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 244,
+            "MaLop": 13,
+            "HoTen": "Bùi Hồng Phương",
+            "NgaySinh": "2008-07-13",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 245,
+            "MaLop": 13,
+            "HoTen": "Trịnh Cát Tú",
+            "NgaySinh": "2008-05-11",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 246,
+            "MaLop": 13,
+            "HoTen": "Trịnh Thị Bình",
+            "NgaySinh": "2008-04-19",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 247,
+            "MaLop": 13,
+            "HoTen": "Lê Tiến Quân",
+            "NgaySinh": "2008-06-13",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 248,
+            "MaLop": 13,
+            "HoTen": "Phan Ngọc Mai",
+            "NgaySinh": "2008-07-27",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 249,
+            "MaLop": 13,
+            "HoTen": "Bùi Duy Tâm",
+            "NgaySinh": "2008-02-22",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 250,
+            "MaLop": 13,
+            "HoTen": "Nguyễn Xuân An",
+            "NgaySinh": "2008-08-12",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 251,
+            "MaLop": 13,
+            "HoTen": "Trịnh Xuân Tuấn",
+            "NgaySinh": "2008-07-23",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 252,
+            "MaLop": 13,
+            "HoTen": "Phan Thị Hà",
+            "NgaySinh": "2008-03-29",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 253,
+            "MaLop": 13,
+            "HoTen": "Vũ Hồng Vy",
+            "NgaySinh": "2008-02-17",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 254,
+            "MaLop": 13,
+            "HoTen": "Phan Phương Huyền",
+            "NgaySinh": "2008-07-19",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 255,
+            "MaLop": 13,
+            "HoTen": "Phạm Hữu Minh",
+            "NgaySinh": "2008-02-26",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 256,
+            "MaLop": 13,
+            "HoTen": "Bùi Duy Liêm",
+            "NgaySinh": "2008-06-21",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 257,
+            "MaLop": 13,
+            "HoTen": "Lê Minh Hải",
+            "NgaySinh": "2008-03-18",
+            "GioiTinh": "Nam"
+        },
+        {
+            "MaHocSinh": 258,
+            "MaLop": 13,
+            "HoTen": "Trịnh Ngọc Huyền",
+            "NgaySinh": "2008-03-25",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 259,
+            "MaLop": 13,
+            "HoTen": "Trịnh Khánh Nhi",
+            "NgaySinh": "2008-06-20",
+            "GioiTinh": "Nữ"
+        },
+        {
+            "MaHocSinh": 260,
+            "MaLop": 13,
+            "HoTen": "Trần Cát Nhi",
+            "NgaySinh": "2008-05-18",
+            "GioiTinh": "Nữ"
+        }
+    ],
+    "TDHD_NguoiDung": [
+        {
+            "MaNguoiDung": 1,
+            "Email": "admin@school.edu.vn",
+            "MatKhauHash": "admin123",
+            "HoTen": "Thầy Tuấn - Admin",
+            "VaiTro": "ADMIN",
+            "MaLop": null,
+            "TrangThai": true
+        },
+        {
+            "MaNguoiDung": 2,
+            "Email": "an.codo10a@school.edu.vn",
+            "MatKhauHash": "codo123",
+            "HoTen": "Nguyễn Văn An",
+            "VaiTro": "CO_DO",
+            "MaLop": 1,
+            "TrangThai": true
+        },
+        {
+            "MaNguoiDung": 3,
+            "Email": "binh.codo10a@school.edu.vn",
+            "MatKhauHash": "codo123",
+            "HoTen": "Lê Thị Bình",
+            "VaiTro": "CO_DO",
+            "MaLop": 1,
+            "TrangThai": true
+        },
+        {
+            "MaNguoiDung": 4,
+            "Email": "gv.10a@school.edu.vn",
+            "MatKhauHash": "gv123",
+            "HoTen": "Cô Hương - GVCN 10A",
+            "VaiTro": "GIAO_VIEN",
+            "MaLop": 1,
+            "TrangThai": true
+        },
+        {
+            "MaNguoiDung": 5,
+            "Email": "cuong.codo10b@school.edu.vn",
+            "MatKhauHash": "codo123",
+            "HoTen": "Trần Quốc Cường",
+            "VaiTro": "CO_DO",
+            "MaLop": 2,
+            "TrangThai": true
+        },
+        {
+            "MaNguoiDung": 6,
+            "Email": "dat.codo10b@school.edu.vn",
+            "MatKhauHash": "codo123",
+            "HoTen": "Phạm Minh Đạt",
+            "VaiTro": "CO_DO",
+            "MaLop": 2,
+            "TrangThai": true
+        },
+        {
+            "MaNguoiDung": 7,
+            "Email": "gv.10b@school.edu.vn",
+            "MatKhauHash": "gv123",
+            "HoTen": "Cô Hương - GVCN 10B",
+            "VaiTro": "GIAO_VIEN",
+            "MaLop": 2,
+            "TrangThai": true
+        },
+        {
+            "MaNguoiDung": 8,
+            "Email": "giang.codo10c@school.edu.vn",
+            "MatKhauHash": "codo123",
+            "HoTen": "Hoàng Thu Giang",
+            "VaiTro": "CO_DO",
+            "MaLop": 3,
+            "TrangThai": true
+        },
+        {
+            "MaNguoiDung": 9,
+            "Email": "hai.codo10c@school.edu.vn",
+            "MatKhauHash": "codo123",
+            "HoTen": "Đỗ Duy Hải",
+            "VaiTro": "CO_DO",
+            "MaLop": 3,
+            "TrangThai": true
+        },
+        {
+            "MaNguoiDung": 10,
+            "Email": "gv.10c@school.edu.vn",
+            "MatKhauHash": "gv123",
+            "HoTen": "Cô Hương - GVCN 10C",
+            "VaiTro": "GIAO_VIEN",
+            "MaLop": 3,
+            "TrangThai": true
+        },
+        {
+            "MaNguoiDung": 11,
+            "Email": "huyen.codo10d@school.edu.vn",
+            "MatKhauHash": "codo123",
+            "HoTen": "Vũ Khánh Huyền",
+            "VaiTro": "CO_DO",
+            "MaLop": 4,
+            "TrangThai": true
+        },
+        {
+            "MaNguoiDung": 12,
+            "Email": "khai.codo10d@school.edu.vn",
+            "MatKhauHash": "codo123",
+            "HoTen": "Bùi Quang Khải",
+            "VaiTro": "CO_DO",
+            "MaLop": 4,
+            "TrangThai": true
+        },
+        {
+            "MaNguoiDung": 13,
+            "Email": "gv.10d@school.edu.vn",
+            "MatKhauHash": "gv123",
+            "HoTen": "Cô Hương - GVCN 10D",
+            "VaiTro": "GIAO_VIEN",
+            "MaLop": 4,
+            "TrangThai": true
+        },
+        {
+            "MaNguoiDung": 14,
+            "Email": "minh.codo11a@school.edu.vn",
+            "MatKhauHash": "codo123",
+            "HoTen": "Trịnh Đức Minh",
+            "VaiTro": "CO_DO",
+            "MaLop": 5,
+            "TrangThai": true
+        },
+        {
+            "MaNguoiDung": 15,
+            "Email": "lan.codo11a@school.edu.vn",
+            "MatKhauHash": "codo123",
+            "HoTen": "Nguyễn Thị Lan",
+            "VaiTro": "CO_DO",
+            "MaLop": 5,
+            "TrangThai": true
+        },
+        {
+            "MaNguoiDung": 16,
+            "Email": "gv.11a@school.edu.vn",
+            "MatKhauHash": "gv123",
+            "HoTen": "Cô Hương - GVCN 11A",
+            "VaiTro": "GIAO_VIEN",
+            "MaLop": 5,
+            "TrangThai": true
+        },
+        {
+            "MaNguoiDung": 17,
+            "Email": "liem.codo11b@school.edu.vn",
+            "MatKhauHash": "codo123",
+            "HoTen": "Phan Thanh Liêm",
+            "VaiTro": "CO_DO",
+            "MaLop": 6,
+            "TrangThai": true
+        },
+        {
+            "MaNguoiDung": 18,
+            "Email": "mai.codo11b@school.edu.vn",
+            "MatKhauHash": "codo123",
+            "HoTen": "Ngô Quỳnh Mai",
+            "VaiTro": "CO_DO",
+            "MaLop": 6,
+            "TrangThai": true
+        },
+        {
+            "MaNguoiDung": 19,
+            "Email": "gv.11b@school.edu.vn",
+            "MatKhauHash": "gv123",
+            "HoTen": "Cô Hương - GVCN 11B",
+            "VaiTro": "GIAO_VIEN",
+            "MaLop": 6,
+            "TrangThai": true
+        },
+        {
+            "MaNguoiDung": 20,
+            "Email": "nam.codo11c@school.edu.vn",
+            "MatKhauHash": "codo123",
+            "HoTen": "Đặng Hoài Nam",
+            "VaiTro": "CO_DO",
+            "MaLop": 7,
+            "TrangThai": true
+        },
+        {
+            "MaNguoiDung": 21,
+            "Email": "oanh.codo11c@school.edu.vn",
+            "MatKhauHash": "codo123",
+            "HoTen": "Võ Thị Oanh",
+            "VaiTro": "CO_DO",
+            "MaLop": 7,
+            "TrangThai": true
+        },
+        {
+            "MaNguoiDung": 22,
+            "Email": "gv.11c@school.edu.vn",
+            "MatKhauHash": "gv123",
+            "HoTen": "Cô Hương - GVCN 11C",
+            "VaiTro": "GIAO_VIEN",
+            "MaLop": 7,
+            "TrangThai": true
+        },
+        {
+            "MaNguoiDung": 23,
+            "Email": "phuc.codo11d@school.edu.vn",
+            "MatKhauHash": "codo123",
+            "HoTen": "Đỗ Hồng Phúc",
+            "VaiTro": "CO_DO",
+            "MaLop": 8,
+            "TrangThai": true
+        },
+        {
+            "MaNguoiDung": 24,
+            "Email": "phuong.codo11d@school.edu.vn",
+            "MatKhauHash": "codo123",
+            "HoTen": "Bùi Công Phượng",
+            "VaiTro": "CO_DO",
+            "MaLop": 8,
+            "TrangThai": true
+        },
+        {
+            "MaNguoiDung": 25,
+            "Email": "gv.11d@school.edu.vn",
+            "MatKhauHash": "gv123",
+            "HoTen": "Cô Hương - GVCN 11D",
+            "VaiTro": "GIAO_VIEN",
+            "MaLop": 8,
+            "TrangThai": true
+        },
+        {
+            "MaNguoiDung": 26,
+            "Email": "quan.codo12a@school.edu.vn",
+            "MatKhauHash": "codo123",
+            "HoTen": "Nguyễn Minh Quân",
+            "VaiTro": "CO_DO",
+            "MaLop": 9,
+            "TrangThai": true
+        },
+        {
+            "MaNguoiDung": 27,
+            "Email": "son.codo12a@school.edu.vn",
+            "MatKhauHash": "codo123",
+            "HoTen": "Lê Hồng Sơn",
+            "VaiTro": "CO_DO",
+            "MaLop": 9,
+            "TrangThai": true
+        },
+        {
+            "MaNguoiDung": 28,
+            "Email": "gv.12a@school.edu.vn",
+            "MatKhauHash": "gv123",
+            "HoTen": "Cô Hương - GVCN 12A",
+            "VaiTro": "GIAO_VIEN",
+            "MaLop": 9,
+            "TrangThai": true
+        },
+        {
+            "MaNguoiDung": 29,
+            "Email": "tam.codo12b@school.edu.vn",
+            "MatKhauHash": "codo123",
+            "HoTen": "Phạm Minh Tâm",
+            "VaiTro": "CO_DO",
+            "MaLop": 10,
+            "TrangThai": true
+        },
+        {
+            "MaNguoiDung": 30,
+            "Email": "uyen.codo12b@school.edu.vn",
+            "MatKhauHash": "codo123",
+            "HoTen": "Trần Thu Uyên",
+            "VaiTro": "CO_DO",
+            "MaLop": 10,
+            "TrangThai": true
+        },
+        {
+            "MaNguoiDung": 31,
+            "Email": "gv.12b@school.edu.vn",
+            "MatKhauHash": "gv123",
+            "HoTen": "Cô Hương - GVCN 12B",
+            "VaiTro": "GIAO_VIEN",
+            "MaLop": 10,
+            "TrangThai": true
+        },
+        {
+            "MaNguoiDung": 32,
+            "Email": "viet.codo12c@school.edu.vn",
+            "MatKhauHash": "codo123",
+            "HoTen": "Vũ Hữu Việt",
+            "VaiTro": "CO_DO",
+            "MaLop": 11,
+            "TrangThai": true
+        },
+        {
+            "MaNguoiDung": 33,
+            "Email": "yen.codo12c@school.edu.vn",
+            "MatKhauHash": "codo123",
+            "HoTen": "Nguyễn Hải Yến",
+            "VaiTro": "CO_DO",
+            "MaLop": 11,
+            "TrangThai": true
+        },
+        {
+            "MaNguoiDung": 34,
+            "Email": "gv.12c@school.edu.vn",
+            "MatKhauHash": "gv123",
+            "HoTen": "Cô Hương - GVCN 12C",
+            "VaiTro": "GIAO_VIEN",
+            "MaLop": 11,
+            "TrangThai": true
+        },
+        {
+            "MaNguoiDung": 35,
+            "Email": "anh.codo12d@school.edu.vn",
+            "MatKhauHash": "codo123",
+            "HoTen": "Hoàng Trọng Anh",
+            "VaiTro": "CO_DO",
+            "MaLop": 12,
+            "TrangThai": true
+        },
+        {
+            "MaNguoiDung": 36,
+            "Email": "bao.codo12d@school.edu.vn",
+            "MatKhauHash": "codo123",
+            "HoTen": "Đặng Quốc Bảo",
+            "VaiTro": "CO_DO",
+            "MaLop": 12,
+            "TrangThai": true
+        },
+        {
+            "MaNguoiDung": 37,
+            "Email": "gv.12d@school.edu.vn",
+            "MatKhauHash": "gv123",
+            "HoTen": "Cô Hương - GVCN 12D",
+            "VaiTro": "GIAO_VIEN",
+            "MaLop": 12,
+            "TrangThai": true
+        },
+        {
+            "MaNguoiDung": 38,
+            "Email": "dung.codo12e@school.edu.vn",
+            "MatKhauHash": "codo123",
+            "HoTen": "Bùi Tiến Dũng",
+            "VaiTro": "CO_DO",
+            "MaLop": 13,
+            "TrangThai": true
+        },
+        {
+            "MaNguoiDung": 39,
+            "Email": "thang.codo12e@school.edu.vn",
+            "MatKhauHash": "codo123",
+            "HoTen": "Nguyễn Hữu Thắng",
+            "VaiTro": "CO_DO",
+            "MaLop": 13,
+            "TrangThai": true
+        },
+        {
+            "MaNguoiDung": 40,
+            "Email": "gv.12e@school.edu.vn",
+            "MatKhauHash": "gv123",
+            "HoTen": "Cô Hương - GVCN 12E",
+            "VaiTro": "GIAO_VIEN",
+            "MaLop": 13,
+            "TrangThai": true
+        }
+    ],
+    "TDHD_PhanCongCoDo": [
+        {
+            "MaPhanCong": 1,
+            "MaNguoiDung": 2,
+            "MaTuan": 1,
+            "MaLop": 2
+        },
+        {
+            "MaPhanCong": 2,
+            "MaNguoiDung": 3,
+            "MaTuan": 1,
+            "MaLop": 3
+        },
+        {
+            "MaPhanCong": 3,
+            "MaNguoiDung": 5,
+            "MaTuan": 1,
+            "MaLop": 3
+        },
+        {
+            "MaPhanCong": 4,
+            "MaNguoiDung": 6,
+            "MaTuan": 1,
+            "MaLop": 4
+        },
+        {
+            "MaPhanCong": 5,
+            "MaNguoiDung": 8,
+            "MaTuan": 1,
+            "MaLop": 4
+        },
+        {
+            "MaPhanCong": 6,
+            "MaNguoiDung": 9,
+            "MaTuan": 1,
+            "MaLop": 5
+        },
+        {
+            "MaPhanCong": 7,
+            "MaNguoiDung": 11,
+            "MaTuan": 1,
+            "MaLop": 5
+        },
+        {
+            "MaPhanCong": 8,
+            "MaNguoiDung": 12,
+            "MaTuan": 1,
+            "MaLop": 6
+        },
+        {
+            "MaPhanCong": 9,
+            "MaNguoiDung": 14,
+            "MaTuan": 1,
+            "MaLop": 6
+        },
+        {
+            "MaPhanCong": 10,
+            "MaNguoiDung": 15,
+            "MaTuan": 1,
+            "MaLop": 7
+        },
+        {
+            "MaPhanCong": 11,
+            "MaNguoiDung": 17,
+            "MaTuan": 1,
+            "MaLop": 7
+        },
+        {
+            "MaPhanCong": 12,
+            "MaNguoiDung": 18,
+            "MaTuan": 1,
+            "MaLop": 8
+        },
+        {
+            "MaPhanCong": 13,
+            "MaNguoiDung": 20,
+            "MaTuan": 1,
+            "MaLop": 8
+        },
+        {
+            "MaPhanCong": 14,
+            "MaNguoiDung": 21,
+            "MaTuan": 1,
+            "MaLop": 9
+        },
+        {
+            "MaPhanCong": 15,
+            "MaNguoiDung": 23,
+            "MaTuan": 1,
+            "MaLop": 9
+        },
+        {
+            "MaPhanCong": 16,
+            "MaNguoiDung": 24,
+            "MaTuan": 1,
+            "MaLop": 10
+        },
+        {
+            "MaPhanCong": 17,
+            "MaNguoiDung": 26,
+            "MaTuan": 1,
+            "MaLop": 10
+        },
+        {
+            "MaPhanCong": 18,
+            "MaNguoiDung": 27,
+            "MaTuan": 1,
+            "MaLop": 11
+        },
+        {
+            "MaPhanCong": 19,
+            "MaNguoiDung": 29,
+            "MaTuan": 1,
+            "MaLop": 11
+        },
+        {
+            "MaPhanCong": 20,
+            "MaNguoiDung": 30,
+            "MaTuan": 1,
+            "MaLop": 12
+        },
+        {
+            "MaPhanCong": 21,
+            "MaNguoiDung": 32,
+            "MaTuan": 1,
+            "MaLop": 12
+        },
+        {
+            "MaPhanCong": 22,
+            "MaNguoiDung": 33,
+            "MaTuan": 1,
+            "MaLop": 13
+        },
+        {
+            "MaPhanCong": 23,
+            "MaNguoiDung": 35,
+            "MaTuan": 1,
+            "MaLop": 13
+        },
+        {
+            "MaPhanCong": 24,
+            "MaNguoiDung": 36,
+            "MaTuan": 1,
+            "MaLop": 1
+        },
+        {
+            "MaPhanCong": 25,
+            "MaNguoiDung": 38,
+            "MaTuan": 1,
+            "MaLop": 1
+        },
+        {
+            "MaPhanCong": 26,
+            "MaNguoiDung": 39,
+            "MaTuan": 1,
+            "MaLop": 2
+        },
+        {
+            "MaPhanCong": 27,
+            "MaNguoiDung": 2,
+            "MaTuan": 2,
+            "MaLop": 4
+        },
+        {
+            "MaPhanCong": 28,
+            "MaNguoiDung": 3,
+            "MaTuan": 2,
+            "MaLop": 5
+        },
+        {
+            "MaPhanCong": 29,
+            "MaNguoiDung": 5,
+            "MaTuan": 2,
+            "MaLop": 5
+        },
+        {
+            "MaPhanCong": 30,
+            "MaNguoiDung": 6,
+            "MaTuan": 2,
+            "MaLop": 6
+        },
+        {
+            "MaPhanCong": 31,
+            "MaNguoiDung": 8,
+            "MaTuan": 2,
+            "MaLop": 6
+        },
+        {
+            "MaPhanCong": 32,
+            "MaNguoiDung": 9,
+            "MaTuan": 2,
+            "MaLop": 7
+        },
+        {
+            "MaPhanCong": 33,
+            "MaNguoiDung": 11,
+            "MaTuan": 2,
+            "MaLop": 7
+        },
+        {
+            "MaPhanCong": 34,
+            "MaNguoiDung": 12,
+            "MaTuan": 2,
+            "MaLop": 8
+        },
+        {
+            "MaPhanCong": 35,
+            "MaNguoiDung": 14,
+            "MaTuan": 2,
+            "MaLop": 8
+        },
+        {
+            "MaPhanCong": 36,
+            "MaNguoiDung": 15,
+            "MaTuan": 2,
+            "MaLop": 9
+        },
+        {
+            "MaPhanCong": 37,
+            "MaNguoiDung": 17,
+            "MaTuan": 2,
+            "MaLop": 9
+        },
+        {
+            "MaPhanCong": 38,
+            "MaNguoiDung": 18,
+            "MaTuan": 2,
+            "MaLop": 10
+        },
+        {
+            "MaPhanCong": 39,
+            "MaNguoiDung": 20,
+            "MaTuan": 2,
+            "MaLop": 10
+        },
+        {
+            "MaPhanCong": 40,
+            "MaNguoiDung": 21,
+            "MaTuan": 2,
+            "MaLop": 11
+        },
+        {
+            "MaPhanCong": 41,
+            "MaNguoiDung": 23,
+            "MaTuan": 2,
+            "MaLop": 11
+        },
+        {
+            "MaPhanCong": 42,
+            "MaNguoiDung": 24,
+            "MaTuan": 2,
+            "MaLop": 12
+        },
+        {
+            "MaPhanCong": 43,
+            "MaNguoiDung": 26,
+            "MaTuan": 2,
+            "MaLop": 12
+        },
+        {
+            "MaPhanCong": 44,
+            "MaNguoiDung": 27,
+            "MaTuan": 2,
+            "MaLop": 13
+        },
+        {
+            "MaPhanCong": 45,
+            "MaNguoiDung": 29,
+            "MaTuan": 2,
+            "MaLop": 13
+        },
+        {
+            "MaPhanCong": 46,
+            "MaNguoiDung": 30,
+            "MaTuan": 2,
+            "MaLop": 1
+        },
+        {
+            "MaPhanCong": 47,
+            "MaNguoiDung": 32,
+            "MaTuan": 2,
+            "MaLop": 1
+        },
+        {
+            "MaPhanCong": 48,
+            "MaNguoiDung": 33,
+            "MaTuan": 2,
+            "MaLop": 2
+        },
+        {
+            "MaPhanCong": 49,
+            "MaNguoiDung": 35,
+            "MaTuan": 2,
+            "MaLop": 2
+        },
+        {
+            "MaPhanCong": 50,
+            "MaNguoiDung": 36,
+            "MaTuan": 2,
+            "MaLop": 3
+        },
+        {
+            "MaPhanCong": 51,
+            "MaNguoiDung": 38,
+            "MaTuan": 2,
+            "MaLop": 3
+        },
+        {
+            "MaPhanCong": 52,
+            "MaNguoiDung": 39,
+            "MaTuan": 2,
+            "MaLop": 4
+        },
+        {
+            "MaPhanCong": 53,
+            "MaNguoiDung": 2,
+            "MaTuan": 3,
+            "MaLop": 6
+        },
+        {
+            "MaPhanCong": 54,
+            "MaNguoiDung": 3,
+            "MaTuan": 3,
+            "MaLop": 7
+        },
+        {
+            "MaPhanCong": 55,
+            "MaNguoiDung": 5,
+            "MaTuan": 3,
+            "MaLop": 7
+        },
+        {
+            "MaPhanCong": 56,
+            "MaNguoiDung": 6,
+            "MaTuan": 3,
+            "MaLop": 8
+        },
+        {
+            "MaPhanCong": 57,
+            "MaNguoiDung": 8,
+            "MaTuan": 3,
+            "MaLop": 8
+        },
+        {
+            "MaPhanCong": 58,
+            "MaNguoiDung": 9,
+            "MaTuan": 3,
+            "MaLop": 9
+        },
+        {
+            "MaPhanCong": 59,
+            "MaNguoiDung": 11,
+            "MaTuan": 3,
+            "MaLop": 9
+        },
+        {
+            "MaPhanCong": 60,
+            "MaNguoiDung": 12,
+            "MaTuan": 3,
+            "MaLop": 10
+        },
+        {
+            "MaPhanCong": 61,
+            "MaNguoiDung": 14,
+            "MaTuan": 3,
+            "MaLop": 10
+        },
+        {
+            "MaPhanCong": 62,
+            "MaNguoiDung": 15,
+            "MaTuan": 3,
+            "MaLop": 11
+        },
+        {
+            "MaPhanCong": 63,
+            "MaNguoiDung": 17,
+            "MaTuan": 3,
+            "MaLop": 11
+        },
+        {
+            "MaPhanCong": 64,
+            "MaNguoiDung": 18,
+            "MaTuan": 3,
+            "MaLop": 12
+        },
+        {
+            "MaPhanCong": 65,
+            "MaNguoiDung": 20,
+            "MaTuan": 3,
+            "MaLop": 12
+        },
+        {
+            "MaPhanCong": 66,
+            "MaNguoiDung": 21,
+            "MaTuan": 3,
+            "MaLop": 13
+        },
+        {
+            "MaPhanCong": 67,
+            "MaNguoiDung": 23,
+            "MaTuan": 3,
+            "MaLop": 13
+        },
+        {
+            "MaPhanCong": 68,
+            "MaNguoiDung": 24,
+            "MaTuan": 3,
+            "MaLop": 1
+        },
+        {
+            "MaPhanCong": 69,
+            "MaNguoiDung": 26,
+            "MaTuan": 3,
+            "MaLop": 1
+        },
+        {
+            "MaPhanCong": 70,
+            "MaNguoiDung": 27,
+            "MaTuan": 3,
+            "MaLop": 2
+        },
+        {
+            "MaPhanCong": 71,
+            "MaNguoiDung": 29,
+            "MaTuan": 3,
+            "MaLop": 2
+        },
+        {
+            "MaPhanCong": 72,
+            "MaNguoiDung": 30,
+            "MaTuan": 3,
+            "MaLop": 3
+        },
+        {
+            "MaPhanCong": 73,
+            "MaNguoiDung": 32,
+            "MaTuan": 3,
+            "MaLop": 3
+        },
+        {
+            "MaPhanCong": 74,
+            "MaNguoiDung": 33,
+            "MaTuan": 3,
+            "MaLop": 4
+        },
+        {
+            "MaPhanCong": 75,
+            "MaNguoiDung": 35,
+            "MaTuan": 3,
+            "MaLop": 4
+        },
+        {
+            "MaPhanCong": 76,
+            "MaNguoiDung": 36,
+            "MaTuan": 3,
+            "MaLop": 5
+        },
+        {
+            "MaPhanCong": 77,
+            "MaNguoiDung": 38,
+            "MaTuan": 3,
+            "MaLop": 5
+        },
+        {
+            "MaPhanCong": 78,
+            "MaNguoiDung": 39,
+            "MaTuan": 3,
+            "MaLop": 6
+        }
+    ],
+    "TDHD_ChiTietViPhamHocSinh": [
+        {
+            "MaChiTiet": 1,
+            "MaLop": 1,
+            "MaHocSinh": 1,
+            "MaTieuChi": 5,
+            "MaTuan": 1,
+            "ThuTrongTuan": 2,
+            "MaNguoiDungGhiNhan": 36,
+            "GhiChuChiTiet": "Đi học muộn"
+        },
+        {
+            "MaChiTiet": 2,
+            "MaLop": 1,
+            "MaHocSinh": 2,
+            "MaTieuChi": 5,
+            "MaTuan": 1,
+            "ThuTrongTuan": 3,
+            "MaNguoiDungGhiNhan": 36,
+            "GhiChuChiTiet": "Đi học muộn"
+        },
+        {
+            "MaChiTiet": 3,
+            "MaLop": 2,
+            "MaHocSinh": 21,
+            "MaTieuChi": 5,
+            "MaTuan": 1,
+            "ThuTrongTuan": 2,
+            "MaNguoiDungGhiNhan": 2,
+            "GhiChuChiTiet": "Đi học muộn"
+        },
+        {
+            "MaChiTiet": 4,
+            "MaLop": 2,
+            "MaHocSinh": 22,
+            "MaTieuChi": 5,
+            "MaTuan": 1,
+            "ThuTrongTuan": 3,
+            "MaNguoiDungGhiNhan": 2,
+            "GhiChuChiTiet": "Đi học muộn"
+        },
+        {
+            "MaChiTiet": 5,
+            "MaLop": 3,
+            "MaHocSinh": 41,
+            "MaTieuChi": 5,
+            "MaTuan": 1,
+            "ThuTrongTuan": 2,
+            "MaNguoiDungGhiNhan": 3,
+            "GhiChuChiTiet": "Đi học muộn"
+        },
+        {
+            "MaChiTiet": 6,
+            "MaLop": 3,
+            "MaHocSinh": 42,
+            "MaTieuChi": 5,
+            "MaTuan": 1,
+            "ThuTrongTuan": 3,
+            "MaNguoiDungGhiNhan": 3,
+            "GhiChuChiTiet": "Đi học muộn"
+        },
+        {
+            "MaChiTiet": 7,
+            "MaLop": 3,
+            "MaHocSinh": 43,
+            "MaTieuChi": 5,
+            "MaTuan": 1,
+            "ThuTrongTuan": 4,
+            "MaNguoiDungGhiNhan": 3,
+            "GhiChuChiTiet": "Đi học muộn"
+        },
+        {
+            "MaChiTiet": 8,
+            "MaLop": 5,
+            "MaHocSinh": 81,
+            "MaTieuChi": 5,
+            "MaTuan": 1,
+            "ThuTrongTuan": 2,
+            "MaNguoiDungGhiNhan": 9,
+            "GhiChuChiTiet": "Đi học muộn"
+        },
+        {
+            "MaChiTiet": 9,
+            "MaLop": 5,
+            "MaHocSinh": 82,
+            "MaTieuChi": 5,
+            "MaTuan": 1,
+            "ThuTrongTuan": 3,
+            "MaNguoiDungGhiNhan": 9,
+            "GhiChuChiTiet": "Đi học muộn"
+        },
+        {
+            "MaChiTiet": 10,
+            "MaLop": 7,
+            "MaHocSinh": 121,
+            "MaTieuChi": 5,
+            "MaTuan": 1,
+            "ThuTrongTuan": 2,
+            "MaNguoiDungGhiNhan": 15,
+            "GhiChuChiTiet": "Đi muộn nề nếp"
+        },
+        {
+            "MaChiTiet": 11,
+            "MaLop": 7,
+            "MaHocSinh": 122,
+            "MaTieuChi": 5,
+            "MaTuan": 1,
+            "ThuTrongTuan": 3,
+            "MaNguoiDungGhiNhan": 15,
+            "GhiChuChiTiet": "Đi muộn nề nếp"
+        },
+        {
+            "MaChiTiet": 12,
+            "MaLop": 7,
+            "MaHocSinh": 123,
+            "MaTieuChi": 5,
+            "MaTuan": 1,
+            "ThuTrongTuan": 4,
+            "MaNguoiDungGhiNhan": 15,
+            "GhiChuChiTiet": "Đi muộn nề nếp"
+        },
+        {
+            "MaChiTiet": 13,
+            "MaLop": 7,
+            "MaHocSinh": 124,
+            "MaTieuChi": 5,
+            "MaTuan": 1,
+            "ThuTrongTuan": 5,
+            "MaNguoiDungGhiNhan": 15,
+            "GhiChuChiTiet": "Đi muộn nề nếp"
+        },
+        {
+            "MaChiTiet": 14,
+            "MaLop": 7,
+            "MaHocSinh": 125,
+            "MaTieuChi": 5,
+            "MaTuan": 1,
+            "ThuTrongTuan": 6,
+            "MaNguoiDungGhiNhan": 15,
+            "GhiChuChiTiet": "Đi muộn nề nếp"
+        },
+        {
+            "MaChiTiet": 15,
+            "MaLop": 7,
+            "MaHocSinh": 126,
+            "MaTieuChi": 5,
+            "MaTuan": 1,
+            "ThuTrongTuan": 2,
+            "MaNguoiDungGhiNhan": 15,
+            "GhiChuChiTiet": "Đi muộn nề nếp"
+        },
+        {
+            "MaChiTiet": 16,
+            "MaLop": 7,
+            "MaHocSinh": 127,
+            "MaTieuChi": 5,
+            "MaTuan": 1,
+            "ThuTrongTuan": 3,
+            "MaNguoiDungGhiNhan": 15,
+            "GhiChuChiTiet": "Đi muộn nề nếp"
+        },
+        {
+            "MaChiTiet": 17,
+            "MaLop": 7,
+            "MaHocSinh": 128,
+            "MaTieuChi": 5,
+            "MaTuan": 1,
+            "ThuTrongTuan": 4,
+            "MaNguoiDungGhiNhan": 15,
+            "GhiChuChiTiet": "Đi muộn nề nếp"
+        },
+        {
+            "MaChiTiet": 18,
+            "MaLop": 7,
+            "MaHocSinh": 129,
+            "MaTieuChi": 5,
+            "MaTuan": 1,
+            "ThuTrongTuan": 5,
+            "MaNguoiDungGhiNhan": 15,
+            "GhiChuChiTiet": "Đi muộn nề nếp"
+        },
+        {
+            "MaChiTiet": 19,
+            "MaLop": 7,
+            "MaHocSinh": 130,
+            "MaTieuChi": 5,
+            "MaTuan": 1,
+            "ThuTrongTuan": 6,
+            "MaNguoiDungGhiNhan": 15,
+            "GhiChuChiTiet": "Đi muộn nề nếp"
+        },
+        {
+            "MaChiTiet": 20,
+            "MaLop": 7,
+            "MaHocSinh": 131,
+            "MaTieuChi": 5,
+            "MaTuan": 1,
+            "ThuTrongTuan": 2,
+            "MaNguoiDungGhiNhan": 15,
+            "GhiChuChiTiet": "Đi muộn nề nếp"
+        },
+        {
+            "MaChiTiet": 21,
+            "MaLop": 7,
+            "MaHocSinh": 132,
+            "MaTieuChi": 5,
+            "MaTuan": 1,
+            "ThuTrongTuan": 3,
+            "MaNguoiDungGhiNhan": 15,
+            "GhiChuChiTiet": "Đi muộn nề nếp"
+        },
+        {
+            "MaChiTiet": 22,
+            "MaLop": 7,
+            "MaHocSinh": 133,
+            "MaTieuChi": 5,
+            "MaTuan": 1,
+            "ThuTrongTuan": 4,
+            "MaNguoiDungGhiNhan": 15,
+            "GhiChuChiTiet": "Đi muộn nề nếp"
+        },
+        {
+            "MaChiTiet": 23,
+            "MaLop": 7,
+            "MaHocSinh": 134,
+            "MaTieuChi": 5,
+            "MaTuan": 1,
+            "ThuTrongTuan": 5,
+            "MaNguoiDungGhiNhan": 15,
+            "GhiChuChiTiet": "Đi muộn nề nếp"
+        },
+        {
+            "MaChiTiet": 24,
+            "MaLop": 7,
+            "MaHocSinh": 135,
+            "MaTieuChi": 5,
+            "MaTuan": 1,
+            "ThuTrongTuan": 6,
+            "MaNguoiDungGhiNhan": 15,
+            "GhiChuChiTiet": "Đi muộn nề nếp"
+        },
+        {
+            "MaChiTiet": 25,
+            "MaLop": 7,
+            "MaHocSinh": 123,
+            "MaTieuChi": 11,
+            "MaTuan": 1,
+            "ThuTrongTuan": 4,
+            "MaNguoiDungGhiNhan": 15,
+            "GhiChuChiTiet": "Làm hỏng bàn ghế học sinh"
+        },
+        {
+            "MaChiTiet": 26,
+            "MaLop": 7,
+            "MaHocSinh": 124,
+            "MaTieuChi": 12,
+            "MaTuan": 1,
+            "ThuTrongTuan": 5,
+            "MaNguoiDungGhiNhan": 15,
+            "GhiChuChiTiet": "Cãi lời giáo viên bộ môn"
+        },
+        {
+            "MaChiTiet": 27,
+            "MaLop": 8,
+            "MaHocSinh": 141,
+            "MaTieuChi": 5,
+            "MaTuan": 1,
+            "ThuTrongTuan": 2,
+            "MaNguoiDungGhiNhan": 18,
+            "GhiChuChiTiet": "Đi học muộn"
+        },
+        {
+            "MaChiTiet": 28,
+            "MaLop": 8,
+            "MaHocSinh": 142,
+            "MaTieuChi": 5,
+            "MaTuan": 1,
+            "ThuTrongTuan": 3,
+            "MaNguoiDungGhiNhan": 18,
+            "GhiChuChiTiet": "Đi học muộn"
+        },
+        {
+            "MaChiTiet": 29,
+            "MaLop": 8,
+            "MaHocSinh": 143,
+            "MaTieuChi": 5,
+            "MaTuan": 1,
+            "ThuTrongTuan": 4,
+            "MaNguoiDungGhiNhan": 18,
+            "GhiChuChiTiet": "Đi học muộn"
+        },
+        {
+            "MaChiTiet": 30,
+            "MaLop": 9,
+            "MaHocSinh": 171,
+            "MaTieuChi": 17,
+            "MaTuan": 1,
+            "ThuTrongTuan": 5,
+            "MaNguoiDungGhiNhan": 21,
+            "GhiChuChiTiet": "Sử dụng điện thoại"
+        },
+        {
+            "MaChiTiet": 31,
+            "MaLop": 9,
+            "MaHocSinh": 172,
+            "MaTieuChi": 14,
+            "MaTuan": 1,
+            "ThuTrongTuan": 6,
+            "MaNguoiDungGhiNhan": 21,
+            "GhiChuChiTiet": "Không đội mũ bảo hiểm"
+        },
+        {
+            "MaChiTiet": 32,
+            "MaLop": 10,
+            "MaHocSinh": null,
+            "MaTieuChi": 3,
+            "MaTuan": 1,
+            "ThuTrongTuan": 3,
+            "MaNguoiDungGhiNhan": 24,
+            "GhiChuChiTiet": "Tập thể dục lộn xộn"
+        },
+        {
+            "MaChiTiet": 33,
+            "MaLop": 10,
+            "MaHocSinh": 186,
+            "MaTieuChi": 5,
+            "MaTuan": 1,
+            "ThuTrongTuan": 3,
+            "MaNguoiDungGhiNhan": 24,
+            "GhiChuChiTiet": "Đi học muộn"
+        },
+        {
+            "MaChiTiet": 34,
+            "MaLop": 10,
+            "MaHocSinh": 187,
+            "MaTieuChi": 29,
+            "MaTuan": 1,
+            "ThuTrongTuan": 5,
+            "MaNguoiDungGhiNhan": 24,
+            "GhiChuChiTiet": "Ngủ gật trong giờ"
+        },
+        {
+            "MaChiTiet": 35,
+            "MaLop": 11,
+            "MaHocSinh": 201,
+            "MaTieuChi": 5,
+            "MaTuan": 1,
+            "ThuTrongTuan": 2,
+            "MaNguoiDungGhiNhan": 27,
+            "GhiChuChiTiet": "Đi học muộn"
+        },
+        {
+            "MaChiTiet": 36,
+            "MaLop": 11,
+            "MaHocSinh": 202,
+            "MaTieuChi": 5,
+            "MaTuan": 1,
+            "ThuTrongTuan": 3,
+            "MaNguoiDungGhiNhan": 27,
+            "GhiChuChiTiet": "Đi học muộn"
+        },
+        {
+            "MaChiTiet": 37,
+            "MaLop": 11,
+            "MaHocSinh": 203,
+            "MaTieuChi": 5,
+            "MaTuan": 1,
+            "ThuTrongTuan": 4,
+            "MaNguoiDungGhiNhan": 27,
+            "GhiChuChiTiet": "Đi học muộn"
+        },
+        {
+            "MaChiTiet": 38,
+            "MaLop": 12,
+            "MaHocSinh": null,
+            "MaTieuChi": 6,
+            "MaTuan": 1,
+            "ThuTrongTuan": 2,
+            "MaNguoiDungGhiNhan": 30,
+            "GhiChuChiTiet": "Vệ sinh lớp muộn"
+        },
+        {
+            "MaChiTiet": 39,
+            "MaLop": 12,
+            "MaHocSinh": 223,
+            "MaTieuChi": 5,
+            "MaTuan": 1,
+            "ThuTrongTuan": 2,
+            "MaNguoiDungGhiNhan": 30,
+            "GhiChuChiTiet": "Đi học muộn 10 phút"
+        },
+        {
+            "MaChiTiet": 40,
+            "MaLop": 12,
+            "MaHocSinh": 224,
+            "MaTieuChi": 26,
+            "MaTuan": 1,
+            "ThuTrongTuan": 4,
+            "MaNguoiDungGhiNhan": 30,
+            "GhiChuChiTiet": "Không đeo thẻ học sinh"
+        },
+        {
+            "MaChiTiet": 41,
+            "MaLop": 12,
+            "MaHocSinh": 225,
+            "MaTieuChi": 26,
+            "MaTuan": 1,
+            "ThuTrongTuan": 4,
+            "MaNguoiDungGhiNhan": 30,
+            "GhiChuChiTiet": "Không đeo thẻ học sinh"
+        },
+        {
+            "MaChiTiet": 42,
+            "MaLop": 13,
+            "MaHocSinh": 241,
+            "MaTieuChi": 5,
+            "MaTuan": 1,
+            "ThuTrongTuan": 2,
+            "MaNguoiDungGhiNhan": 33,
+            "GhiChuChiTiet": "Đi học muộn"
+        },
+        {
+            "MaChiTiet": 43,
+            "MaLop": 13,
+            "MaHocSinh": 242,
+            "MaTieuChi": 5,
+            "MaTuan": 1,
+            "ThuTrongTuan": 3,
+            "MaNguoiDungGhiNhan": 33,
+            "GhiChuChiTiet": "Đi học muộn"
+        }
+    ],
+    "TDHD_ChiTietThanhTichHocSinh": [
+        {
+            "MaChiTietThanhTich": 1,
+            "MaLop": 1,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 2,
+            "MonHoc": "Tin học",
+            "MaNguoiDungGhiNhan": 36,
+            "GhiChu": "Lớp học tốt"
+        },
+        {
+            "MaChiTietThanhTich": 2,
+            "MaLop": 1,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 3,
+            "MonHoc": "Tin học",
+            "MaNguoiDungGhiNhan": 36,
+            "GhiChu": "Lớp học tốt"
+        },
+        {
+            "MaChiTietThanhTich": 3,
+            "MaLop": 1,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 4,
+            "MonHoc": "Tin học",
+            "MaNguoiDungGhiNhan": 36,
+            "GhiChu": "Lớp học tốt"
+        },
+        {
+            "MaChiTietThanhTich": 4,
+            "MaLop": 1,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 5,
+            "MonHoc": "Tin học",
+            "MaNguoiDungGhiNhan": 36,
+            "GhiChu": "Lớp học tốt"
+        },
+        {
+            "MaChiTietThanhTich": 5,
+            "MaLop": 1,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 6,
+            "MonHoc": "Tin học",
+            "MaNguoiDungGhiNhan": 36,
+            "GhiChu": "Lớp học tốt"
+        },
+        {
+            "MaChiTietThanhTich": 6,
+            "MaLop": 2,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 2,
+            "MonHoc": "Tin học",
+            "MaNguoiDungGhiNhan": 2,
+            "GhiChu": "Lớp học tốt"
+        },
+        {
+            "MaChiTietThanhTich": 7,
+            "MaLop": 2,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 3,
+            "MonHoc": "Tin học",
+            "MaNguoiDungGhiNhan": 2,
+            "GhiChu": "Lớp học tốt"
+        },
+        {
+            "MaChiTietThanhTich": 8,
+            "MaLop": 2,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 4,
+            "MonHoc": "Tin học",
+            "MaNguoiDungGhiNhan": 2,
+            "GhiChu": "Lớp học tốt"
+        },
+        {
+            "MaChiTietThanhTich": 9,
+            "MaLop": 2,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 5,
+            "MonHoc": "Tin học",
+            "MaNguoiDungGhiNhan": 2,
+            "GhiChu": "Lớp học tốt"
+        },
+        {
+            "MaChiTietThanhTich": 10,
+            "MaLop": 2,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 6,
+            "MonHoc": "Tin học",
+            "MaNguoiDungGhiNhan": 2,
+            "GhiChu": "Lớp học tốt"
+        },
+        {
+            "MaChiTietThanhTich": 11,
+            "MaLop": 2,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 2,
+            "MonHoc": "Tin học",
+            "MaNguoiDungGhiNhan": 2,
+            "GhiChu": "Lớp học tốt"
+        },
+        {
+            "MaChiTietThanhTich": 12,
+            "MaLop": 3,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 2,
+            "MonHoc": "Tin học",
+            "MaNguoiDungGhiNhan": 3,
+            "GhiChu": "Lớp học tốt"
+        },
+        {
+            "MaChiTietThanhTich": 13,
+            "MaLop": 3,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 3,
+            "MonHoc": "Tin học",
+            "MaNguoiDungGhiNhan": 3,
+            "GhiChu": "Lớp học tốt"
+        },
+        {
+            "MaChiTietThanhTich": 14,
+            "MaLop": 3,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 4,
+            "MonHoc": "Tin học",
+            "MaNguoiDungGhiNhan": 3,
+            "GhiChu": "Lớp học tốt"
+        },
+        {
+            "MaChiTietThanhTich": 15,
+            "MaLop": 3,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 5,
+            "MonHoc": "Tin học",
+            "MaNguoiDungGhiNhan": 3,
+            "GhiChu": "Lớp học tốt"
+        },
+        {
+            "MaChiTietThanhTich": 16,
+            "MaLop": 3,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 6,
+            "MonHoc": "Tin học",
+            "MaNguoiDungGhiNhan": 3,
+            "GhiChu": "Lớp học tốt"
+        },
+        {
+            "MaChiTietThanhTich": 17,
+            "MaLop": 3,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 2,
+            "MonHoc": "Tin học",
+            "MaNguoiDungGhiNhan": 3,
+            "GhiChu": "Lớp học tốt"
+        },
+        {
+            "MaChiTietThanhTich": 18,
+            "MaLop": 3,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 3,
+            "MonHoc": "Tin học",
+            "MaNguoiDungGhiNhan": 3,
+            "GhiChu": "Lớp học tốt"
+        },
+        {
+            "MaChiTietThanhTich": 19,
+            "MaLop": 3,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 4,
+            "MonHoc": "Tin học",
+            "MaNguoiDungGhiNhan": 3,
+            "GhiChu": "Lớp học tốt"
+        },
+        {
+            "MaChiTietThanhTich": 20,
+            "MaLop": 3,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 5,
+            "MonHoc": "Tin học",
+            "MaNguoiDungGhiNhan": 3,
+            "GhiChu": "Lớp học tốt"
+        },
+        {
+            "MaChiTietThanhTich": 21,
+            "MaLop": 3,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 6,
+            "MonHoc": "Tin học",
+            "MaNguoiDungGhiNhan": 3,
+            "GhiChu": "Lớp học tốt"
+        },
+        {
+            "MaChiTietThanhTich": 22,
+            "MaLop": 3,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 2,
+            "MonHoc": "Tin học",
+            "MaNguoiDungGhiNhan": 3,
+            "GhiChu": "Lớp học tốt"
+        },
+        {
+            "MaChiTietThanhTich": 23,
+            "MaLop": 3,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 3,
+            "MonHoc": "Tin học",
+            "MaNguoiDungGhiNhan": 3,
+            "GhiChu": "Lớp học tốt"
+        },
+        {
+            "MaChiTietThanhTich": 24,
+            "MaLop": 4,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 2,
+            "MonHoc": "Tin học",
+            "MaNguoiDungGhiNhan": 6,
+            "GhiChu": "Lớp học tốt"
+        },
+        {
+            "MaChiTietThanhTich": 25,
+            "MaLop": 4,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 3,
+            "MonHoc": "Tin học",
+            "MaNguoiDungGhiNhan": 6,
+            "GhiChu": "Lớp học tốt"
+        },
+        {
+            "MaChiTietThanhTich": 26,
+            "MaLop": 4,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 4,
+            "MonHoc": "Tin học",
+            "MaNguoiDungGhiNhan": 6,
+            "GhiChu": "Lớp học tốt"
+        },
+        {
+            "MaChiTietThanhTich": 27,
+            "MaLop": 4,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 5,
+            "MonHoc": "Tin học",
+            "MaNguoiDungGhiNhan": 6,
+            "GhiChu": "Lớp học tốt"
+        },
+        {
+            "MaChiTietThanhTich": 28,
+            "MaLop": 4,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 6,
+            "MonHoc": "Tin học",
+            "MaNguoiDungGhiNhan": 6,
+            "GhiChu": "Lớp học tốt"
+        },
+        {
+            "MaChiTietThanhTich": 29,
+            "MaLop": 5,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 2,
+            "MonHoc": "Tin học",
+            "MaNguoiDungGhiNhan": 9,
+            "GhiChu": "Lớp học tốt"
+        },
+        {
+            "MaChiTietThanhTich": 30,
+            "MaLop": 5,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 3,
+            "MonHoc": "Tin học",
+            "MaNguoiDungGhiNhan": 9,
+            "GhiChu": "Lớp học tốt"
+        },
+        {
+            "MaChiTietThanhTich": 31,
+            "MaLop": 5,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 4,
+            "MonHoc": "Tin học",
+            "MaNguoiDungGhiNhan": 9,
+            "GhiChu": "Lớp học tốt"
+        },
+        {
+            "MaChiTietThanhTich": 32,
+            "MaLop": 5,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 5,
+            "MonHoc": "Tin học",
+            "MaNguoiDungGhiNhan": 9,
+            "GhiChu": "Lớp học tốt"
+        },
+        {
+            "MaChiTietThanhTich": 33,
+            "MaLop": 5,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 6,
+            "MonHoc": "Tin học",
+            "MaNguoiDungGhiNhan": 9,
+            "GhiChu": "Lớp học tốt"
+        },
+        {
+            "MaChiTietThanhTich": 34,
+            "MaLop": 5,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 2,
+            "MonHoc": "Tin học",
+            "MaNguoiDungGhiNhan": 9,
+            "GhiChu": "Lớp học tốt"
+        },
+        {
+            "MaChiTietThanhTich": 35,
+            "MaLop": 5,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 3,
+            "MonHoc": "Tin học",
+            "MaNguoiDungGhiNhan": 9,
+            "GhiChu": "Lớp học tốt"
+        },
+        {
+            "MaChiTietThanhTich": 36,
+            "MaLop": 5,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 4,
+            "MonHoc": "Tin học",
+            "MaNguoiDungGhiNhan": 9,
+            "GhiChu": "Lớp học tốt"
+        },
+        {
+            "MaChiTietThanhTich": 37,
+            "MaLop": 5,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 5,
+            "MonHoc": "Tin học",
+            "MaNguoiDungGhiNhan": 9,
+            "GhiChu": "Lớp học tốt"
+        },
+        {
+            "MaChiTietThanhTich": 38,
+            "MaLop": 5,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 6,
+            "MonHoc": "Tin học",
+            "MaNguoiDungGhiNhan": 9,
+            "GhiChu": "Lớp học tốt"
+        },
+        {
+            "MaChiTietThanhTich": 39,
+            "MaLop": 6,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 2,
+            "MonHoc": "Tin học",
+            "MaNguoiDungGhiNhan": 12,
+            "GhiChu": "Lớp học tốt"
+        },
+        {
+            "MaChiTietThanhTich": 40,
+            "MaLop": 6,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 3,
+            "MonHoc": "Tin học",
+            "MaNguoiDungGhiNhan": 12,
+            "GhiChu": "Lớp học tốt"
+        },
+        {
+            "MaChiTietThanhTich": 41,
+            "MaLop": 6,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 4,
+            "MonHoc": "Tin học",
+            "MaNguoiDungGhiNhan": 12,
+            "GhiChu": "Lớp học tốt"
+        },
+        {
+            "MaChiTietThanhTich": 42,
+            "MaLop": 6,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 5,
+            "MonHoc": "Tin học",
+            "MaNguoiDungGhiNhan": 12,
+            "GhiChu": "Lớp học tốt"
+        },
+        {
+            "MaChiTietThanhTich": 43,
+            "MaLop": 6,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 6,
+            "MonHoc": "Tin học",
+            "MaNguoiDungGhiNhan": 12,
+            "GhiChu": "Lớp học tốt"
+        },
+        {
+            "MaChiTietThanhTich": 44,
+            "MaLop": 6,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 2,
+            "MonHoc": "Tin học",
+            "MaNguoiDungGhiNhan": 12,
+            "GhiChu": "Lớp học tốt"
+        },
+        {
+            "MaChiTietThanhTich": 45,
+            "MaLop": 8,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 2,
+            "MonHoc": "Tin học",
+            "MaNguoiDungGhiNhan": 18,
+            "GhiChu": "Lớp học tốt"
+        },
+        {
+            "MaChiTietThanhTich": 46,
+            "MaLop": 8,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 3,
+            "MonHoc": "Tin học",
+            "MaNguoiDungGhiNhan": 18,
+            "GhiChu": "Lớp học tốt"
+        },
+        {
+            "MaChiTietThanhTich": 47,
+            "MaLop": 8,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 4,
+            "MonHoc": "Tin học",
+            "MaNguoiDungGhiNhan": 18,
+            "GhiChu": "Lớp học tốt"
+        },
+        {
+            "MaChiTietThanhTich": 48,
+            "MaLop": 8,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 5,
+            "MonHoc": "Tin học",
+            "MaNguoiDungGhiNhan": 18,
+            "GhiChu": "Lớp học tốt"
+        },
+        {
+            "MaChiTietThanhTich": 49,
+            "MaLop": 8,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 6,
+            "MonHoc": "Tin học",
+            "MaNguoiDungGhiNhan": 18,
+            "GhiChu": "Lớp học tốt"
+        },
+        {
+            "MaChiTietThanhTich": 50,
+            "MaLop": 8,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 2,
+            "MonHoc": "Tin học",
+            "MaNguoiDungGhiNhan": 18,
+            "GhiChu": "Lớp học tốt"
+        },
+        {
+            "MaChiTietThanhTich": 51,
+            "MaLop": 8,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 3,
+            "MonHoc": "Tin học",
+            "MaNguoiDungGhiNhan": 18,
+            "GhiChu": "Lớp học tốt"
+        },
+        {
+            "MaChiTietThanhTich": 52,
+            "MaLop": 8,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 4,
+            "MonHoc": "Tin học",
+            "MaNguoiDungGhiNhan": 18,
+            "GhiChu": "Lớp học tốt"
+        },
+        {
+            "MaChiTietThanhTich": 53,
+            "MaLop": 8,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 5,
+            "MonHoc": "Tin học",
+            "MaNguoiDungGhiNhan": 18,
+            "GhiChu": "Lớp học tốt"
+        },
+        {
+            "MaChiTietThanhTich": 54,
+            "MaLop": 8,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 6,
+            "MonHoc": "Tin học",
+            "MaNguoiDungGhiNhan": 18,
+            "GhiChu": "Lớp học tốt"
+        },
+        {
+            "MaChiTietThanhTich": 55,
+            "MaLop": 8,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 2,
+            "MonHoc": "Tin học",
+            "MaNguoiDungGhiNhan": 18,
+            "GhiChu": "Lớp học tốt"
+        },
+        {
+            "MaChiTietThanhTich": 56,
+            "MaLop": 9,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 2,
+            "MonHoc": "Địa lý",
+            "MaNguoiDungGhiNhan": 21,
+            "GhiChu": "Lớp học tốt"
+        },
+        {
+            "MaChiTietThanhTich": 57,
+            "MaLop": 9,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 3,
+            "MonHoc": "Địa lý",
+            "MaNguoiDungGhiNhan": 21,
+            "GhiChu": "Lớp học tốt"
+        },
+        {
+            "MaChiTietThanhTich": 58,
+            "MaLop": 9,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 4,
+            "MonHoc": "Địa lý",
+            "MaNguoiDungGhiNhan": 21,
+            "GhiChu": "Lớp học tốt"
+        },
+        {
+            "MaChiTietThanhTich": 59,
+            "MaLop": 9,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 5,
+            "MonHoc": "Địa lý",
+            "MaNguoiDungGhiNhan": 21,
+            "GhiChu": "Lớp học tốt"
+        },
+        {
+            "MaChiTietThanhTich": 60,
+            "MaLop": 9,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 6,
+            "MonHoc": "Địa lý",
+            "MaNguoiDungGhiNhan": 21,
+            "GhiChu": "Lớp học tốt"
+        },
+        {
+            "MaChiTietThanhTich": 61,
+            "MaLop": 9,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 2,
+            "MonHoc": "Địa lý",
+            "MaNguoiDungGhiNhan": 21,
+            "GhiChu": "Lớp học tốt"
+        },
+        {
+            "MaChiTietThanhTich": 62,
+            "MaLop": 9,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 3,
+            "MonHoc": "Địa lý",
+            "MaNguoiDungGhiNhan": 21,
+            "GhiChu": "Lớp học tốt"
+        },
+        {
+            "MaChiTietThanhTich": 63,
+            "MaLop": 9,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 4,
+            "MonHoc": "Địa lý",
+            "MaNguoiDungGhiNhan": 21,
+            "GhiChu": "Lớp học tốt"
+        },
+        {
+            "MaChiTietThanhTich": 64,
+            "MaLop": 9,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 5,
+            "MonHoc": "Địa lý",
+            "MaNguoiDungGhiNhan": 21,
+            "GhiChu": "Lớp học tốt"
+        },
+        {
+            "MaChiTietThanhTich": 65,
+            "MaLop": 9,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 6,
+            "MonHoc": "Địa lý",
+            "MaNguoiDungGhiNhan": 21,
+            "GhiChu": "Lớp học tốt"
+        },
+        {
+            "MaChiTietThanhTich": 66,
+            "MaLop": 9,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 2,
+            "MonHoc": "Địa lý",
+            "MaNguoiDungGhiNhan": 21,
+            "GhiChu": "Lớp học tốt"
+        },
+        {
+            "MaChiTietThanhTich": 67,
+            "MaLop": 9,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 3,
+            "MonHoc": "Địa lý",
+            "MaNguoiDungGhiNhan": 21,
+            "GhiChu": "Lớp học tốt"
+        },
+        {
+            "MaChiTietThanhTich": 68,
+            "MaLop": 9,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 4,
+            "MonHoc": "Địa lý",
+            "MaNguoiDungGhiNhan": 21,
+            "GhiChu": "Lớp học tốt"
+        },
+        {
+            "MaChiTietThanhTich": 69,
+            "MaLop": 9,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 5,
+            "MonHoc": "Địa lý",
+            "MaNguoiDungGhiNhan": 21,
+            "GhiChu": "Lớp học tốt"
+        },
+        {
+            "MaChiTietThanhTich": 70,
+            "MaLop": 9,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 6,
+            "MonHoc": "Địa lý",
+            "MaNguoiDungGhiNhan": 21,
+            "GhiChu": "Lớp học tốt"
+        },
+        {
+            "MaChiTietThanhTich": 71,
+            "MaLop": 9,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 2,
+            "MonHoc": "Địa lý",
+            "MaNguoiDungGhiNhan": 21,
+            "GhiChu": "Lớp học tốt"
+        },
+        {
+            "MaChiTietThanhTich": 72,
+            "MaLop": 9,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 3,
+            "MonHoc": "Địa lý",
+            "MaNguoiDungGhiNhan": 21,
+            "GhiChu": "Lớp học tốt"
+        },
+        {
+            "MaChiTietThanhTich": 73,
+            "MaLop": 9,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 4,
+            "MonHoc": "Địa lý",
+            "MaNguoiDungGhiNhan": 21,
+            "GhiChu": "Lớp học tốt"
+        },
+        {
+            "MaChiTietThanhTich": 74,
+            "MaLop": 9,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 5,
+            "MonHoc": "Địa lý",
+            "MaNguoiDungGhiNhan": 21,
+            "GhiChu": "Lớp học tốt"
+        },
+        {
+            "MaChiTietThanhTich": 75,
+            "MaLop": 9,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 6,
+            "MonHoc": "Địa lý",
+            "MaNguoiDungGhiNhan": 21,
+            "GhiChu": "Lớp học tốt"
+        },
+        {
+            "MaChiTietThanhTich": 76,
+            "MaLop": 9,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 2,
+            "MonHoc": "Địa lý",
+            "MaNguoiDungGhiNhan": 21,
+            "GhiChu": "Lớp học tốt"
+        },
+        {
+            "MaChiTietThanhTich": 77,
+            "MaLop": 9,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 3,
+            "MonHoc": "Địa lý",
+            "MaNguoiDungGhiNhan": 21,
+            "GhiChu": "Lớp học tốt"
+        },
+        {
+            "MaChiTietThanhTich": 78,
+            "MaLop": 9,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 4,
+            "MonHoc": "Địa lý",
+            "MaNguoiDungGhiNhan": 21,
+            "GhiChu": "Lớp học tốt"
+        },
+        {
+            "MaChiTietThanhTich": 79,
+            "MaLop": 9,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 5,
+            "MonHoc": "Địa lý",
+            "MaNguoiDungGhiNhan": 21,
+            "GhiChu": "Lớp học tốt"
+        },
+        {
+            "MaChiTietThanhTich": 80,
+            "MaLop": 9,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 6,
+            "MonHoc": "Địa lý",
+            "MaNguoiDungGhiNhan": 21,
+            "GhiChu": "Lớp học tốt"
+        },
+        {
+            "MaChiTietThanhTich": 81,
+            "MaLop": 9,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 2,
+            "MonHoc": "Địa lý",
+            "MaNguoiDungGhiNhan": 21,
+            "GhiChu": "Lớp học tốt"
+        },
+        {
+            "MaChiTietThanhTich": 82,
+            "MaLop": 9,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 3,
+            "MonHoc": "Địa lý",
+            "MaNguoiDungGhiNhan": 21,
+            "GhiChu": "Lớp học tốt"
+        },
+        {
+            "MaChiTietThanhTich": 83,
+            "MaLop": 10,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 2,
+            "MonHoc": "Sinh học",
+            "MaNguoiDungGhiNhan": 24,
+            "GhiChu": "Lớp học tốt"
+        },
+        {
+            "MaChiTietThanhTich": 84,
+            "MaLop": 10,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 3,
+            "MonHoc": "Sinh học",
+            "MaNguoiDungGhiNhan": 24,
+            "GhiChu": "Lớp học tốt"
+        },
+        {
+            "MaChiTietThanhTich": 85,
+            "MaLop": 10,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 4,
+            "MonHoc": "Sinh học",
+            "MaNguoiDungGhiNhan": 24,
+            "GhiChu": "Lớp học tốt"
+        },
+        {
+            "MaChiTietThanhTich": 86,
+            "MaLop": 10,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 5,
+            "MonHoc": "Sinh học",
+            "MaNguoiDungGhiNhan": 24,
+            "GhiChu": "Lớp học tốt"
+        },
+        {
+            "MaChiTietThanhTich": 87,
+            "MaLop": 10,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 6,
+            "MonHoc": "Sinh học",
+            "MaNguoiDungGhiNhan": 24,
+            "GhiChu": "Lớp học tốt"
+        },
+        {
+            "MaChiTietThanhTich": 88,
+            "MaLop": 10,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 2,
+            "MonHoc": "Sinh học",
+            "MaNguoiDungGhiNhan": 24,
+            "GhiChu": "Lớp học tốt"
+        },
+        {
+            "MaChiTietThanhTich": 89,
+            "MaLop": 10,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 3,
+            "MonHoc": "Sinh học",
+            "MaNguoiDungGhiNhan": 24,
+            "GhiChu": "Lớp học tốt"
+        },
+        {
+            "MaChiTietThanhTich": 90,
+            "MaLop": 10,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 4,
+            "MonHoc": "Sinh học",
+            "MaNguoiDungGhiNhan": 24,
+            "GhiChu": "Lớp học tốt"
+        },
+        {
+            "MaChiTietThanhTich": 91,
+            "MaLop": 10,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 5,
+            "MonHoc": "Sinh học",
+            "MaNguoiDungGhiNhan": 24,
+            "GhiChu": "Lớp học tốt"
+        },
+        {
+            "MaChiTietThanhTich": 92,
+            "MaLop": 10,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 6,
+            "MonHoc": "Sinh học",
+            "MaNguoiDungGhiNhan": 24,
+            "GhiChu": "Lớp học tốt"
+        },
+        {
+            "MaChiTietThanhTich": 93,
+            "MaLop": 10,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 2,
+            "MonHoc": "Sinh học",
+            "MaNguoiDungGhiNhan": 24,
+            "GhiChu": "Lớp học tốt"
+        },
+        {
+            "MaChiTietThanhTich": 94,
+            "MaLop": 10,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 3,
+            "MonHoc": "Sinh học",
+            "MaNguoiDungGhiNhan": 24,
+            "GhiChu": "Lớp học tốt"
+        },
+        {
+            "MaChiTietThanhTich": 95,
+            "MaLop": 10,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 4,
+            "MonHoc": "Sinh học",
+            "MaNguoiDungGhiNhan": 24,
+            "GhiChu": "Lớp học tốt"
+        },
+        {
+            "MaChiTietThanhTich": 96,
+            "MaLop": 10,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 5,
+            "MonHoc": "Sinh học",
+            "MaNguoiDungGhiNhan": 24,
+            "GhiChu": "Lớp học tốt"
+        },
+        {
+            "MaChiTietThanhTich": 97,
+            "MaLop": 10,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 6,
+            "MonHoc": "Sinh học",
+            "MaNguoiDungGhiNhan": 24,
+            "GhiChu": "Lớp học tốt"
+        },
+        {
+            "MaChiTietThanhTich": 98,
+            "MaLop": 10,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 2,
+            "MonHoc": "Sinh học",
+            "MaNguoiDungGhiNhan": 24,
+            "GhiChu": "Lớp học tốt"
+        },
+        {
+            "MaChiTietThanhTich": 99,
+            "MaLop": 10,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 3,
+            "MonHoc": "Sinh học",
+            "MaNguoiDungGhiNhan": 24,
+            "GhiChu": "Lớp học tốt"
+        },
+        {
+            "MaChiTietThanhTich": 100,
+            "MaLop": 10,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 4,
+            "MonHoc": "Sinh học",
+            "MaNguoiDungGhiNhan": 24,
+            "GhiChu": "Lớp học tốt"
+        },
+        {
+            "MaChiTietThanhTich": 101,
+            "MaLop": 10,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 5,
+            "MonHoc": "Sinh học",
+            "MaNguoiDungGhiNhan": 24,
+            "GhiChu": "Lớp học tốt"
+        },
+        {
+            "MaChiTietThanhTich": 102,
+            "MaLop": 10,
+            "MaHocSinh": 181,
+            "MaTieuChi": 102,
+            "MaTuan": 1,
+            "ThuTrongTuan": 2,
+            "MonHoc": "Lịch sử",
+            "MaNguoiDungGhiNhan": 24,
+            "GhiChu": "Trả lời tốt"
+        },
+        {
+            "MaChiTietThanhTich": 103,
+            "MaLop": 10,
+            "MaHocSinh": 182,
+            "MaTieuChi": 102,
+            "MaTuan": 1,
+            "ThuTrongTuan": 3,
+            "MonHoc": "Lịch sử",
+            "MaNguoiDungGhiNhan": 24,
+            "GhiChu": "Trả lời tốt"
+        },
+        {
+            "MaChiTietThanhTich": 104,
+            "MaLop": 10,
+            "MaHocSinh": 183,
+            "MaTieuChi": 102,
+            "MaTuan": 1,
+            "ThuTrongTuan": 4,
+            "MonHoc": "Lịch sử",
+            "MaNguoiDungGhiNhan": 24,
+            "GhiChu": "Trả lời tốt"
+        },
+        {
+            "MaChiTietThanhTich": 105,
+            "MaLop": 10,
+            "MaHocSinh": 184,
+            "MaTieuChi": 102,
+            "MaTuan": 1,
+            "ThuTrongTuan": 5,
+            "MonHoc": "Lịch sử",
+            "MaNguoiDungGhiNhan": 24,
+            "GhiChu": "Trả lời tốt"
+        },
+        {
+            "MaChiTietThanhTich": 106,
+            "MaLop": 10,
+            "MaHocSinh": 185,
+            "MaTieuChi": 102,
+            "MaTuan": 1,
+            "ThuTrongTuan": 6,
+            "MonHoc": "Lịch sử",
+            "MaNguoiDungGhiNhan": 24,
+            "GhiChu": "Trả lời tốt"
+        },
+        {
+            "MaChiTietThanhTich": 107,
+            "MaLop": 10,
+            "MaHocSinh": 186,
+            "MaTieuChi": 102,
+            "MaTuan": 1,
+            "ThuTrongTuan": 2,
+            "MonHoc": "Lịch sử",
+            "MaNguoiDungGhiNhan": 24,
+            "GhiChu": "Trả lời tốt"
+        },
+        {
+            "MaChiTietThanhTich": 108,
+            "MaLop": 10,
+            "MaHocSinh": 187,
+            "MaTieuChi": 102,
+            "MaTuan": 1,
+            "ThuTrongTuan": 3,
+            "MonHoc": "Lịch sử",
+            "MaNguoiDungGhiNhan": 24,
+            "GhiChu": "Trả lời tốt"
+        },
+        {
+            "MaChiTietThanhTich": 109,
+            "MaLop": 10,
+            "MaHocSinh": 188,
+            "MaTieuChi": 102,
+            "MaTuan": 1,
+            "ThuTrongTuan": 4,
+            "MonHoc": "Lịch sử",
+            "MaNguoiDungGhiNhan": 24,
+            "GhiChu": "Trả lời tốt"
+        },
+        {
+            "MaChiTietThanhTich": 110,
+            "MaLop": 10,
+            "MaHocSinh": 189,
+            "MaTieuChi": 102,
+            "MaTuan": 1,
+            "ThuTrongTuan": 5,
+            "MonHoc": "Lịch sử",
+            "MaNguoiDungGhiNhan": 24,
+            "GhiChu": "Trả lời tốt"
+        },
+        {
+            "MaChiTietThanhTich": 111,
+            "MaLop": 10,
+            "MaHocSinh": 190,
+            "MaTieuChi": 102,
+            "MaTuan": 1,
+            "ThuTrongTuan": 6,
+            "MonHoc": "Lịch sử",
+            "MaNguoiDungGhiNhan": 24,
+            "GhiChu": "Trả lời tốt"
+        },
+        {
+            "MaChiTietThanhTich": 112,
+            "MaLop": 11,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 2,
+            "MonHoc": "Tin học",
+            "MaNguoiDungGhiNhan": 27,
+            "GhiChu": "Lớp học tốt"
+        },
+        {
+            "MaChiTietThanhTich": 113,
+            "MaLop": 11,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 3,
+            "MonHoc": "Tin học",
+            "MaNguoiDungGhiNhan": 27,
+            "GhiChu": "Lớp học tốt"
+        },
+        {
+            "MaChiTietThanhTich": 114,
+            "MaLop": 11,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 4,
+            "MonHoc": "Tin học",
+            "MaNguoiDungGhiNhan": 27,
+            "GhiChu": "Lớp học tốt"
+        },
+        {
+            "MaChiTietThanhTich": 115,
+            "MaLop": 11,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 5,
+            "MonHoc": "Tin học",
+            "MaNguoiDungGhiNhan": 27,
+            "GhiChu": "Lớp học tốt"
+        },
+        {
+            "MaChiTietThanhTich": 116,
+            "MaLop": 11,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 6,
+            "MonHoc": "Tin học",
+            "MaNguoiDungGhiNhan": 27,
+            "GhiChu": "Lớp học tốt"
+        },
+        {
+            "MaChiTietThanhTich": 117,
+            "MaLop": 12,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 2,
+            "MonHoc": "Toán học",
+            "MaNguoiDungGhiNhan": 30,
+            "GhiChu": "Giờ học tốt xuất sắc"
+        },
+        {
+            "MaChiTietThanhTich": 118,
+            "MaLop": 12,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 3,
+            "MonHoc": "Toán học",
+            "MaNguoiDungGhiNhan": 30,
+            "GhiChu": "Giờ học tốt xuất sắc"
+        },
+        {
+            "MaChiTietThanhTich": 119,
+            "MaLop": 12,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 4,
+            "MonHoc": "Toán học",
+            "MaNguoiDungGhiNhan": 30,
+            "GhiChu": "Giờ học tốt xuất sắc"
+        },
+        {
+            "MaChiTietThanhTich": 120,
+            "MaLop": 12,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 5,
+            "MonHoc": "Toán học",
+            "MaNguoiDungGhiNhan": 30,
+            "GhiChu": "Giờ học tốt xuất sắc"
+        },
+        {
+            "MaChiTietThanhTich": 121,
+            "MaLop": 12,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 6,
+            "MonHoc": "Toán học",
+            "MaNguoiDungGhiNhan": 30,
+            "GhiChu": "Giờ học tốt xuất sắc"
+        },
+        {
+            "MaChiTietThanhTich": 122,
+            "MaLop": 12,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 7,
+            "MonHoc": "Toán học",
+            "MaNguoiDungGhiNhan": 30,
+            "GhiChu": "Giờ học tốt xuất sắc"
+        },
+        {
+            "MaChiTietThanhTich": 123,
+            "MaLop": 12,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 2,
+            "MonHoc": "Vật lý",
+            "MaNguoiDungGhiNhan": 30,
+            "GhiChu": "Phát biểu tích cực"
+        },
+        {
+            "MaChiTietThanhTich": 124,
+            "MaLop": 12,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 3,
+            "MonHoc": "Vật lý",
+            "MaNguoiDungGhiNhan": 30,
+            "GhiChu": "Phát biểu tích cực"
+        },
+        {
+            "MaChiTietThanhTich": 125,
+            "MaLop": 12,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 4,
+            "MonHoc": "Vật lý",
+            "MaNguoiDungGhiNhan": 30,
+            "GhiChu": "Phát biểu tích cực"
+        },
+        {
+            "MaChiTietThanhTich": 126,
+            "MaLop": 12,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 5,
+            "MonHoc": "Vật lý",
+            "MaNguoiDungGhiNhan": 30,
+            "GhiChu": "Phát biểu tích cực"
+        },
+        {
+            "MaChiTietThanhTich": 127,
+            "MaLop": 12,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 6,
+            "MonHoc": "Vật lý",
+            "MaNguoiDungGhiNhan": 30,
+            "GhiChu": "Phát biểu tích cực"
+        },
+        {
+            "MaChiTietThanhTich": 128,
+            "MaLop": 12,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 2,
+            "MonHoc": "Vật lý",
+            "MaNguoiDungGhiNhan": 30,
+            "GhiChu": "Phát biểu tích cực"
+        },
+        {
+            "MaChiTietThanhTich": 129,
+            "MaLop": 12,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 3,
+            "MonHoc": "Vật lý",
+            "MaNguoiDungGhiNhan": 30,
+            "GhiChu": "Phát biểu tích cực"
+        },
+        {
+            "MaChiTietThanhTich": 130,
+            "MaLop": 12,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 4,
+            "MonHoc": "Vật lý",
+            "MaNguoiDungGhiNhan": 30,
+            "GhiChu": "Phát biểu tích cực"
+        },
+        {
+            "MaChiTietThanhTich": 131,
+            "MaLop": 12,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 5,
+            "MonHoc": "Vật lý",
+            "MaNguoiDungGhiNhan": 30,
+            "GhiChu": "Phát biểu tích cực"
+        },
+        {
+            "MaChiTietThanhTich": 132,
+            "MaLop": 12,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 6,
+            "MonHoc": "Vật lý",
+            "MaNguoiDungGhiNhan": 30,
+            "GhiChu": "Phát biểu tích cực"
+        },
+        {
+            "MaChiTietThanhTich": 133,
+            "MaLop": 12,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 2,
+            "MonHoc": "Vật lý",
+            "MaNguoiDungGhiNhan": 30,
+            "GhiChu": "Phát biểu tích cực"
+        },
+        {
+            "MaChiTietThanhTich": 134,
+            "MaLop": 12,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 3,
+            "MonHoc": "Vật lý",
+            "MaNguoiDungGhiNhan": 30,
+            "GhiChu": "Phát biểu tích cực"
+        },
+        {
+            "MaChiTietThanhTich": 135,
+            "MaLop": 12,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 4,
+            "MonHoc": "Vật lý",
+            "MaNguoiDungGhiNhan": 30,
+            "GhiChu": "Phát biểu tích cực"
+        },
+        {
+            "MaChiTietThanhTich": 136,
+            "MaLop": 12,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 5,
+            "MonHoc": "Vật lý",
+            "MaNguoiDungGhiNhan": 30,
+            "GhiChu": "Phát biểu tích cực"
+        },
+        {
+            "MaChiTietThanhTich": 137,
+            "MaLop": 12,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 6,
+            "MonHoc": "Vật lý",
+            "MaNguoiDungGhiNhan": 30,
+            "GhiChu": "Phát biểu tích cực"
+        },
+        {
+            "MaChiTietThanhTich": 138,
+            "MaLop": 12,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 2,
+            "MonHoc": "Vật lý",
+            "MaNguoiDungGhiNhan": 30,
+            "GhiChu": "Phát biểu tích cực"
+        },
+        {
+            "MaChiTietThanhTich": 139,
+            "MaLop": 12,
+            "MaHocSinh": 221,
+            "MaTieuChi": 101,
+            "MaTuan": 1,
+            "ThuTrongTuan": 2,
+            "MonHoc": "Hóa học",
+            "MaNguoiDungGhiNhan": 30,
+            "GhiChu": "Kiểm tra miệng đạt 10 điểm"
+        },
+        {
+            "MaChiTietThanhTich": 140,
+            "MaLop": 12,
+            "MaHocSinh": 222,
+            "MaTieuChi": 101,
+            "MaTuan": 1,
+            "ThuTrongTuan": 3,
+            "MonHoc": "Hóa học",
+            "MaNguoiDungGhiNhan": 30,
+            "GhiChu": "Kiểm tra miệng đạt 10 điểm"
+        },
+        {
+            "MaChiTietThanhTich": 141,
+            "MaLop": 12,
+            "MaHocSinh": 223,
+            "MaTieuChi": 101,
+            "MaTuan": 1,
+            "ThuTrongTuan": 4,
+            "MonHoc": "Hóa học",
+            "MaNguoiDungGhiNhan": 30,
+            "GhiChu": "Kiểm tra miệng đạt 10 điểm"
+        },
+        {
+            "MaChiTietThanhTich": 142,
+            "MaLop": 12,
+            "MaHocSinh": 224,
+            "MaTieuChi": 101,
+            "MaTuan": 1,
+            "ThuTrongTuan": 5,
+            "MonHoc": "Hóa học",
+            "MaNguoiDungGhiNhan": 30,
+            "GhiChu": "Kiểm tra miệng đạt 10 điểm"
+        },
+        {
+            "MaChiTietThanhTich": 143,
+            "MaLop": 12,
+            "MaHocSinh": 225,
+            "MaTieuChi": 101,
+            "MaTuan": 1,
+            "ThuTrongTuan": 6,
+            "MonHoc": "Hóa học",
+            "MaNguoiDungGhiNhan": 30,
+            "GhiChu": "Kiểm tra miệng đạt 10 điểm"
+        },
+        {
+            "MaChiTietThanhTich": 144,
+            "MaLop": 12,
+            "MaHocSinh": 226,
+            "MaTieuChi": 101,
+            "MaTuan": 1,
+            "ThuTrongTuan": 2,
+            "MonHoc": "Hóa học",
+            "MaNguoiDungGhiNhan": 30,
+            "GhiChu": "Kiểm tra miệng đạt 10 điểm"
+        },
+        {
+            "MaChiTietThanhTich": 145,
+            "MaLop": 12,
+            "MaHocSinh": 227,
+            "MaTieuChi": 101,
+            "MaTuan": 1,
+            "ThuTrongTuan": 3,
+            "MonHoc": "Hóa học",
+            "MaNguoiDungGhiNhan": 30,
+            "GhiChu": "Kiểm tra miệng đạt 10 điểm"
+        },
+        {
+            "MaChiTietThanhTich": 146,
+            "MaLop": 13,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 2,
+            "MonHoc": "Tin học",
+            "MaNguoiDungGhiNhan": 33,
+            "GhiChu": "Lớp học tốt"
+        },
+        {
+            "MaChiTietThanhTich": 147,
+            "MaLop": 13,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 3,
+            "MonHoc": "Tin học",
+            "MaNguoiDungGhiNhan": 33,
+            "GhiChu": "Lớp học tốt"
+        },
+        {
+            "MaChiTietThanhTich": 148,
+            "MaLop": 13,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 4,
+            "MonHoc": "Tin học",
+            "MaNguoiDungGhiNhan": 33,
+            "GhiChu": "Lớp học tốt"
+        },
+        {
+            "MaChiTietThanhTich": 149,
+            "MaLop": 13,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 5,
+            "MonHoc": "Tin học",
+            "MaNguoiDungGhiNhan": 33,
+            "GhiChu": "Lớp học tốt"
+        },
+        {
+            "MaChiTietThanhTich": 150,
+            "MaLop": 13,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 6,
+            "MonHoc": "Tin học",
+            "MaNguoiDungGhiNhan": 33,
+            "GhiChu": "Lớp học tốt"
+        },
+        {
+            "MaChiTietThanhTich": 151,
+            "MaLop": 13,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 2,
+            "MonHoc": "Tin học",
+            "MaNguoiDungGhiNhan": 33,
+            "GhiChu": "Lớp học tốt"
+        },
+        {
+            "MaChiTietThanhTich": 152,
+            "MaLop": 13,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 3,
+            "MonHoc": "Tin học",
+            "MaNguoiDungGhiNhan": 33,
+            "GhiChu": "Lớp học tốt"
+        },
+        {
+            "MaChiTietThanhTich": 153,
+            "MaLop": 13,
+            "MaHocSinh": null,
+            "MaTieuChi": 103,
+            "MaTuan": 1,
+            "ThuTrongTuan": 4,
+            "MonHoc": "Tin học",
+            "MaNguoiDungGhiNhan": 33,
+            "GhiChu": "Lớp học tốt"
+        }
+    ]
+}
