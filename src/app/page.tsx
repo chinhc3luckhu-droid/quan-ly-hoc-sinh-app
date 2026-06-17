@@ -977,10 +977,10 @@ export default function Home() {
   }, [selectedClassId, currentWeekId, dbState]);
 
   // Xem chi tiết khen thưởng vi phạm cá nhân của 1 học sinh
-  const handleShowStudentDetail = (student: any) => {
+  const handleShowStudentDetail = (student: any, filterType: "ALL" | "TRU" | "CONG" = "ALL") => {
     if (!dbState) return;
-    const viPhams = dbState.ChiTietViPhamHocSinh.filter(v => v.MaHocSinh === student.MaHocSinh && v.MaTuan === currentWeekId);
-    const thanhTichs = dbState.ChiTietThanhTichHocSinh.filter(t => t.MaHocSinh === student.MaHocSinh && t.MaTuan === currentWeekId);
+    const viPhams = filterType === "CONG" ? [] : dbState.ChiTietViPhamHocSinh.filter(v => v.MaHocSinh === student.MaHocSinh && v.MaTuan === currentWeekId);
+    const thanhTichs = filterType === "TRU" ? [] : dbState.ChiTietThanhTichHocSinh.filter(t => t.MaHocSinh === student.MaHocSinh && t.MaTuan === currentWeekId);
     const criteria = dbState.QuyDinhThiDua;
 
     const rows: any[] = [];
@@ -1007,7 +1007,8 @@ export default function Home() {
     });
 
     setStudentDetailRows(rows);
-    setStudentDetailTitle(`Sổ ghi nhận học sinh: ${student.HoTen}`);
+    const titleSuffix = filterType === "TRU" ? " (Chi tiết lỗi phạt)" : (filterType === "CONG" ? " (Chi tiết điểm cộng)" : "");
+    setStudentDetailTitle(`Sổ ghi nhận học sinh: ${student.HoTen}${titleSuffix}`);
     setActiveDialog("student-detail");
   };
 
@@ -2160,12 +2161,22 @@ export default function Home() {
                           <td style={{ textAlign: 'center' }} className="family-pt-mono">{row.NgaySinh}</td>
                           <td style={{ textAlign: 'center' }}>{row.GioiTinh}</td>
                           <td style={{ textAlign: 'center' }}>
-                            <span className={`badge ${row.numVp > 0 ? 'badge-danger' : 'badge-secondary'}`}>
+                            <span 
+                              className={`badge ${row.numVp > 0 ? 'badge-danger' : 'badge-secondary'}`}
+                              onClick={() => handleShowStudentDetail(row, "TRU")}
+                              style={{ cursor: 'pointer' }}
+                              title="Xem chi tiết vi phạm"
+                            >
                               {row.numVp} vi phạm
                             </span>
                           </td>
                           <td style={{ textAlign: 'center' }}>
-                            <span className={`badge ${row.numTt > 0 ? 'badge-success' : 'badge-secondary'}`}>
+                            <span 
+                              className={`badge ${row.numTt > 0 ? 'badge-success' : 'badge-secondary'}`}
+                              onClick={() => handleShowStudentDetail(row, "CONG")}
+                              style={{ cursor: 'pointer' }}
+                              title="Xem chi tiết khen thưởng"
+                            >
                               {row.numTt} khen thưởng
                             </span>
                           </td>

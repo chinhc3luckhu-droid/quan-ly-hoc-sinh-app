@@ -771,6 +771,34 @@
         </div>
     </dialog>
 
+    <!-- Dialog: Student Details Breakdown -->
+    <dialog id="student-detail-dialog" class="glass-dialog form-dialog" style="max-width: 650px; width: 95%;">
+        <div class="dialog-content" style="align-items: stretch; text-align: left;">
+            <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-card); padding-bottom: 0.75rem; margin-bottom: 1rem; gap: 1rem;">
+                <h3 id="student-detail-title" style="margin: 0; font-family: var(--font-heading); font-size: 1.1rem;">Sổ ghi nhận học sinh</h3>
+                <button class="btn btn-icon btn-sm btn-outline" id="btn-close-student-detail" style="border: none; padding: 4px; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; border-radius: 50%; width: 28px; height: 28px;">
+                    <span class="material-symbols-rounded" style="font-size: 1.25rem;">close</span>
+                </button>
+            </div>
+            <div class="table-responsive" style="max-height: 400px; overflow-y: auto;">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 100px;">Thời gian</th>
+                            <th style="width: 120px; text-align: center;">Phân loại</th>
+                            <th>Nội dung sự việc</th>
+                            <th>Ghi chú thêm</th>
+                            <th style="width: 100px; text-align: center;">Số điểm</th>
+                        </tr>
+                    </thead>
+                    <tbody id="student-detail-tbody">
+                        <!-- Dynamic rows populated via JS -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </dialog>
+
     <!-- Supabase JS Client SDK -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="app.js"></script>

@@ -933,6 +933,11 @@ class AppStateManager {
         this.btnCancelImportDialog = document.getElementById("btn-cancel-import-dialog");
         this.btnSubmitImportStudents = document.getElementById("btn-submit-import-students");
 
+        this.studentDetailDialog = document.getElementById("student-detail-dialog");
+        this.studentDetailTitle = document.getElementById("student-detail-title");
+        this.studentDetailTbody = document.getElementById("student-detail-tbody");
+        this.btnCloseStudentDetail = document.getElementById("btn-close-student-detail");
+
         this.regulationsState = null;
         this.editingCriterionId = null;
         this.studentsState = null;
@@ -1016,6 +1021,13 @@ class AppStateManager {
         if (this.btnCloseViolationDetail) {
             this.btnCloseViolationDetail.addEventListener("click", () => {
                 this.violationDetailDialog.close();
+            });
+        }
+
+        // Đóng hộp thoại chi tiết học sinh
+        if (this.btnCloseStudentDetail) {
+            this.btnCloseStudentDetail.addEventListener("click", () => {
+                this.studentDetailDialog.close();
             });
         }
 
@@ -3071,10 +3083,10 @@ class AppStateManager {
                 <td>${row.NgaySinh}</td>
                 <td>${row.GioiTinh}</td>
                 <td>
-                    <span class="badge ${numVp > 0 ? 'badge-danger' : 'badge-secondary'}">${numVp} vi phạm</span>
+                    <span class="badge ${numVp > 0 ? 'badge-danger' : 'badge-secondary'} btn-vp-detail" style="cursor: pointer;" title="Xem chi tiết vi phạm">${numVp} vi phạm</span>
                 </td>
                 <td>
-                    <span class="badge ${numTt > 0 ? 'badge-success' : 'badge-secondary'}">${numTt} thành tích</span>
+                    <span class="badge ${numTt > 0 ? 'badge-success' : 'badge-secondary'} btn-tt-detail" style="cursor: pointer;" title="Xem chi tiết khen thưởng">${numTt} thành tích</span>
                 </td>
                 <td>
                     ${this.currentRole === "ADMIN" ? `
@@ -3136,12 +3148,94 @@ class AppStateManager {
                 });
             }
 
+            // Xem chi tiết lỗi phạt của học sinh
+            const btnVpDetail = tr.querySelector(".btn-vp-detail");
+            btnVpDetail.addEventListener("click", () => {
+                this.showStudentDetail(row.MaHocSinh, "TRU");
+            });
+
+            // Xem chi tiết thành tích của học sinh
+            const btnTtDetail = tr.querySelector(".btn-tt-detail");
+            btnTtDetail.addEventListener("click", () => {
+                this.showStudentDetail(row.MaHocSinh, "CONG");
+            });
+
             tbody.appendChild(tr);
         });
 
         if (classStudents.length === 0) {
             tbody.innerHTML = '<tr><td colspan="8" class="no-data">Lớp học chưa có dữ liệu học sinh.</td></tr>';
         }
+    }
+
+    showStudentDetail(studentId, filterType = "ALL") {
+        const students = JSON.parse(localStorage.getItem("TDHD_DanhSachHocSinh") || "[]");
+        const viPhams = JSON.parse(localStorage.getItem("TDHD_ChiTietViPhamHocSinh") || "[]");
+        const thanhTichs = JSON.parse(localStorage.getItem("TDHD_ChiTietThanhTichHocSinh") || "[]");
+        const criteria = JSON.parse(localStorage.getItem("TDHD_QuyDinhThiDua") || "[]");
+
+        const student = students.find(s => s.MaHocSinh === studentId);
+        if (!student) return;
+
+        const filteredVps = filterType === "CONG" ? [] : viPhams.filter(v => v.MaHocSinh === studentId && v.MaTuan === this.currentWeekId);
+        const filteredTts = filterType === "TRU" ? [] : thanhTichs.filter(t => t.MaHocSinh === studentId && t.MaTuan === this.currentWeekId);
+
+        const rows = [];
+        filteredVps.forEach(v => {
+            const tc = criteria.find(c => c.MaTieuChi === v.MaTieuChi);
+            rows.push({
+                type: "Vi phạm",
+                content: tc ? tc.NoiDung : "Lỗi vi phạm",
+                detail: v.GhiChuChiTiet || "-",
+                points: `-${tc ? tc.DiemChuyenDoi : 0}đ`,
+                day: `Thứ ${v.ThuTrongTuan}`
+            });
+        });
+
+        filteredTts.forEach(t => {
+            const tc = criteria.find(c => c.MaTieuChi === t.MaTieuChi);
+            rows.push({
+                type: "Thành tích",
+                content: tc ? tc.NoiDung : "Khen thưởng",
+                detail: t.GhiChu || "-",
+                points: `+${tc ? tc.DiemChuyenDoi : 0}đ`,
+                day: `Thứ ${t.ThuTrongTuan}`
+            });
+        });
+
+        const titleSuffix = filterType === "TRU" ? " (Chi tiết lỗi phạt)" : (filterType === "CONG" ? " (Chi tiết điểm cộng)" : "");
+        this.studentDetailTitle.textContent = `Sổ ghi nhận học sinh: ${student.HoTen}${titleSuffix}`;
+        this.studentDetailTbody.innerHTML = "";
+
+        if (rows.length === 0) {
+            this.studentDetailTbody.innerHTML = `
+                <tr>
+                    <td colspan="5" class="no-data" style="text-align: center; color: var(--text-muted); padding: 2rem 0;">
+                        Học sinh không có ghi chép khen thưởng hay kỷ luật nào trong tuần này.
+                    </td>
+                </tr>
+            `;
+        } else {
+            rows.forEach(item => {
+                const tr = document.createElement("tr");
+                tr.innerHTML = `
+                    <td class="family-pt-mono">${item.day}</td>
+                    <td style="text-align: center;">
+                        <span class="badge ${item.type === 'Vi phạm' ? 'badge-danger' : 'badge-success'}">
+                            ${item.type}
+                        </span>
+                    </td>
+                    <td><strong>${item.content}</strong></td>
+                    <td>${item.detail}</td>
+                    <td style="text-align: center;" class="${item.type === 'Vi phạm' ? 'text-danger' : 'text-success'}">
+                        <strong>${item.points}</strong>
+                    </td>
+                `;
+                this.studentDetailTbody.appendChild(tr);
+            });
+        }
+
+        this.studentDetailDialog.showModal();
     }
 
     handleStudentSubmit() {
