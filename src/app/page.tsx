@@ -1538,49 +1538,48 @@ export default function Home() {
           <div className="tab-content active">
             
             {/* Top 3 Podium Cards */}
-            <div className="podium-container">
+            <div className="podium-section">
               {/* Rank 2 (Left) */}
               {topRankings[1] && (
-                <div className="podium-step silver">
-                  <div className="avatar">
-                    <span className="material-symbols-rounded">school</span>
+                <div className="podium-card silver">
+                  <div className="podium-plaque silver-plaque">2ND PLACE</div>
+                  <div className="podium-rank">2</div>
+                  <div className="podium-details">
+                    <h3 className="class-name">Lớp {topRankings[1].TenLop}</h3>
+                    <p className="score"><span className="score-value">{topRankings[1].DiemTongKet.toFixed(1)}</span> điểm</p>
+                    <p className="stats">Cộng: +{topRankings[1].TongDiemCong.toFixed(1)} | Trừ: -{topRankings[1].TongDiemTru.toFixed(1)}</p>
                   </div>
-                  <h2 className="podium-class">Lớp {topRankings[1].TenLop}</h2>
-                  <div className="rank-badge">Hạng 2</div>
-                  <div className="podium-score">{topRankings[1].DiemTongKet} điểm</div>
-                  <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginTop: '4px' }}>
-                    +{topRankings[1].TongDiemCong} / -{topRankings[1].TongDiemTru}
-                  </p>
                 </div>
               )}
 
               {/* Rank 1 (Center) */}
               {topRankings[0] && (
-                <div className="podium-step gold">
-                  <div className="avatar">
-                    <span className="material-symbols-rounded" style={{ fontSize: '2.5rem', color: 'var(--accent-gold)' }}>military_tech</span>
+                <div className="podium-card gold">
+                  <div className="crown-icon">
+                    <svg viewBox="0 0 24 24" width="36" height="36" fill="var(--primary-color)" style={{ filter: 'drop-shadow(0 0 10px var(--primary-color))' }}>
+                      <path d="M2 22h20v-3H2v3zm10-18L9.5 9 4 5.5 7 16h10l3-10.5-5.5 3.5L12 4z"/>
+                    </svg>
                   </div>
-                  <h2 className="podium-class" style={{ fontSize: '1.75rem' }}>Lớp {topRankings[0].TenLop}</h2>
-                  <div className="rank-badge">Hạng 1</div>
-                  <div className="podium-score" style={{ fontSize: '1.4rem' }}>{topRankings[0].DiemTongKet} điểm</div>
-                  <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginTop: '4px' }}>
-                    +{topRankings[0].TongDiemCong} / -{topRankings[0].TongDiemTru}
-                  </p>
+                  <div className="podium-plaque gold-plaque">CHAMPION</div>
+                  <div className="podium-rank">1</div>
+                  <div className="podium-details">
+                    <h3 className="class-name">Lớp {topRankings[0].TenLop}</h3>
+                    <p className="score"><span className="score-value">{topRankings[0].DiemTongKet.toFixed(1)}</span> điểm</p>
+                    <p className="stats">Cộng: +{topRankings[0].TongDiemCong.toFixed(1)} | Trừ: -{topRankings[0].TongDiemTru.toFixed(1)}</p>
+                  </div>
                 </div>
               )}
 
               {/* Rank 3 (Right) */}
               {topRankings[2] && (
-                <div className="podium-step bronze">
-                  <div className="avatar">
-                    <span className="material-symbols-rounded">school</span>
+                <div className="podium-card bronze">
+                  <div className="podium-plaque bronze-plaque">3RD PLACE</div>
+                  <div className="podium-rank">3</div>
+                  <div className="podium-details">
+                    <h3 className="class-name">Lớp {topRankings[2].TenLop}</h3>
+                    <p className="score"><span className="score-value">{topRankings[2].DiemTongKet.toFixed(1)}</span> điểm</p>
+                    <p className="stats">Cộng: +{topRankings[2].TongDiemCong.toFixed(1)} | Trừ: -{topRankings[2].TongDiemTru.toFixed(1)}</p>
                   </div>
-                  <h2 className="podium-class">Lớp {topRankings[2].TenLop}</h2>
-                  <div className="rank-badge">Hạng 3</div>
-                  <div className="podium-score">{topRankings[2].DiemTongKet} điểm</div>
-                  <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginTop: '4px' }}>
-                    +{topRankings[2].TongDiemCong} / -{topRankings[2].TongDiemTru}
-                  </p>
                 </div>
               )}
             </div>
@@ -1722,14 +1721,14 @@ export default function Home() {
                   </p>
                 </div>
 
-                <div className="podium-section" style={{ marginTop: '1.5rem', marginBottom: '3.5rem', borderBottom: 'none', paddingBottom: 0, minHeight: '270px', alignItems: 'flex-end', display: 'flex', justifyContent: 'center', gap: '2rem' }}>
+                <div className="podium-section" style={{ marginTop: '1.5rem', marginBottom: '3.5rem', borderBottom: 'none', paddingBottom: 0, minHeight: '270px', alignItems: 'flex-end' }}>
                   {/* Bottom 2nd (Rank 12) */}
                   {rankingList[rankingList.length - 2] && (
                     <div className="podium-card warn-2" style={{ opacity: 1 }}>
                       <div className="warn-icon-wrapper">
                         <span className="material-symbols-rounded text-danger" style={{ fontSize: '2.2rem', marginBottom: '0.5rem' }}>warning</span>
                       </div>
-                      <div className="podium-rank" style={{ background: 'var(--danger-bg)', color: 'var(--danger-color)', border: '1px solid var(--danger-color)', fontSize: '0.95rem', width: '32px', height: '32px', fontWeight: 700, display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '50%', margin: '0 auto 0.5rem auto' }}>
+                      <div className="podium-rank" style={{ background: 'var(--danger-bg)', color: 'var(--danger-color)', border: '1px solid var(--danger-color)', fontSize: '0.95rem', width: '32px', height: '32px', fontWeight: 700 }}>
                         {rankingList[rankingList.length - 2].XepHang}
                       </div>
                       <div className="podium-details">
@@ -1746,7 +1745,7 @@ export default function Home() {
                       <div className="warn-icon-wrapper" style={{ animation: 'pulseRed 1.5s infinite', display: 'inline-flex' }}>
                         <span className="material-symbols-rounded text-danger" style={{ fontSize: '2.5rem', marginBottom: '0.5rem' }}>error</span>
                       </div>
-                      <div className="podium-rank" style={{ background: 'var(--danger-bg)', color: 'var(--danger-color)', border: '2px solid var(--danger-color)', fontSize: '1.05rem', width: '36px', height: '36px', fontWeight: 800, display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '50%', margin: '0 auto 0.5rem auto' }}>
+                      <div className="podium-rank" style={{ background: 'var(--danger-bg)', color: 'var(--danger-color)', border: '2px solid var(--danger-color)', fontSize: '1.05rem', width: '36px', height: '36px', fontWeight: 800 }}>
                         {rankingList[rankingList.length - 1].XepHang}
                       </div>
                       <div className="podium-details">
@@ -1763,7 +1762,7 @@ export default function Home() {
                       <div className="warn-icon-wrapper">
                         <span className="material-symbols-rounded text-warning" style={{ fontSize: '2.2rem', marginBottom: '0.5rem' }}>eco</span>
                       </div>
-                      <div className="podium-rank" style={{ background: 'var(--warning-bg)', color: 'var(--warning-color)', border: '1px solid var(--warning-color)', fontSize: '0.95rem', width: '32px', height: '32px', fontWeight: 700, display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '50%', margin: '0 auto 0.5rem auto' }}>
+                      <div className="podium-rank" style={{ background: 'var(--warning-bg)', color: 'var(--warning-color)', border: '1px solid var(--warning-color)', fontSize: '0.95rem', width: '32px', height: '32px', fontWeight: 700 }}>
                         {rankingList[rankingList.length - 3].XepHang}
                       </div>
                       <div className="podium-details">
