@@ -50,6 +50,14 @@
                     <span class="material-symbols-rounded">group</span>
                     <span>Hồ Sơ Học Sinh</span>
                 </button>
+                <button class="nav-item" data-tab="weeks" id="nav-weeks">
+                    <span class="material-symbols-rounded">calendar_today</span>
+                    <span>Danh Mục Tuần</span>
+                </button>
+                <button class="nav-item" data-tab="classes" id="nav-classes">
+                    <span class="material-symbols-rounded">class</span>
+                    <span>Danh Mục Lớp</span>
+                </button>
             </nav>
             
             <div class="sidebar-footer">
@@ -328,7 +336,7 @@
                             <h3>I. BẢNG GHI NHẬN VI PHẠM (ĐIỂM TRỪ)</h3>
                         </div>
                         <div class="table-responsive">
-                            <table class="matrix-table">
+                            <table class="matrix-table sticky-thead violations-table">
                                 <thead>
                                     <tr>
                                         <th style="min-width: 250px;">Nội Dung Vi Phạm Quy Chế</th>
@@ -359,7 +367,7 @@
                             </span>
                         </div>
                         <div class="table-responsive">
-                            <table class="matrix-table">
+                            <table class="matrix-table sticky-thead merits-table">
                                 <thead>
                                     <tr>
                                         <th style="min-width: 250px;">Nội Dung Thành Tích Học Tập</th>
@@ -592,6 +600,79 @@
                                 <span class="material-symbols-rounded">save</span> Lưu thực hiện
                             </button>
                         </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tab: Danh Mục Tuần (DanhMucTuan) -->
+            <section class="tab-view" id="tab-weeks">
+                <div class="view-header">
+                    <h2>Danh Mục Tuần Học</h2>
+                    <p>Quản lý danh sách tuần học trong năm và thiết lập ngày bắt đầu, ngày kết thúc</p>
+                </div>
+
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h3>Danh Sách Tuần Học</h3>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Mã Tuần</th>
+                                    <th>Tên Tuần</th>
+                                    <th>Ngày Bắt Đầu</th>
+                                    <th>Ngày Kết Thúc</th>
+                                    <th>Thao Tác</th>
+                                </tr>
+                            </thead>
+                            <tbody id="weeks-tbody">
+                                <!-- Populated dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- Nút lưu danh mục tuần -->
+                    <div class="matrix-actions-bar" style="margin-top: 1.5rem; border-top: 1px solid var(--border-card); padding-top: 1.5rem; display: flex; justify-content: flex-end;">
+                        <button class="btn btn-primary" id="btn-save-weeks" style="display: none;">
+                            <span class="material-symbols-rounded">save</span> Lưu Tuần Học
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tab: Danh Mục Lớp (DanhMucLop) -->
+            <section class="tab-view" id="tab-classes">
+                <div class="view-header">
+                    <h2>Danh Mục Lớp Học</h2>
+                    <p>Quản lý danh sách các lớp học thi đua, khối lớp, năm học và điểm thi đua gốc hàng tuần</p>
+                </div>
+
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h3>Danh Sách Lớp Học</h3>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Mã Lớp</th>
+                                    <th>Tên Lớp</th>
+                                    <th>Khối</th>
+                                    <th>Năm Học</th>
+                                    <th>Điểm Gốc</th>
+                                    <th>Thao Tác</th>
+                                </tr>
+                            </thead>
+                            <tbody id="classes-tbody">
+                                <!-- Populated dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- Nút lưu danh mục lớp -->
+                    <div class="matrix-actions-bar" style="margin-top: 1.5rem; border-top: 1px solid var(--border-card); padding-top: 1.5rem; display: flex; justify-content: flex-end;">
+                        <button class="btn btn-primary" id="btn-save-classes" style="display: none;">
+                            <span class="material-symbols-rounded">save</span> Lưu Lớp Học
+                        </button>
                     </div>
                 </div>
             </section>

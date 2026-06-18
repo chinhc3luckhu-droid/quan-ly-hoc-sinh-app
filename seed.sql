@@ -114,7 +114,7 @@ INSERT INTO "DanhSachHocSinh" ("MaHocSinh", "MaLop", "HoTen", "NgaySinh", "GioiT
 INSERT INTO "DanhSachHocSinh" ("MaHocSinh", "MaLop", "HoTen", "NgaySinh", "GioiTinh") VALUES (47, 3, 'Bùi Thành Khải', '2010-04-19', 'Nam') ON CONFLICT DO NOTHING;
 INSERT INTO "DanhSachHocSinh" ("MaHocSinh", "MaLop", "HoTen", "NgaySinh", "GioiTinh") VALUES (48, 3, 'Nguyễn Khánh Hân', '2010-01-20', 'Nữ') ON CONFLICT DO NOTHING;
 INSERT INTO "DanhSachHocSinh" ("MaHocSinh", "MaLop", "HoTen", "NgaySinh", "GioiTinh") VALUES (49, 3, 'Trịnh Cát Tú', '2010-09-15', 'Nữ') ON CONFLICT DO NOTHING;
-INSERT INTO "DanhSachHocSinh" ("MaHocSinh", "MaLop", "HoTen", "NgaySinh", "GioiTinh") VALUES (50, 3, 'Bùi Hồng Oanh', '2010-02-29', 'Nữ') ON CONFLICT DO NOTHING;
+INSERT INTO "DanhSachHocSinh" ("MaHocSinh", "MaLop", "HoTen", "NgaySinh", "GioiTinh") VALUES (50, 3, 'Bùi Hồng Oanh', '2010-02-28', 'Nữ') ON CONFLICT DO NOTHING;
 INSERT INTO "DanhSachHocSinh" ("MaHocSinh", "MaLop", "HoTen", "NgaySinh", "GioiTinh") VALUES (51, 3, 'Phạm Mai Lan', '2010-04-28', 'Nữ') ON CONFLICT DO NOTHING;
 INSERT INTO "DanhSachHocSinh" ("MaHocSinh", "MaLop", "HoTen", "NgaySinh", "GioiTinh") VALUES (52, 3, 'Trịnh Đức Anh', '2010-09-20', 'Nam') ON CONFLICT DO NOTHING;
 INSERT INTO "DanhSachHocSinh" ("MaHocSinh", "MaLop", "HoTen", "NgaySinh", "GioiTinh") VALUES (53, 3, 'Phạm Hữu Nam', '2010-05-22', 'Nam') ON CONFLICT DO NOTHING;

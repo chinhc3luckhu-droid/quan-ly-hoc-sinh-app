@@ -44,6 +44,12 @@ export default function Home() {
   const [newStudentGender, setNewStudentGender] = useState<"Nam" | "Nữ">("Nam");
   const [editingStudentId, setEditingStudentId] = useState<number | null>(null);
 
+  // Tab: Weeks states
+  const [editWeeks, setEditWeeks] = useState<any[]>([]);
+
+  // Tab: Classes states
+  const [editClasses, setEditClasses] = useState<any[]>([]);
+
   // Import Student states
   const [importPreviewData, setImportPreviewData] = useState<any[]>([]);
   const [importFileName, setImportFileName] = useState("");
@@ -94,6 +100,33 @@ export default function Home() {
     const weekAssigns = dbState.PhanCongCoDo.filter(a => a.MaTuan === currentWeekId);
     setEditAssigns(JSON.parse(JSON.stringify(weekAssigns)));
   }, [currentWeekId, dbState, activeTab]);
+
+  // Khởi động bảng danh mục tuần & lớp tạm thời khi activeTab hoặc dbState thay đổi
+  useEffect(() => {
+    if (!dbState) return;
+    
+    // Khởi động tuần
+    const sortedWeeks = [...dbState.DanhMucTuan].sort((a, b) => a.MaTuan - b.MaTuan);
+    if (currentRole === "ADMIN") {
+      const lastRow = sortedWeeks[sortedWeeks.length - 1];
+      if (!lastRow || (lastRow.TenTuan && lastRow.NgayBatDau && lastRow.NgayKetThuc)) {
+        const nextId = sortedWeeks.length > 0 ? Math.max(...sortedWeeks.map(w => w.MaTuan)) + 1 : 1;
+        sortedWeeks.push({ MaTuan: nextId, TenTuan: "", NgayBatDau: "", NgayKetThuc: "", isNew: true });
+      }
+    }
+    setEditWeeks(sortedWeeks);
+
+    // Khởi động lớp
+    const sortedClasses = [...dbState.DanhMucLop].sort((a, b) => a.MaLop - b.MaLop);
+    if (currentRole === "ADMIN") {
+      const lastRow = sortedClasses[sortedClasses.length - 1];
+      if (!lastRow || (lastRow.TenLop && lastRow.Khoi && lastRow.NamHoc && lastRow.BaseScore !== undefined)) {
+        const nextId = sortedClasses.length > 0 ? Math.max(...sortedClasses.map(c => c.MaLop)) + 1 : 1;
+        sortedClasses.push({ MaLop: nextId, TenLop: "", Khoi: 10, NamHoc: "2025-2026", BaseScore: 100, isNew: true });
+      }
+    }
+    setEditClasses(sortedClasses);
+  }, [dbState, activeTab, currentRole]);
 
   // Khởi động và cập nhật ma trận chấm điểm dựa trên Lớp và Tuần được chọn ở Tab 2
   useEffect(() => {
@@ -958,6 +991,140 @@ export default function Home() {
     setImportError("");
   };
 
+  // Logic cho quản lý TUẦN HỌC
+  const handleWeekChange = (index: number, field: string, value: any) => {
+    setEditWeeks(prev => {
+      const copy = [...prev];
+      copy[index] = { ...copy[index], [field]: value };
+      
+      const row = copy[index];
+      if (row.isNew && row.TenTuan && row.NgayBatDau && row.NgayKetThuc) {
+        delete row.isNew;
+        // Tự động append dòng mới
+        const nextId = copy.length > 0 ? Math.max(...copy.map(w => w.MaTuan)) + 1 : 1;
+        copy.push({ MaTuan: nextId, TenTuan: "", NgayBatDau: "", NgayKetThuc: "", isNew: true });
+      }
+      return copy;
+    });
+  };
+
+  const handleDeleteWeek = (index: number) => {
+    if (confirm("Bạn có chắc chắn muốn xóa tuần học này không?")) {
+      setEditWeeks(prev => prev.filter((_, i) => i !== index));
+    }
+  };
+
+  const handleSaveWeeks = () => {
+    if (!dbState) return;
+    
+    // Lọc
+    const validWeeks: any[] = [];
+    let hasIncomplete = false;
+    editWeeks.forEach(row => {
+      if (!row.TenTuan && !row.NgayBatDau && !row.NgayKetThuc) {
+        return; // Dòng trống
+      }
+      if (!row.TenTuan || !row.NgayBatDau || !row.NgayKetThuc) {
+        hasIncomplete = true;
+        return;
+      }
+      validWeeks.push(row);
+    });
+
+    if (hasIncomplete) {
+      alert("Lỗi: Có tuần học bị thiếu thông tin. Vui lòng nhập đầy đủ hoặc xóa dòng!");
+      return;
+    }
+
+    // Trùng tên
+    const names = validWeeks.map(w => w.TenTuan.toLowerCase());
+    if (names.length !== new Set(names).size) {
+      alert("Lỗi: Tên tuần học không được trùng nhau!");
+      return;
+    }
+
+    // Ngày bắt đầu >= kết thúc
+    let dateError = false;
+    validWeeks.forEach(w => {
+      if (new Date(w.NgayBatDau) >= new Date(w.NgayKetThuc)) {
+        dateError = true;
+      }
+    });
+    if (dateError) {
+      alert("Lỗi: Ngày bắt đầu phải trước ngày kết thúc!");
+      return;
+    }
+
+    const updated = {
+      ...dbState,
+      DanhMucTuan: validWeeks
+    };
+    setDbState(recalculateAllWeeks(updated));
+    localStorage.setItem("TDHD_DanhMucTuan", JSON.stringify(validWeeks));
+    syncTableToSupabase("DanhMucTuan", "MaTuan", validWeeks, true);
+    alert("Đã lưu và đồng bộ danh mục tuần học thành công!");
+  };
+
+  // Logic cho quản lý LỚP HỌC
+  const handleClassChange = (index: number, field: string, value: any) => {
+    setEditClasses(prev => {
+      const copy = [...prev];
+      copy[index] = { ...copy[index], [field]: value };
+      
+      const row = copy[index];
+      if (row.isNew && row.TenLop && row.Khoi && row.NamHoc && row.BaseScore !== undefined) {
+        delete row.isNew;
+        // Tự động append dòng mới
+        const nextId = copy.length > 0 ? Math.max(...copy.map(c => c.MaLop)) + 1 : 1;
+        copy.push({ MaLop: nextId, TenLop: "", Khoi: 10, NamHoc: "2025-2026", BaseScore: 100, isNew: true });
+      }
+      return copy;
+    });
+  };
+
+  const handleDeleteClass = (index: number) => {
+    if (confirm("Bạn có chắc chắn muốn xóa lớp học này không?")) {
+      setEditClasses(prev => prev.filter((_, i) => i !== index));
+    }
+  };
+
+  const handleSaveClasses = () => {
+    if (!dbState) return;
+
+    const validClasses: any[] = [];
+    let hasIncomplete = false;
+    editClasses.forEach(row => {
+      if (!row.TenLop && !row.NamHoc && row.BaseScore === 100 && row.Khoi === 10) {
+        return; // Dòng trống
+      }
+      if (!row.TenLop || !row.NamHoc || row.BaseScore === undefined || isNaN(row.BaseScore)) {
+        hasIncomplete = true;
+        return;
+      }
+      validClasses.push(row);
+    });
+
+    if (hasIncomplete) {
+      alert("Lỗi: Có lớp học bị thiếu thông tin hoặc điểm gốc không hợp lệ. Vui lòng nhập đầy đủ hoặc xóa dòng!");
+      return;
+    }
+
+    const names = validClasses.map(c => c.TenLop.toLowerCase());
+    if (names.length !== new Set(names).size) {
+      alert("Lỗi: Tên lớp học không được trùng nhau!");
+      return;
+    }
+
+    const updated = {
+      ...dbState,
+      DanhMucLop: validClasses
+    };
+    setDbState(recalculateAllWeeks(updated));
+    localStorage.setItem("TDHD_DanhMucLop", JSON.stringify(validClasses));
+    syncTableToSupabase("DanhMucLop", "MaLop", validClasses, true);
+    alert("Đã lưu và đồng bộ danh mục lớp học thành công!");
+  };
+
   // 7. Logic cho TAB 6: HỒ SƠ HỌC SINH
   const studentsList = useMemo(() => {
     if (!dbState) return [];
@@ -1116,6 +1283,20 @@ export default function Home() {
           >
             <span className="material-symbols-rounded">group</span>
             <span>Hồ Sơ Học Sinh</span>
+          </button>
+          <button 
+            className={`nav-item ${activeTab === "weeks" ? "active" : ""}`} 
+            onClick={() => { setActiveTab("weeks"); setSearchTerm(""); }}
+          >
+            <span className="material-symbols-rounded">calendar_today</span>
+            <span>Danh Mục Tuần</span>
+          </button>
+          <button 
+            className={`nav-item ${activeTab === "classes" ? "active" : ""}`} 
+            onClick={() => { setActiveTab("classes"); setSearchTerm(""); }}
+          >
+            <span className="material-symbols-rounded">class</span>
+            <span>Danh Mục Lớp</span>
           </button>
         </nav>
         
@@ -1476,7 +1657,7 @@ export default function Home() {
                     </h3>
 
                     <div className="table-responsive">
-                      <table className="data-table">
+                      <table className="data-table sticky-thead violations-table">
                         <thead>
                           <tr>
                             <th style={{ width: '30%' }}>Nội Dung Tiêu Chí</th>
@@ -1577,7 +1758,7 @@ export default function Home() {
                     </h3>
 
                     <div className="table-responsive">
-                      <table className="data-table">
+                      <table className="data-table sticky-thead merits-table">
                         <thead>
                           <tr>
                             <th style={{ width: '30%' }}>Nội Dung Tiêu Chí</th>
@@ -2244,6 +2425,226 @@ export default function Home() {
                 )}
               </div>
 
+            </div>
+          </div>
+        )}
+
+        {/* Content TAB: DANH MỤC TUẦN (WEEKS) */}
+        {searchTerm.trim() === "" && activeTab === "weeks" && (
+          <div className="tab-content active">
+            <div className="card">
+              <div className="card-header">
+                <h3 className="card-title">Danh Sách Tuần Học</h3>
+              </div>
+
+              <div className="table-responsive">
+                <table className="data-table">
+                  <thead>
+                    <tr>
+                      <th style={{ width: '15%' }}>Mã Tuần</th>
+                      <th style={{ width: '30%' }}>Tên Tuần</th>
+                      <th style={{ width: '25%' }}>Ngày Bắt Đầu</th>
+                      <th style={{ width: '20%' }}>Ngày Kết Thúc</th>
+                      <th style={{ width: '10%', textAlign: 'center' }}>Thao tác</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {editWeeks.map((row, index) => (
+                      <tr key={row.MaTuan}>
+                        <td className="family-pt-mono">WEEK_{row.MaTuan.toString().padStart(3, '0')}</td>
+                        <td>
+                          {currentRole === "ADMIN" ? (
+                            <input 
+                              type="text"
+                              className="form-control-sm"
+                              style={{ width: '100%', padding: '6px', borderRadius: '4px', border: '1px solid var(--border-card)', background: 'var(--bg-card)', color: 'var(--text-primary)' }}
+                              placeholder={`Ví dụ: Tuần ${row.MaTuan}`}
+                              value={row.TenTuan}
+                              onChange={(e) => handleWeekChange(index, "TenTuan", e.target.value)}
+                            />
+                          ) : (
+                            <strong>{row.TenTuan || "-"}</strong>
+                          )}
+                        </td>
+                        <td>
+                          {currentRole === "ADMIN" ? (
+                            <input 
+                              type="date"
+                              className="form-control-sm"
+                              style={{ width: '100%', padding: '6px', borderRadius: '4px', border: '1px solid var(--border-card)', background: 'var(--bg-card)', color: 'var(--text-primary)' }}
+                              value={row.NgayBatDau}
+                              onChange={(e) => handleWeekChange(index, "NgayBatDau", e.target.value)}
+                            />
+                          ) : (
+                            <span className="family-pt-mono">{row.NgayBatDau || "-"}</span>
+                          )}
+                        </td>
+                        <td>
+                          {currentRole === "ADMIN" ? (
+                            <input 
+                              type="date"
+                              className="form-control-sm"
+                              style={{ width: '100%', padding: '6px', borderRadius: '4px', border: '1px solid var(--border-card)', background: 'var(--bg-card)', color: 'var(--text-primary)' }}
+                              value={row.NgayKetThuc}
+                              onChange={(e) => handleWeekChange(index, "NgayKetThuc", e.target.value)}
+                            />
+                          ) : (
+                            <span className="family-pt-mono">{row.NgayKetThuc || "-"}</span>
+                          )}
+                        </td>
+                        <td style={{ textAlign: 'center' }}>
+                          {currentRole === "ADMIN" ? (
+                            <button 
+                              type="button"
+                              className="btn btn-icon btn-sm text-red"
+                              disabled={row.isNew}
+                              onClick={() => handleDeleteWeek(index)}
+                              style={{ opacity: row.isNew ? 0.3 : 1, cursor: row.isNew ? 'not-allowed' : 'pointer', border: 'none', background: 'transparent' }}
+                            >
+                              <span className="material-symbols-rounded">delete</span>
+                            </button>
+                          ) : (
+                            <span style={{ color: 'var(--text-muted)', fontSize: '0.85rem' }}>-</span>
+                          )}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+
+              {/* Action footer */}
+              {currentRole === "ADMIN" && (
+                <div style={{ padding: '1.5rem', borderTop: '1px solid var(--border-card)', background: 'var(--bg-card)', display: 'flex', justifyContent: 'flex-end' }}>
+                  <button 
+                    type="button" 
+                    className="btn btn-primary"
+                    onClick={handleSaveWeeks}
+                  >
+                    <span className="material-symbols-rounded" style={{ verticalAlign: 'middle', marginRight: '6px' }}>save</span>
+                    Lưu Tuần Học
+                  </button>
+                </div>
+              )}
+            </div>
+          </div>
+        )}
+
+        {/* Content TAB: DANH MỤC LỚP (CLASSES) */}
+        {searchTerm.trim() === "" && activeTab === "classes" && (
+          <div className="tab-content active">
+            <div className="card">
+              <div className="card-header">
+                <h3 className="card-title">Danh Sách Lớp Học</h3>
+              </div>
+
+              <div className="table-responsive">
+                <table className="data-table">
+                  <thead>
+                    <tr>
+                      <th style={{ width: '15%' }}>Mã Lớp</th>
+                      <th style={{ width: '25%' }}>Tên Lớp</th>
+                      <th style={{ width: '20%' }}>Khối</th>
+                      <th style={{ width: '20%' }}>Năm Học</th>
+                      <th style={{ width: '10%', textAlign: 'center' }}>Điểm Gốc</th>
+                      <th style={{ width: '10%', textAlign: 'center' }}>Thao tác</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {editClasses.map((row, index) => (
+                      <tr key={row.MaLop}>
+                        <td className="family-pt-mono">CLASS_{row.MaLop.toString().padStart(3, '0')}</td>
+                        <td>
+                          {currentRole === "ADMIN" ? (
+                            <input 
+                              type="text"
+                              className="form-control-sm"
+                              style={{ width: '100%', padding: '6px', borderRadius: '4px', border: '1px solid var(--border-card)', background: 'var(--bg-card)', color: 'var(--text-primary)' }}
+                              placeholder="Ví dụ: 10A"
+                              value={row.TenLop}
+                              onChange={(e) => handleClassChange(index, "TenLop", e.target.value)}
+                            />
+                          ) : (
+                            <strong>Lớp {row.TenLop || "-"}</strong>
+                          )}
+                        </td>
+                        <td>
+                          {currentRole === "ADMIN" ? (
+                            <select 
+                              className="codo-select-inline"
+                              style={{ width: '100%', padding: '6px', borderRadius: '4px', border: '1px solid var(--border-card)', background: 'var(--bg-card)', color: 'var(--text-primary)' }}
+                              value={row.Khoi}
+                              onChange={(e) => handleClassChange(index, "Khoi", parseInt(e.target.value))}
+                            >
+                              <option value={10}>Khối 10</option>
+                              <option value={11}>Khối 11</option>
+                              <option value={12}>Khối 12</option>
+                            </select>
+                          ) : (
+                            <span>Khối {row.Khoi}</span>
+                          )}
+                        </td>
+                        <td>
+                          {currentRole === "ADMIN" ? (
+                            <input 
+                              type="text"
+                              className="form-control-sm"
+                              style={{ width: '100%', padding: '6px', borderRadius: '4px', border: '1px solid var(--border-card)', background: 'var(--bg-card)', color: 'var(--text-primary)' }}
+                              placeholder="2025-2026"
+                              value={row.NamHoc}
+                              onChange={(e) => handleClassChange(index, "NamHoc", e.target.value)}
+                            />
+                          ) : (
+                            <span>{row.NamHoc}</span>
+                          )}
+                        </td>
+                        <td style={{ textAlign: 'center' }}>
+                          {currentRole === "ADMIN" ? (
+                            <input 
+                              type="number"
+                              className="form-control-sm"
+                              style={{ width: '80px', padding: '6px', borderRadius: '4px', border: '1px solid var(--border-card)', background: 'var(--bg-card)', color: 'var(--text-primary)', textAlign: 'center' }}
+                              value={row.BaseScore}
+                              onChange={(e) => handleClassChange(index, "BaseScore", parseFloat(e.target.value))}
+                            />
+                          ) : (
+                            <strong>{row.BaseScore}</strong>
+                          )}
+                        </td>
+                        <td style={{ textAlign: 'center' }}>
+                          {currentRole === "ADMIN" ? (
+                            <button 
+                              type="button"
+                              className="btn btn-icon btn-sm text-red"
+                              disabled={row.isNew}
+                              onClick={() => handleDeleteClass(index)}
+                              style={{ opacity: row.isNew ? 0.3 : 1, cursor: row.isNew ? 'not-allowed' : 'pointer', border: 'none', background: 'transparent' }}
+                            >
+                              <span className="material-symbols-rounded">delete</span>
+                            </button>
+                          ) : (
+                            <span style={{ color: 'var(--text-muted)', fontSize: '0.85rem' }}>-</span>
+                          )}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+
+              {/* Action footer */}
+              {currentRole === "ADMIN" && (
+                <div style={{ padding: '1.5rem', borderTop: '1px solid var(--border-card)', background: 'var(--bg-card)', display: 'flex', justifyContent: 'flex-end' }}>
+                  <button 
+                    type="button" 
+                    className="btn btn-primary"
+                    onClick={handleSaveClasses}
+                  >
+                    <span className="material-symbols-rounded" style={{ verticalAlign: 'middle', marginRight: '6px' }}>save</span>
+                    Lưu Lớp Học
+                  </button>
+                </div>
+              )}
             </div>
           </div>
         )}

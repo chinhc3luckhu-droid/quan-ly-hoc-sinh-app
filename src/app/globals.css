@@ -1334,6 +1334,36 @@ body.dark-theme {
     background: rgba(39, 39, 42, 0.1);
 }
 
+/* Sticky Table Headers for Scoring Matrix (Desktop only to preserve mobile scrolling) */
+@media (min-width: 1024px) {
+    .matrix-card {
+        overflow: visible !important;
+    }
+    .tab-content .card {
+        overflow: visible !important;
+    }
+    .matrix-card .table-responsive,
+    .tab-content .card .table-responsive {
+        overflow: visible !important;
+    }
+    .sticky-thead th {
+        position: sticky;
+        top: -1px;
+        z-index: 10;
+        box-shadow: 0 1px 0 var(--border-card);
+    }
+}
+
+/* Solid background colors to prevent transparent text overlap */
+.violations-table th {
+    background-color: #FFF9F9 !important;
+}
+
+.merits-table th {
+    background-color: #FAFCFA !important;
+}
+
+
 /* Checkbox Toggle inside Matrix */
 .matrix-class-toggle {
     display: flex;

@@ -938,11 +938,18 @@ class AppStateManager {
         this.studentDetailTbody = document.getElementById("student-detail-tbody");
         this.btnCloseStudentDetail = document.getElementById("btn-close-student-detail");
 
+        this.weeksTbody = document.getElementById("weeks-tbody");
+        this.classesTbody = document.getElementById("classes-tbody");
+        this.btnSaveWeeks = document.getElementById("btn-save-weeks");
+        this.btnSaveClasses = document.getElementById("btn-save-classes");
+
         this.regulationsState = null;
         this.editingCriterionId = null;
         this.studentsState = null;
         this.editingStudentId = null;
         this.tempImportedStudents = [];
+        this.weeksState = null;
+        this.classesState = null;
     }
 
     bindEvents() {
@@ -1231,6 +1238,18 @@ class AppStateManager {
                 this.renderStudentsTab();
             });
         }
+
+        if (this.btnSaveWeeks) {
+            this.btnSaveWeeks.addEventListener("click", () => {
+                this.saveWeeksData();
+            });
+        }
+
+        if (this.btnSaveClasses) {
+            this.btnSaveClasses.addEventListener("click", () => {
+                this.saveClassesData();
+            });
+        }
     }
 
     syncRole() {
@@ -1250,6 +1269,9 @@ class AppStateManager {
             if (this.btnImportStudentModal) this.btnImportStudentModal.style.display = "inline-flex";
             document.getElementById("nav-scoring").style.display = "inline-flex";
             document.getElementById("nav-assignments").style.display = "inline-flex";
+            
+            if (this.btnSaveWeeks) this.btnSaveWeeks.style.display = "inline-flex";
+            if (this.btnSaveClasses) this.btnSaveClasses.style.display = "inline-flex";
         }
         else if (this.currentRole === "CO_DO") {
             // Đóng vai cờ đỏ Trần Đức Minh lớp 11A
@@ -1265,6 +1287,9 @@ class AppStateManager {
             if (this.btnImportStudentModal) this.btnImportStudentModal.style.display = "none";
             document.getElementById("nav-scoring").style.display = "inline-flex";
             document.getElementById("nav-assignments").style.display = "none";
+
+            if (this.btnSaveWeeks) this.btnSaveWeeks.style.display = "none";
+            if (this.btnSaveClasses) this.btnSaveClasses.style.display = "none";
         }
         else if (this.currentRole === "GIAO_VIEN") {
             // Giáo viên chủ nhiệm lớp 11A
@@ -1279,6 +1304,9 @@ class AppStateManager {
             if (this.btnImportStudentModal) this.btnImportStudentModal.style.display = "none";
             document.getElementById("nav-scoring").style.display = "none";
             document.getElementById("nav-assignments").style.display = "none";
+
+            if (this.btnSaveWeeks) this.btnSaveWeeks.style.display = "none";
+            if (this.btnSaveClasses) this.btnSaveClasses.style.display = "none";
         }
         else if (this.currentRole === "HOC_SINH") {
             // Học sinh lớp 11A
@@ -1293,10 +1321,14 @@ class AppStateManager {
             if (this.btnImportStudentModal) this.btnImportStudentModal.style.display = "none";
             document.getElementById("nav-scoring").style.display = "none";
             document.getElementById("nav-assignments").style.display = "none";
+
+            if (this.btnSaveWeeks) this.btnSaveWeeks.style.display = "none";
+            if (this.btnSaveClasses) this.btnSaveClasses.style.display = "none";
         }
     }
 
     renderAll() {
+        this.populateWeekSelectors();
         this.renderTab(this.activeTab);
     }
 
@@ -1319,6 +1351,12 @@ class AppStateManager {
                 break;
             case "students":
                 this.renderStudentsTab();
+                break;
+            case "weeks":
+                this.renderWeeksTab();
+                break;
+            case "classes":
+                this.renderClassesTab();
                 break;
         }
     }
@@ -3400,6 +3438,427 @@ class AppStateManager {
             this.importSummaryText.style.color = "var(--danger-color)";
             this.btnSubmitImportStudents.disabled = true;
         }
+    }
+
+    populateWeekSelectors() {
+        const weeks = JSON.parse(localStorage.getItem("TDHD_DanhMucTuan") || "[]");
+        weeks.sort((a, b) => a.MaTuan - b.MaTuan);
+
+        const currentVal = this.currentWeekId.toString();
+
+        const updateSelect = (selectEl) => {
+            if (!selectEl) return;
+            const prevVal = selectEl.value;
+            selectEl.innerHTML = "";
+            weeks.forEach(w => {
+                const opt = document.createElement("option");
+                opt.value = w.MaTuan;
+                opt.textContent = w.TenTuan;
+                selectEl.appendChild(opt);
+            });
+            if (weeks.some(w => w.MaTuan.toString() === prevVal)) {
+                selectEl.value = prevVal;
+            } else if (weeks.length > 0) {
+                selectEl.value = weeks[0].MaTuan.toString();
+            }
+        };
+
+        updateSelect(this.weekSelector);
+        updateSelect(this.scoringSelectWeek);
+        updateSelect(this.summarySelectWeek);
+        updateSelect(this.assignWeekSelect);
+
+        // Đảm bảo currentWeekId hợp lệ
+        if (weeks.length > 0) {
+            if (!weeks.some(w => w.MaTuan === this.currentWeekId)) {
+                this.currentWeekId = weeks[0].MaTuan;
+                if (this.weekSelector) this.weekSelector.value = this.currentWeekId.toString();
+            }
+        }
+    }
+
+    renderWeeksTab() {
+        if (!this.weeksState) {
+            this.weeksState = JSON.parse(localStorage.getItem("TDHD_DanhMucTuan") || "[]");
+        }
+        
+        // Sắp xếp
+        this.weeksState.sort((a, b) => a.MaTuan - b.MaTuan);
+        
+        const tbody = this.weeksTbody;
+        tbody.innerHTML = "";
+
+        const renderGrid = () => {
+            tbody.innerHTML = "";
+
+            const rowsToRender = [...this.weeksState];
+            if (this.currentRole === "ADMIN") {
+                // Thêm một dòng trống ở cuối cùng
+                const lastRow = rowsToRender[rowsToRender.length - 1];
+                if (!lastRow || (lastRow.TenTuan && lastRow.NgayBatDau && lastRow.NgayKetThuc)) {
+                    const nextId = this.weeksState.length > 0 ? Math.max(...this.weeksState.map(w => w.MaTuan)) + 1 : 1;
+                    const blankRow = { MaTuan: nextId, TenTuan: "", NgayBatDau: "", NgayKetThuc: "", isNew: true };
+                    this.weeksState.push(blankRow);
+                    rowsToRender.push(blankRow);
+                }
+            }
+
+            rowsToRender.forEach((row, index) => {
+                const tr = document.createElement("tr");
+
+                if (this.currentRole === "ADMIN") {
+                    // Cột 1: Mã Tuần (Chỉ đọc)
+                    const tdId = document.createElement("td");
+                    tdId.innerHTML = `<code>WEEK_${row.MaTuan.toString().padStart(3, '0')}</code>`;
+                    tr.appendChild(tdId);
+
+                    // Cột 2: Tên Tuần (Input)
+                    const tdName = document.createElement("td");
+                    const inputName = document.createElement("input");
+                    inputName.type = "text";
+                    inputName.className = "form-control-sm";
+                    inputName.style.width = "100%";
+                    inputName.placeholder = `Ví dụ: Tuần ${row.MaTuan}`;
+                    inputName.value = row.TenTuan;
+                    inputName.addEventListener("change", (e) => {
+                        row.TenTuan = e.target.value.trim();
+                        if (row.isNew && row.TenTuan && row.NgayBatDau && row.NgayKetThuc) {
+                            delete row.isNew;
+                            renderGrid();
+                        }
+                    });
+                    tdName.appendChild(inputName);
+                    tr.appendChild(tdName);
+
+                    // Cột 3: Ngày Bắt Đầu (Input Date)
+                    const tdStart = document.createElement("td");
+                    const inputStart = document.createElement("input");
+                    inputStart.type = "date";
+                    inputStart.className = "form-control-sm";
+                    inputStart.style.width = "100%";
+                    inputStart.value = row.NgayBatDau;
+                    inputStart.addEventListener("change", (e) => {
+                        row.NgayBatDau = e.target.value;
+                        if (row.isNew && row.TenTuan && row.NgayBatDau && row.NgayKetThuc) {
+                            delete row.isNew;
+                            renderGrid();
+                        }
+                    });
+                    tdStart.appendChild(inputStart);
+                    tr.appendChild(tdStart);
+
+                    // Cột 4: Ngày Kết Thúc (Input Date)
+                    const tdEnd = document.createElement("td");
+                    const inputEnd = document.createElement("input");
+                    inputEnd.type = "date";
+                    inputEnd.className = "form-control-sm";
+                    inputEnd.style.width = "100%";
+                    inputEnd.value = row.NgayKetThuc;
+                    inputEnd.addEventListener("change", (e) => {
+                        row.NgayKetThuc = e.target.value;
+                        if (row.isNew && row.TenTuan && row.NgayBatDau && row.NgayKetThuc) {
+                            delete row.isNew;
+                            renderGrid();
+                        }
+                    });
+                    tdEnd.appendChild(inputEnd);
+                    tr.appendChild(tdEnd);
+
+                    // Cột 5: Thao tác (Xóa)
+                    const tdAction = document.createElement("td");
+                    const btnDelete = document.createElement("button");
+                    btnDelete.className = "btn btn-icon btn-sm text-red";
+                    btnDelete.innerHTML = `<span class="material-symbols-rounded">delete</span>`;
+
+                    if (row.isNew) {
+                        btnDelete.style.opacity = "0.3";
+                        btnDelete.style.cursor = "not-allowed";
+                    } else {
+                        btnDelete.addEventListener("click", () => {
+                            if (confirm(`Bạn có chắc chắn muốn xóa "${row.TenTuan}" không?`)) {
+                                this.weeksState = this.weeksState.filter(w => w.MaTuan !== row.MaTuan);
+                                renderGrid();
+                            }
+                        });
+                    }
+                    tdAction.appendChild(btnDelete);
+                    tr.appendChild(tdAction);
+
+                } else {
+                    // Chế độ xem: Bảng tĩnh
+                    if (row.isNew || (!row.TenTuan && !row.NgayBatDau && !row.NgayKetThuc)) return;
+
+                    tr.innerHTML = `
+                        <td><code>WEEK_${row.MaTuan.toString().padStart(3, '0')}</code></td>
+                        <td><strong>${row.TenTuan}</strong></td>
+                        <td class="family-pt-mono">${row.NgayBatDau}</td>
+                        <td class="family-pt-mono">${row.NgayKetThuc}</td>
+                        <td><span style="color:var(--text-muted); opacity:0.35;">-</span></td>
+                    `;
+                }
+
+                tbody.appendChild(tr);
+            });
+
+            if (rowsToRender.length === 0 || (this.currentRole !== "ADMIN" && this.weeksState.length === 0)) {
+                tbody.innerHTML = '<tr><td colspan="5" class="no-data">Chưa có dữ liệu tuần học nào.</td></tr>';
+            }
+        };
+
+        renderGrid();
+    }
+
+    saveWeeksData() {
+        if (this.currentRole !== "ADMIN") return;
+
+        // Lọc bỏ các dòng chưa hoàn thành
+        const validWeeks = [];
+        let hasIncomplete = false;
+
+        this.weeksState.forEach(row => {
+            if (!row.TenTuan && !row.NgayBatDau && !row.NgayKetThuc) {
+                return; // Dòng trống hoàn toàn
+            }
+            if (!row.TenTuan || !row.NgayBatDau || !row.NgayKetThuc) {
+                hasIncomplete = true;
+                return; // Thiếu thông tin
+            }
+            validWeeks.push(row);
+        });
+
+        if (hasIncomplete) {
+            alert("Lỗi: Có tuần học bị thiếu thông tin Tên tuần hoặc Ngày bắt đầu/kết thúc. Vui lòng nhập đầy đủ hoặc xóa dòng!");
+            return;
+        }
+
+        // Validate trùng tên tuần
+        const names = validWeeks.map(w => w.TenTuan.toLowerCase());
+        const uniqueNames = new Set(names);
+        if (names.length !== uniqueNames.size) {
+            alert("Lỗi: Tên tuần học không được trùng nhau!");
+            return;
+        }
+
+        // Validate ngày bắt đầu phải nhỏ hơn ngày kết thúc
+        let dateError = false;
+        validWeeks.forEach(w => {
+            if (new Date(w.NgayBatDau) >= new Date(w.NgayKetThuc)) {
+                dateError = true;
+            }
+        });
+        if (dateError) {
+            alert("Lỗi: Ngày bắt đầu phải trước ngày kết thúc!");
+            return;
+        }
+
+        // Lưu
+        localStorage.setItem("TDHD_DanhMucTuan", JSON.stringify(validWeeks));
+
+        // Đồng bộ Supabase
+        MockDatabase.syncTableToSupabase("TDHD_DanhMucTuan", "DanhMucTuan", "MaTuan", true);
+
+        // Reset state để render lại
+        this.weeksState = null;
+        this.renderAll();
+        alert("Đã lưu và đồng bộ danh mục tuần học thành công!");
+    }
+
+    renderClassesTab() {
+        if (!this.classesState) {
+            this.classesState = JSON.parse(localStorage.getItem("TDHD_DanhMucLop") || "[]");
+        }
+
+        // Sắp xếp
+        this.classesState.sort((a, b) => a.MaLop - b.MaLop);
+
+        const tbody = this.classesTbody;
+        tbody.innerHTML = "";
+
+        const renderGrid = () => {
+            tbody.innerHTML = "";
+
+            const rowsToRender = [...this.classesState];
+            if (this.currentRole === "ADMIN") {
+                // Thêm dòng trống cuối cùng
+                const lastRow = rowsToRender[rowsToRender.length - 1];
+                if (!lastRow || (lastRow.TenLop && lastRow.Khoi && lastRow.NamHoc && lastRow.BaseScore !== undefined)) {
+                    const nextId = this.classesState.length > 0 ? Math.max(...this.classesState.map(c => c.MaLop)) + 1 : 1;
+                    const blankRow = { MaLop: nextId, TenLop: "", Khoi: 10, NamHoc: "2025-2026", BaseScore: 100, isNew: true };
+                    this.classesState.push(blankRow);
+                    rowsToRender.push(blankRow);
+                }
+            }
+
+            rowsToRender.forEach((row, index) => {
+                const tr = document.createElement("tr");
+
+                if (this.currentRole === "ADMIN") {
+                    // Cột 1: Mã Lớp (Chỉ đọc)
+                    const tdId = document.createElement("td");
+                    tdId.innerHTML = `<code>CLASS_${row.MaLop.toString().padStart(3, '0')}</code>`;
+                    tr.appendChild(tdId);
+
+                    // Cột 2: Tên Lớp (Input)
+                    const tdName = document.createElement("td");
+                    const inputName = document.createElement("input");
+                    inputName.type = "text";
+                    inputName.className = "form-control-sm";
+                    inputName.style.width = "100%";
+                    inputName.placeholder = "Ví dụ: 10A";
+                    inputName.value = row.TenLop;
+                    inputName.addEventListener("change", (e) => {
+                        row.TenLop = e.target.value.trim();
+                        if (row.isNew && row.TenLop && row.Khoi && row.NamHoc && row.BaseScore !== undefined) {
+                            delete row.isNew;
+                            renderGrid();
+                        }
+                    });
+                    tdName.appendChild(inputName);
+                    tr.appendChild(tdName);
+
+                    // Cột 3: Khối (Select)
+                    const tdKhoi = document.createElement("td");
+                    const selectKhoi = document.createElement("select");
+                    selectKhoi.className = "codo-select-inline";
+                    selectKhoi.style.width = "100%";
+                    [10, 11, 12].forEach(k => {
+                        const opt = document.createElement("option");
+                        opt.value = k;
+                        opt.textContent = `Khối ${k}`;
+                        selectKhoi.appendChild(opt);
+                    });
+                    selectKhoi.value = row.Khoi;
+                    selectKhoi.addEventListener("change", (e) => {
+                        row.Khoi = parseInt(e.target.value);
+                        if (row.isNew && row.TenLop && row.Khoi && row.NamHoc && row.BaseScore !== undefined) {
+                            delete row.isNew;
+                            renderGrid();
+                        }
+                    });
+                    tdKhoi.appendChild(selectKhoi);
+                    tr.appendChild(tdKhoi);
+
+                    // Cột 4: Năm Học (Input)
+                    const tdNamHoc = document.createElement("td");
+                    const inputNamHoc = document.createElement("input");
+                    inputNamHoc.type = "text";
+                    inputNamHoc.className = "form-control-sm";
+                    inputNamHoc.style.width = "100%";
+                    inputNamHoc.placeholder = "2025-2026";
+                    inputNamHoc.value = row.NamHoc;
+                    inputNamHoc.addEventListener("change", (e) => {
+                        row.NamHoc = e.target.value.trim();
+                        if (row.isNew && row.TenLop && row.Khoi && row.NamHoc && row.BaseScore !== undefined) {
+                            delete row.isNew;
+                            renderGrid();
+                        }
+                    });
+                    tdNamHoc.appendChild(inputNamHoc);
+                    tr.appendChild(tdNamHoc);
+
+                    // Cột 5: Điểm Gốc (Input Number)
+                    const tdScore = document.createElement("td");
+                    const inputScore = document.createElement("input");
+                    inputScore.type = "number";
+                    inputScore.className = "form-control-sm";
+                    inputScore.style.width = "100%";
+                    inputScore.value = row.BaseScore;
+                    inputScore.addEventListener("change", (e) => {
+                        row.BaseScore = parseFloat(e.target.value);
+                        if (row.isNew && row.TenLop && row.Khoi && row.NamHoc && row.BaseScore !== undefined) {
+                            delete row.isNew;
+                            renderGrid();
+                        }
+                    });
+                    tdScore.appendChild(inputScore);
+                    tr.appendChild(tdScore);
+
+                    // Cột 6: Thao tác (Xóa)
+                    const tdAction = document.createElement("td");
+                    const btnDelete = document.createElement("button");
+                    btnDelete.className = "btn btn-icon btn-sm text-red";
+                    btnDelete.innerHTML = `<span class="material-symbols-rounded">delete</span>`;
+
+                    if (row.isNew) {
+                        btnDelete.style.opacity = "0.3";
+                        btnDelete.style.cursor = "not-allowed";
+                    } else {
+                        btnDelete.addEventListener("click", () => {
+                            if (confirm(`Bạn có chắc chắn muốn xóa lớp "${row.TenLop}" không?`)) {
+                                this.classesState = this.classesState.filter(c => c.MaLop !== row.MaLop);
+                                renderGrid();
+                            }
+                        });
+                    }
+                    tdAction.appendChild(btnDelete);
+                    tr.appendChild(tdAction);
+
+                } else {
+                    // Chế độ xem: Bảng tĩnh
+                    if (row.isNew || (!row.TenLop && !row.NamHoc)) return;
+
+                    tr.innerHTML = `
+                        <td><code>CLASS_${row.MaLop.toString().padStart(3, '0')}</code></td>
+                        <td><strong>${row.TenLop}</strong></td>
+                        <td>Khối ${row.Khoi}</td>
+                        <td>${row.NamHoc}</td>
+                        <td><strong>${row.BaseScore}</strong></td>
+                        <td><span style="color:var(--text-muted); opacity:0.35;">-</span></td>
+                    `;
+                }
+
+                tbody.appendChild(tr);
+            });
+
+            if (rowsToRender.length === 0 || (this.currentRole !== "ADMIN" && this.classesState.length === 0)) {
+                tbody.innerHTML = '<tr><td colspan="6" class="no-data">Chưa có dữ liệu lớp học nào.</td></tr>';
+            }
+        };
+
+        renderGrid();
+    }
+
+    saveClassesData() {
+        if (this.currentRole !== "ADMIN") return;
+
+        // Lọc
+        const validClasses = [];
+        let hasIncomplete = false;
+
+        this.classesState.forEach(row => {
+            if (!row.TenLop && !row.NamHoc && row.BaseScore === 100 && row.Khoi === 10) {
+                return; // Dòng trống
+            }
+            if (!row.TenLop || !row.NamHoc || row.BaseScore === undefined || isNaN(row.BaseScore)) {
+                hasIncomplete = true;
+                return;
+            }
+            validClasses.push(row);
+        });
+
+        if (hasIncomplete) {
+            alert("Lỗi: Có lớp học bị thiếu thông tin hoặc điểm gốc không hợp lệ. Vui lòng nhập đầy đủ hoặc xóa dòng!");
+            return;
+        }
+
+        // Validate trùng tên lớp
+        const names = validClasses.map(c => c.TenLop.toLowerCase());
+        const uniqueNames = new Set(names);
+        if (names.length !== uniqueNames.size) {
+            alert("Lỗi: Tên lớp học không được trùng nhau!");
+            return;
+        }
+
+        // Lưu
+        localStorage.setItem("TDHD_DanhMucLop", JSON.stringify(validClasses));
+
+        // Đồng bộ Supabase
+        MockDatabase.syncTableToSupabase("TDHD_DanhMucLop", "DanhMucLop", "MaLop", true);
+
+        // Reset state để render lại
+        this.classesState = null;
+        this.renderAll();
+        alert("Đã lưu và đồng bộ danh mục lớp học thành công!");
     }
 }
 

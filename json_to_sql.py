@@ -75,4 +75,4 @@ sql_output.append("COMMIT;")
 with open("seed.sql", "w", encoding="utf-8") as f:
     f.write("\n".join(sql_output))
 
-print("Đã tạo thành công tệp seed.sql với toàn bộ dữ liệu INSERT!")
+print("Da tao thanh cong tep seed.sql voi toan bo du lieu INSERT!")
