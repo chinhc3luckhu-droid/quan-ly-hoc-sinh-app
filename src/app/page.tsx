@@ -1601,31 +1601,46 @@ export default function Home() {
                   <table className="data-table">
                     <thead>
                       <tr>
-                        <th style={{ textAlign: 'center', width: '70px' }}>Hạng</th>
-                        <th>Lớp học</th>
-                        <th style={{ textAlign: 'center' }}>Điểm gốc</th>
-                        <th style={{ textAlign: 'center' }}>Điểm cộng</th>
-                        <th style={{ textAlign: 'center' }}>Điểm trừ</th>
-                        <th style={{ textAlign: 'center' }}>Tổng điểm kết</th>
+                        <th style={{ textAlign: 'center', width: '80px' }}>Thứ Hạng</th>
+                        <th>Lớp</th>
+                        <th>Khối</th>
+                        <th>Điểm Gốc</th>
+                        <th className="score-plus" style={{ textAlign: 'center' }}>Tổng Cộng</th>
+                        <th className="score-minus" style={{ textAlign: 'center' }}>Tổng Trừ</th>
+                        <th>Điểm Tổng Kết</th>
+                        <th style={{ textAlign: 'center', width: '80px' }}>Chi Tiết</th>
                       </tr>
                     </thead>
                     <tbody>
                       {rankingList.map(row => (
-                        <tr key={row.MaTongKet} className={row.XepHang <= 3 ? "highlight-row" : ""}>
+                        <tr 
+                          key={row.MaTongKet} 
+                          className={
+                            row.XepHang === 1 ? "gold-row" :
+                            row.XepHang === 2 ? "silver-row" :
+                            row.XepHang === 3 ? "bronze-row" : ""
+                          }
+                        >
                           <td style={{ textAlign: 'center' }}>
-                            {row.XepHang === 1 ? <span style={{ fontSize: '1.25rem', color: 'var(--accent-gold)' }}>★</span> : 
-                             row.XepHang === 2 ? <span style={{ fontSize: '1.2rem', color: 'var(--text-muted)' }}>🥈</span> : 
-                             row.XepHang === 3 ? <span style={{ fontSize: '1.2rem', color: '#b08d57' }}>🥉</span> : 
-                             <span className="family-pt-mono">{row.XepHang}</span>}
+                            <span className={`rank-badge rank-${row.XepHang}`}>{row.XepHang}</span>
                           </td>
-                          <td><strong>Lớp {row.TenLop}</strong> (Khối {row.Khoi})</td>
-                          <td style={{ textAlign: 'center' }} className="family-pt-mono">{row.DiemGoc}đ</td>
-                          <td style={{ textAlign: 'center', color: 'var(--success-color)', fontWeight: 600 }}>+{row.TongDiemCong}đ</td>
-                          <td style={{ textAlign: 'center', color: 'var(--danger-color)', fontWeight: 600 }}>-{row.TongDiemTru}đ</td>
+                          <td><strong>Lớp {row.TenLop}</strong></td>
+                          <td>Khối {row.Khoi}</td>
+                          <td className="family-pt-mono">{row.DiemGoc}</td>
+                          <td className="score-plus" style={{ textAlign: 'center' }}>+{row.TongDiemCong}</td>
+                          <td className="score-minus" style={{ textAlign: 'center' }}>-{row.TongDiemTru}</td>
+                          <td><strong>{row.DiemTongKet.toFixed(1)}</strong></td>
                           <td style={{ textAlign: 'center' }}>
-                            <span className="badge badge-success" style={{ minWidth: '70px', display: 'inline-block', textAlign: 'center', fontWeight: 'bold' }}>
-                              {row.DiemTongKet}đ
-                            </span>
+                            <button 
+                              className="btn btn-icon btn-sm btn-view-class" 
+                              onClick={() => {
+                                setSelectedClassId(row.MaLop);
+                                setActiveTab("students");
+                              }}
+                              style={{ border: 'none', background: 'transparent', cursor: 'pointer' }}
+                            >
+                              <span className="material-symbols-rounded">visibility</span>
+                            </button>
                           </td>
                         </tr>
                       ))}
