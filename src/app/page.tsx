@@ -241,6 +241,90 @@ export default function Home() {
     return [...weekLogs].sort((a, b) => b.MaNhatKy - a.MaNhatKy).slice(0, 5);
   }, [currentWeekId, dbState]);
 
+  // Dashboard Violation Summary Matrix
+  const dashboardViolationSummary = useMemo(() => {
+    if (!dbState) return { columns: [], rows: [], footerPoints: [], grandTotal: 0 };
+
+    const classes = dbState.DanhMucLop;
+    const criteria = dbState.QuyDinhThiDua.filter(c => c.Loai === "TRU" && c.is_active !== false);
+    const nhatKyViPhams = dbState.NhatKyViPhamHangNgay.filter(nk => nk.MaTuan === currentWeekId);
+
+    const colTotals = new Array(classes.length).fill(0);
+    let grandTotalPoints = 0;
+
+    const rows = criteria.map(tc => {
+      let rowTotalQty = 0;
+      const classValues = classes.map((lop, classIdx) => {
+        const logs = nhatKyViPhams.filter(nk => nk.MaLop === lop.MaLop && nk.MaTieuChi === tc.MaTieuChi);
+        const classQty = logs.reduce((sum, item) => sum + item.SoLuong, 0);
+
+        rowTotalQty += classQty;
+        colTotals[classIdx] += classQty * tc.DiemChuyenDoi;
+
+        return classQty;
+      });
+
+      return {
+        tc,
+        classValues,
+        rowTotalQty
+      };
+    });
+
+    classes.forEach((_, classIdx) => {
+      grandTotalPoints += colTotals[classIdx];
+    });
+
+    return {
+      columns: classes.map(c => c.TenLop),
+      rows,
+      footerPoints: colTotals,
+      grandTotal: grandTotalPoints
+    };
+  }, [dbState, currentWeekId]);
+
+  // Dashboard Achievement Summary Matrix
+  const dashboardAchievementSummary = useMemo(() => {
+    if (!dbState) return { columns: [], rows: [], footerPoints: [], grandTotal: 0 };
+
+    const classes = dbState.DanhMucLop;
+    const criteria = dbState.QuyDinhThiDua.filter(c => c.Loai === "CONG" && c.is_active !== false);
+    const nhatKyThanhTichs = dbState.ThanhTichHocTapTheoTuan.filter(nk => nk.MaTuan === currentWeekId);
+
+    const colTotals = new Array(criteria.length).fill(0);
+    let grandTotalPoints = 0;
+
+    const rows = classes.map(lop => {
+      let rowTotalQty = 0;
+      const criteriaValues = criteria.map((tc, criteriaIdx) => {
+        const logs = nhatKyThanhTichs.filter(nk => nk.MaLop === lop.MaLop && nk.MaTieuChi === tc.MaTieuChi);
+        const classQty = logs.reduce((sum, item) => sum + item.SoLuong, 0);
+
+        rowTotalQty += classQty;
+        colTotals[criteriaIdx] += classQty * tc.DiemChuyenDoi;
+
+        return classQty;
+      });
+
+      return {
+        lop,
+        criteriaValues,
+        rowTotalQty
+      };
+    });
+
+    criteria.forEach((_, criteriaIdx) => {
+      grandTotalPoints += colTotals[criteriaIdx];
+    });
+
+    return {
+      columns: criteria,
+      rows,
+      footerPoints: colTotals,
+      grandTotal: grandTotalPoints
+    };
+  }, [dbState, currentWeekId]);
+
   // Xem chi tiết người vi phạm của tiêu chí
   const handleShowViolationDetail = (criterionId: number, criterionName: string) => {
     if (!dbState) return;
@@ -1606,6 +1690,202 @@ export default function Home() {
 
               </div>
 
+            </div>
+
+            {/* Nhóm 3 Lớp Cần Nỗ Lực Cải Thiện Nề Nếp Hơn */}
+            {rankingList.length >= 3 && (
+              <>
+                <div className="bottom-podium-header" style={{ marginTop: '3.5rem', textAlign: 'center' }}>
+                  <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', justifyContent: 'center' }}>
+                    <span className="material-symbols-rounded" style={{ color: 'var(--danger-color)', fontSize: '2rem', verticalAlign: 'middle' }}>trending_down</span>
+                    <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.4rem', fontWeight: 700, color: 'var(--text-primary)', margin: 0 }}>
+                      Nhóm 3 Lớp Cần Nỗ Lực Cải Thiện Nề Nếp Hơn
+                    </h3>
+                  </div>
+                  <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem', marginTop: '0.35rem' }}>
+                    Hãy cùng nỗ lực chấn chỉnh nề nếp và xây dựng phong trào tốt trong tuần tới nhé!
+                  </p>
+                </div>
+
+                <div className="podium-section" style={{ marginTop: '1.5rem', marginBottom: '3.5rem', borderBottom: 'none', paddingBottom: 0, minHeight: '270px', alignItems: 'flex-end', display: 'flex', justifyContent: 'center', gap: '2rem' }}>
+                  {/* Bottom 2nd (Rank 12) */}
+                  {rankingList[rankingList.length - 2] && (
+                    <div className="podium-card warn-2" style={{ opacity: 1 }}>
+                      <div className="warn-icon-wrapper">
+                        <span className="material-symbols-rounded text-danger" style={{ fontSize: '2.2rem', marginBottom: '0.5rem' }}>warning</span>
+                      </div>
+                      <div className="podium-rank" style={{ background: 'var(--danger-bg)', color: 'var(--danger-color)', border: '1px solid var(--danger-color)', fontSize: '0.95rem', width: '32px', height: '32px', fontWeight: 700, display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '50%', margin: '0 auto 0.5rem auto' }}>
+                        {rankingList[rankingList.length - 2].XepHang}
+                      </div>
+                      <div className="podium-details">
+                        <h3 className="class-name">Lớp {rankingList[rankingList.length - 2].TenLop}</h3>
+                        <p className="score"><span className="score-value">{rankingList[rankingList.length - 2].DiemTongKet.toFixed(1)}</span> điểm</p>
+                        <p className="stats">Cộng: +{rankingList[rankingList.length - 2].TongDiemCong.toFixed(1)} | Trừ: -{rankingList[rankingList.length - 2].TongDiemTru.toFixed(1)}</p>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Bottom 1st (Rank 13 - Thấp nhất) */}
+                  {rankingList[rankingList.length - 1] && (
+                    <div className="podium-card warn-1" style={{ opacity: 1 }}>
+                      <div className="warn-icon-wrapper" style={{ animation: 'pulseRed 1.5s infinite', display: 'inline-flex' }}>
+                        <span className="material-symbols-rounded text-danger" style={{ fontSize: '2.5rem', marginBottom: '0.5rem' }}>error</span>
+                      </div>
+                      <div className="podium-rank" style={{ background: 'var(--danger-bg)', color: 'var(--danger-color)', border: '2px solid var(--danger-color)', fontSize: '1.05rem', width: '36px', height: '36px', fontWeight: 800, display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '50%', margin: '0 auto 0.5rem auto' }}>
+                        {rankingList[rankingList.length - 1].XepHang}
+                      </div>
+                      <div className="podium-details">
+                        <h3 className="class-name">Lớp {rankingList[rankingList.length - 1].TenLop}</h3>
+                        <p className="score"><span className="score-value">{rankingList[rankingList.length - 1].DiemTongKet.toFixed(1)}</span> điểm</p>
+                        <p className="stats">Cộng: +{rankingList[rankingList.length - 1].TongDiemCong.toFixed(1)} | Trừ: -{rankingList[rankingList.length - 1].TongDiemTru.toFixed(1)}</p>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Bottom 3rd (Rank 11) */}
+                  {rankingList[rankingList.length - 3] && (
+                    <div className="podium-card warn-3" style={{ opacity: 1 }}>
+                      <div className="warn-icon-wrapper">
+                        <span className="material-symbols-rounded text-warning" style={{ fontSize: '2.2rem', marginBottom: '0.5rem' }}>eco</span>
+                      </div>
+                      <div className="podium-rank" style={{ background: 'var(--warning-bg)', color: 'var(--warning-color)', border: '1px solid var(--warning-color)', fontSize: '0.95rem', width: '32px', height: '32px', fontWeight: 700, display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '50%', margin: '0 auto 0.5rem auto' }}>
+                        {rankingList[rankingList.length - 3].XepHang}
+                      </div>
+                      <div className="podium-details">
+                        <h3 className="class-name">Lớp {rankingList[rankingList.length - 3].TenLop}</h3>
+                        <p className="score"><span className="score-value">{rankingList[rankingList.length - 3].DiemTongKet.toFixed(1)}</span> điểm</p>
+                        <p className="stats">Cộng: +{rankingList[rankingList.length - 3].TongDiemCong.toFixed(1)} | Trừ: -{rankingList[rankingList.length - 3].TongDiemTru.toFixed(1)}</p>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </>
+            )}
+
+            {/* Bảng Tổng Hợp Điểm Trừ Toàn Trường */}
+            <div className="card" style={{ marginTop: '2rem', width: '100%' }}>
+              <div className="card-header" style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                <div className="card-title-icon red" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '36px', height: '36px', borderRadius: '50%', background: 'var(--danger-bg)', color: 'var(--danger-color)' }}>
+                  <span className="material-symbols-rounded">grid_on</span>
+                </div>
+                <h3 className="card-title">Bảng Tổng Hợp Điểm Trừ Toàn Trường (Trong Tuần)</h3>
+              </div>
+              <div className="table-responsive">
+                <table className="data-table" style={{ width: '100%' }}>
+                  <thead>
+                    <tr>
+                      <th style={{ minWidth: '250px', textAlign: 'left' }}>Tiêu Chí Vi Phạm Quy Chế</th>
+                      {dbState.DanhMucLop.map(lop => (
+                        <th key={lop.MaLop} style={{ textAlign: 'center' }}>Lớp {lop.TenLop}</th>
+                      ))}
+                      <th style={{ background: 'oklch(100% 0 0 / 2%)', color: 'var(--text-primary)', fontWeight: '700', textAlign: 'center', width: '110px' }}>Tổng Lượt Lỗi</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {dashboardViolationSummary.rows.map((row, rowIdx) => (
+                      <tr key={row.tc.MaTieuChi}>
+                        <td style={{ textAlign: 'left' }}>
+                          <span style={{ color: 'var(--text-muted)', fontFamily: 'monospace', fontSize: '0.75rem', marginRight: '6px' }}>
+                            {row.tc.MaTieuChi.toString().padStart(3, '0')}
+                          </span>
+                          <strong>{row.tc.NoiDung}</strong>
+                          <span className="badge badge-danger" style={{ marginLeft: '6px', fontSize: '0.65rem' }}>
+                            -{row.tc.DiemChuyenDoi}đ/{row.tc.DonViTinh.split('/').pop()}
+                          </span>
+                        </td>
+                        {row.classValues.map((classQty, classIdx) => (
+                          <td key={classIdx} style={{ textAlign: 'center' }}>
+                            {classQty > 0 ? (
+                              <span style={{ fontWeight: '700', color: 'var(--text-primary)' }}>{classQty}</span>
+                            ) : (
+                              <span style={{ color: 'var(--text-muted)', opacity: 0.15 }}>-</span>
+                            )}
+                          </td>
+                        ))}
+                        <td style={{ textAlign: 'center', fontWeight: '700', color: 'var(--text-primary)', background: 'oklch(100% 0 0 / 1.5%)' }}>
+                          {row.rowTotalQty > 0 ? row.rowTotalQty : <span style={{ color: 'var(--text-muted)', opacity: 0.35 }}>-</span>}
+                        </td>
+                      </tr>
+                    ))}
+
+                    {/* Footer Row */}
+                    <tr style={{ borderTop: '2px solid var(--border-card)', background: 'oklch(60% 0.19 25 / 1.5%)', fontWeight: 'bold' }}>
+                      <td><strong style={{ color: 'var(--danger-color)' }}>Tổng Điểm Bị Trừ</strong></td>
+                      {dashboardViolationSummary.footerPoints.map((points, idx) => (
+                        <td key={idx} style={{ textAlign: 'center', fontWeight: '800', color: 'var(--danger-color)' }}>
+                          {points > 0 ? `-${points.toFixed(1)}đ` : <span style={{ color: 'var(--text-muted)', opacity: 0.35 }}>0đ</span>}
+                        </td>
+                      ))}
+                      <td style={{ textAlign: 'center', fontWeight: '800', color: 'var(--danger-color)', background: 'oklch(60% 0.19 25 / 8%)' }}>
+                        {dashboardViolationSummary.grandTotal > 0 ? `-${dashboardViolationSummary.grandTotal.toFixed(1)}đ` : "0đ"}
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            {/* Bảng Tổng Hợp Điểm Cộng Toàn Trường */}
+            <div className="card" style={{ marginTop: '2rem', width: '100%' }}>
+              <div className="card-header" style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                <div className="card-title-icon green" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '36px', height: '36px', borderRadius: '50%', background: 'var(--success-bg)', color: 'var(--success-color)' }}>
+                  <span className="material-symbols-rounded">playlist_add_check</span>
+                </div>
+                <h3 className="card-title">Bảng Tổng Hợp Điểm Cộng Toàn Trường (Trong Tuần)</h3>
+              </div>
+              <div className="table-responsive">
+                <table className="data-table" style={{ width: '100%' }}>
+                  <thead>
+                    <tr>
+                      <th style={{ minWidth: '150px', textAlign: 'left' }}>Lớp Học</th>
+                      {dashboardAchievementSummary.columns.map(tc => (
+                        <th key={tc.MaTieuChi} style={{ textAlign: 'center' }}>
+                          <strong>{tc.NoiDung}</strong>
+                          <br />
+                          <span className="text-green" style={{ fontSize: '0.7rem', fontWeight: 'normal' }}>
+                            +{tc.DiemChuyenDoi}đ/{tc.DonViTinh.split('/').pop()}
+                          </span>
+                        </th>
+                      ))}
+                      <th style={{ background: 'oklch(100% 0 0 / 2%)', color: 'var(--text-primary)', fontWeight: '700', textAlign: 'center', width: '120px' }}>Tổng Lượt Cộng</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {dashboardAchievementSummary.rows.map((row, rowIdx) => (
+                      <tr key={row.lop.MaLop}>
+                        <td style={{ textAlign: 'left' }}>
+                          <strong>Lớp {row.lop.TenLop}</strong>
+                        </td>
+                        {row.criteriaValues.map((classQty, criteriaIdx) => (
+                          <td key={criteriaIdx} style={{ textAlign: 'center' }}>
+                            {classQty > 0 ? (
+                              <span style={{ fontWeight: '700', color: 'var(--success-color)' }}>{classQty}</span>
+                            ) : (
+                              <span style={{ color: 'var(--text-muted)', opacity: 0.15 }}>-</span>
+                            )}
+                          </td>
+                        ))}
+                        <td style={{ textAlign: 'center', fontWeight: '700', color: 'var(--text-primary)', background: 'oklch(100% 0 0 / 1.5%)' }}>
+                          {row.rowTotalQty > 0 ? row.rowTotalQty : <span style={{ color: 'var(--text-muted)', opacity: 0.35 }}>-</span>}
+                        </td>
+                      </tr>
+                    ))}
+
+                    {/* Footer Row */}
+                    <tr style={{ borderTop: '2px solid var(--border-card)', background: 'oklch(65% 0.17 140 / 1.5%)', fontWeight: 'bold' }}>
+                      <td><strong style={{ color: 'var(--success-color)' }}>Tổng Điểm Cộng</strong></td>
+                      {dashboardAchievementSummary.footerPoints.map((points, idx) => (
+                        <td key={idx} style={{ textAlign: 'center', fontWeight: '800', color: 'var(--success-color)' }}>
+                          {points > 0 ? `+${points.toFixed(1)}đ` : <span style={{ color: 'var(--text-muted)', opacity: 0.35 }}>0đ</span>}
+                        </td>
+                      ))}
+                      <td style={{ textAlign: 'center', fontWeight: '800', color: 'var(--success-color)', background: 'oklch(65% 0.17 140 / 8%)' }}>
+                        {dashboardAchievementSummary.grandTotal > 0 ? `+${dashboardAchievementSummary.grandTotal.toFixed(1)}đ` : "0đ"}
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
 
           </div>
