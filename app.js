@@ -7,8 +7,8 @@
 // ============================================================================
 // 0. CẤU HÌNH KẾT NỐI SUPABASE (ONLINE SYNC)
 // ============================================================================
-const SUPABASE_URL = "https://ityrvtsglaszhirogpig.supabase.co";
-const SUPABASE_KEY = "sb_publishable_Xgu15PoWEk0ndO4zKJYGRA_u0dr2Bri";
+const SUPABASE_URL = "https://flkjwkzpcifawwywbyeq.supabase.co";
+const SUPABASE_KEY = "sb_publishable_6H3eblga3dHPtUKzjOYv_g_OV3kujdF";
 
 let supabaseClient = null;
 if (typeof supabase !== 'undefined' && SUPABASE_URL && SUPABASE_KEY) {
