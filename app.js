@@ -713,7 +713,7 @@ class MockDatabase {
             // 1. Tổng hợp điểm trừ hàng ngày (Bảng 9)
             // Gom nhóm: MaLop, MaTieuChi, ThuTrongTuan
             classes.forEach(lop => {
-                const lopVps = viPhams.filter(v => v.MaLop === lop.MaLop && v.MaTuan === weekId);
+                const lopVps = viPhams.filter(v => v.MaLop === lop.MaLop && v.MaTuan === weekId && (v.TrangThai || 'DA_XAC_NHAN') !== 'KHIEU_NAI');
                 const groupedVps = {};
 
                 lopVps.forEach(v => {
@@ -741,7 +741,7 @@ class MockDatabase {
 
             // 2. Tổng hợp điểm cộng hàng ngày (Bảng 10)
             classes.forEach(lop => {
-                const lopTts = thanhTichs.filter(t => t.MaLop === lop.MaLop && t.MaTuan === weekId);
+                const lopTts = thanhTichs.filter(t => t.MaLop === lop.MaLop && t.MaTuan === weekId && (t.TrangThai || 'DA_XAC_NHAN') !== 'KHIEU_NAI');
                 const groupedTts = {};
 
                 lopTts.forEach(t => {
@@ -840,6 +840,7 @@ class AppStateManager {
         // Dropdown giả lập đóng vai và chọn tuần
         this.roleSelector = document.getElementById("role-selector");
         this.weekSelector = document.getElementById("select-week");
+        this.weekLockContainer = document.getElementById("week-lock-container");
 
         // Các tab view
         this.tabs = document.querySelectorAll(".nav-item");
@@ -950,6 +951,16 @@ class AppStateManager {
         this.tempImportedStudents = [];
         this.weeksState = null;
         this.classesState = null;
+
+        // Disputes components
+        this.adminDisputesCard = document.getElementById("admin-disputes-card");
+        this.gvcnDisputesCard = document.getElementById("gvcn-disputes-card");
+        this.disputeDialog = document.getElementById("dispute-dialog");
+        this.disputeReasonInput = document.getElementById("dispute-reason-input");
+        this.disputeViolationInfo = document.getElementById("dispute-violation-info");
+        this.btnCancelDisputeDialog = document.getElementById("btn-cancel-dispute-dialog");
+        this.btnSubmitDisputeDialog = document.getElementById("btn-submit-dispute-dialog");
+        this.disputingViolationId = null;
     }
 
     bindEvents() {
@@ -1016,6 +1027,9 @@ class AppStateManager {
         if (this.summarySelectWeek) {
             this.summarySelectWeek.addEventListener("change", () => {
                 this.loadSummaryMatrixData();
+                if (this.currentRole === "GIAO_VIEN") {
+                    this.renderGvcnDisputes();
+                }
             });
         }
 
@@ -1250,6 +1264,18 @@ class AppStateManager {
                 this.saveClassesData();
             });
         }
+
+        // Disputes dialog events
+        if (this.btnCancelDisputeDialog) {
+            this.btnCancelDisputeDialog.addEventListener("click", () => {
+                this.disputeDialog.close();
+            });
+        }
+        if (this.btnSubmitDisputeDialog) {
+            this.btnSubmitDisputeDialog.addEventListener("click", () => {
+                this.handleSaveDispute();
+            });
+        }
     }
 
     syncRole() {
@@ -1327,8 +1353,95 @@ class AppStateManager {
         }
     }
 
+    isCurrentWeekLocked() {
+        const weeks = JSON.parse(localStorage.getItem("TDHD_DanhMucTuan") || "[]");
+        const currentWeek = weeks.find(w => w.MaTuan === this.currentWeekId);
+        return currentWeek ? !!currentWeek.DaChotSo : false;
+    }
+
+    toggleWeekLock(weekId) {
+        const weeks = JSON.parse(localStorage.getItem("TDHD_DanhMucTuan") || "[]");
+        const updatedWeeks = weeks.map(w => {
+            if (w.MaTuan === weekId) {
+                return { ...w, DaChotSo: !w.DaChotSo };
+            }
+            return w;
+        });
+        localStorage.setItem("TDHD_DanhMucTuan", JSON.stringify(updatedWeeks));
+        this.weeksState = JSON.parse(JSON.stringify(updatedWeeks));
+
+        // Sync with Supabase
+        MockDatabase.syncTableToSupabase("TDHD_DanhMucTuan", "DanhMucTuan", "MaTuan", true);
+
+        // Recalculate and re-render
+        MockDatabase.recalculateAllWeeks();
+        this.renderAll();
+    }
+
+    renderWeekLock() {
+        if (!this.weekLockContainer) return;
+        const isLocked = this.isCurrentWeekLocked();
+
+        this.weekLockContainer.innerHTML = "";
+
+        if (this.currentRole === "ADMIN") {
+            const btn = document.createElement("button");
+            btn.className = `lock-badge ${isLocked ? 'locked' : 'unlocked'}`;
+            btn.style.cssText = `
+                display: inline-flex;
+                align-items: center;
+                gap: 0.25rem;
+                padding: 0.25rem 0.6rem;
+                border-radius: 100px;
+                background-color: ${isLocked ? '#F1F5F9' : '#ECFDF5'};
+                color: ${isLocked ? '#475569' : '#047857'};
+                font-size: 0.7rem;
+                font-weight: 600;
+                border: ${isLocked ? '1px solid #E2E8F0' : '1px solid #A7F3D0'};
+                cursor: pointer;
+                font-family: var(--font-body);
+                transition: all 0.2s ease;
+            `;
+            btn.title = isLocked ? "Nhấp để mở khóa tuần thi đua" : "Nhấp để khóa chốt sổ tuần thi đua";
+            btn.innerHTML = `
+                <span class="material-symbols-rounded" style="font-size: 0.85rem;">
+                    ${isLocked ? 'lock' : 'lock_open'}
+                </span>
+                ${isLocked ? '🔒 Đã chốt (Mở khóa)' : '🔓 Đang mở (Khóa sổ)'}
+            `;
+            btn.addEventListener("click", () => {
+                this.toggleWeekLock(this.currentWeekId);
+            });
+            this.weekLockContainer.appendChild(btn);
+        } else {
+            const span = document.createElement("span");
+            span.className = `lock-badge ${isLocked ? 'locked' : 'unlocked'}`;
+            span.style.cssText = `
+                display: inline-flex;
+                align-items: center;
+                gap: 0.25rem;
+                padding: 0.25rem 0.5rem;
+                border-radius: 100px;
+                background-color: ${isLocked ? '#F1F5F9' : '#ECFDF5'};
+                color: ${isLocked ? '#475569' : '#047857'};
+                font-size: 0.7rem;
+                font-weight: 600;
+                border: ${isLocked ? '1px solid #E2E8F0' : '1px solid #A7F3D0'};
+                font-family: var(--font-body);
+            `;
+            span.innerHTML = `
+                <span class="material-symbols-rounded" style="font-size: 0.85rem;">
+                    ${isLocked ? 'lock' : 'lock_open'}
+                </span>
+                ${isLocked ? 'Đã chốt' : 'Đang mở'}
+            `;
+            this.weekLockContainer.appendChild(span);
+        }
+    }
+
     renderAll() {
         this.populateWeekSelectors();
+        this.renderWeekLock();
         this.renderTab(this.activeTab);
     }
 
@@ -1362,9 +1475,369 @@ class AppStateManager {
     }
 
     // ============================================================================
+    // DISPUTE MANAGEMENT METHODS (Khiếu nại điểm số)
+    // ============================================================================
+    renderAdminDisputes() {
+        if (!this.adminDisputesCard) return;
+
+        const viPhams = JSON.parse(localStorage.getItem("TDHD_ChiTietViPhamHocSinh") || "[]");
+        const students = JSON.parse(localStorage.getItem("TDHD_DanhSachHocSinh") || "[]");
+        const classes = JSON.parse(localStorage.getItem("TDHD_DanhMucLop") || "[]");
+        const criteria = JSON.parse(localStorage.getItem("TDHD_QuyDinhThiDua") || "[]");
+
+        const pendingDisputes = [];
+        viPhams.forEach(v => {
+            if (v.TrangThai === 'KHIEU_NAI') {
+                const student = students.find(s => s.MaHocSinh === v.MaHocSinh);
+                const lop = classes.find(l => l.MaLop === v.MaLop);
+                const tc = criteria.find(c => c.MaTieuChi === v.MaTieuChi);
+                pendingDisputes.push({
+                    rawRecord: v,
+                    studentName: student ? student.HoTen : 'Tập thể lớp',
+                    className: lop ? lop.TenLop : 'Lớp khác',
+                    criterionName: tc ? tc.NoiDung : 'Vi phạm',
+                    points: tc ? tc.DiemChuyenDoi : 0,
+                    day: `Thứ ${v.ThuTrongTuan}`,
+                    reason: v.LyDoKhieuNai
+                });
+            }
+        });
+
+        this.adminDisputesCard.style.display = "block";
+        this.adminDisputesCard.innerHTML = "";
+
+        const cardContainer = document.createElement("div");
+        cardContainer.className = "dashboard-card";
+        cardContainer.style.cssText = "border: 1px solid var(--border-card); background: var(--bg-card); margin-bottom: 1.5rem;";
+
+        const cardHeader = document.createElement("div");
+        cardHeader.className = "card-header";
+        cardHeader.style.cssText = "display: flex; align-items: center; gap: 8px; border-bottom: 1px solid var(--border-card);";
+        cardHeader.innerHTML = `
+            <span class="material-symbols-rounded" style="color: var(--primary-color);">mail</span>
+            <h3 class="card-title" style="color: var(--text-primary); margin: 0; font-size: 1.1rem; font-weight: 600;">
+                Hộp Thư Tiếp Nhận Khiếu Nại Thi Đua (${pendingDisputes.length})
+            </h3>
+        `;
+        cardContainer.appendChild(cardHeader);
+
+        if (pendingDisputes.length === 0) {
+            const noData = document.createElement("div");
+            noData.className = "no-data";
+            noData.style.cssText = "padding: 2rem 0; text-align: center; color: var(--text-muted); font-size: 0.85rem;";
+            noData.innerHTML = `
+                <span class="material-symbols-rounded" style="font-size: 2rem; display: block; margin-bottom: 0.5rem; opacity: 0.5;">mark_email_read</span>
+                Không có khiếu nại thi đua nào cần xử lý từ Giáo viên Chủ nhiệm.
+            `;
+            cardContainer.appendChild(noData);
+        } else {
+            const tableResponsive = document.createElement("div");
+            tableResponsive.className = "table-responsive";
+            tableResponsive.style.cssText = "padding: 0.5rem;";
+
+            let tableHTML = `
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 80px;">Lớp</th>
+                            <th style="width: 120px;">Học sinh</th>
+                            <th>Nội dung vi phạm</th>
+                            <th>Lý do khiếu nại (từ GVCN)</th>
+                            <th style="width: 130px; text-align: center;">Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            `;
+
+            pendingDisputes.forEach(disp => {
+                tableHTML += `
+                    <tr>
+                        <td><strong>Lớp ${disp.className}</strong></td>
+                        <td>${disp.studentName}</td>
+                        <td>
+                            <strong>${disp.criterionName}</strong>
+                            <span class="badge badge-danger" style="margin-left: 6px; font-size: 0.65rem;">
+                                -${disp.points}đ
+                            </span>
+                        </td>
+                        <td>
+                            <span style="font-style: italic; color: var(--text-secondary);">
+                                "${disp.reason || ''}"
+                            </span>
+                        </td>
+                        <td style="text-align: center;">
+                            <div style="display: flex; gap: 6px; justify-content: center;">
+                                <button
+                                    class="btn btn-sm btn-approve-dispute"
+                                    data-id="${disp.rawRecord.MaChiTiet}"
+                                    style="padding: 4px 10px; font-size: 0.7rem; background: #DCFCE7; color: #16A34A; border: 1px solid #A7F3D0; border-radius: 4px; cursor: pointer; font-weight: 600;"
+                                    title="Chấp nhận khiếu nại (Xóa lỗi này)"
+                                >
+                                    Duyệt
+                                </button>
+                                <button
+                                    class="btn btn-sm btn-reject-dispute"
+                                    data-id="${disp.rawRecord.MaChiTiet}"
+                                    style="padding: 4px 10px; font-size: 0.7rem; background: #FEF2F2; color: #DC2626; border: 1px solid #FCA5A5; border-radius: 4px; cursor: pointer; font-weight: 600;"
+                                    title="Bác bỏ khiếu nại (Giữ nguyên lỗi)"
+                                >
+                                    Bác bỏ
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+            });
+
+            tableHTML += `
+                    </tbody>
+                </table>
+            `;
+
+            tableResponsive.innerHTML = tableHTML;
+            cardContainer.appendChild(tableResponsive);
+
+            // Add event listeners
+            tableResponsive.querySelectorAll(".btn-approve-dispute").forEach(btn => {
+                btn.addEventListener("click", () => {
+                    const id = parseInt(btn.getAttribute("data-id"));
+                    this.handleResolveDispute(id, "APPROVE");
+                });
+            });
+
+            tableResponsive.querySelectorAll(".btn-reject-dispute").forEach(btn => {
+                btn.addEventListener("click", () => {
+                    const id = parseInt(btn.getAttribute("data-id"));
+                    this.handleResolveDispute(id, "REJECT");
+                });
+            });
+        }
+
+        this.adminDisputesCard.appendChild(cardContainer);
+    }
+
+    renderGvcnDisputes() {
+        if (!this.gvcnDisputesCard) return;
+
+        const weekId = this.summarySelectWeek ? parseInt(this.summarySelectWeek.value) : this.currentWeekId;
+        const classId = this.currentUser ? this.currentUser.MaLop : null;
+        if (!classId) {
+            this.gvcnDisputesCard.style.display = "none";
+            return;
+        }
+
+        const viPhams = JSON.parse(localStorage.getItem("TDHD_ChiTietViPhamHocSinh") || "[]");
+        const classViPhams = viPhams.filter(v => v.MaLop === classId && v.MaTuan === weekId);
+        const classes = JSON.parse(localStorage.getItem("TDHD_DanhMucLop") || "[]");
+        const currentClass = classes.find(c => c.MaLop === classId);
+        const className = currentClass ? currentClass.TenLop : "";
+
+        this.gvcnDisputesCard.style.display = "block";
+        this.gvcnDisputesCard.innerHTML = "";
+
+        const cardContainer = document.createElement("div");
+        cardContainer.className = "dashboard-card";
+        cardContainer.style.cssText = "margin-top: 1.5rem;";
+
+        const cardHeader = document.createElement("div");
+        cardHeader.className = "card-header";
+        cardHeader.style.cssText = "display: flex; align-items: center; gap: 8px;";
+        cardHeader.innerHTML = `
+            <span class="material-symbols-rounded" style="color: var(--warning-color);">shield_alert</span>
+            <h3 class="card-title" style="margin: 0; font-size: 1.1rem; font-weight: 600;">
+                Khai Báo Khiếu Nại Điểm Thi Đua - Lớp ${className}
+            </h3>
+        `;
+        cardContainer.appendChild(cardHeader);
+
+        if (classViPhams.length === 0) {
+            const noData = document.createElement("div");
+            noData.className = "no-data";
+            noData.style.cssText = "padding: 2rem 0; text-align: center; color: var(--text-muted); font-size: 0.85rem;";
+            noData.textContent = "Không có lỗi vi phạm nào được ghi nhận cho lớp bạn trong tuần này.";
+            cardContainer.appendChild(noData);
+        } else {
+            const tableResponsive = document.createElement("div");
+            tableResponsive.className = "table-responsive";
+
+            let tableHTML = `
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 80px;">Thời gian</th>
+                            <th style="width: 120px;">Đối tượng</th>
+                            <th>Nội dung vi phạm</th>
+                            <th>Ghi chú cờ đỏ</th>
+                            <th style="width: 80px; text-align: center;">Điểm trừ</th>
+                            <th style="width: 180px; text-align: center;">Trạng thái khiếu nại</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            `;
+
+            const criteria = JSON.parse(localStorage.getItem("TDHD_QuyDinhThiDua") || "[]");
+            const students = JSON.parse(localStorage.getItem("TDHD_DanhSachHocSinh") || "[]");
+
+            classViPhams.forEach(v => {
+                const tc = criteria.find(c => c.MaTieuChi === v.MaTieuChi);
+                const hs = v.MaHocSinh ? students.find(s => s.MaHocSinh === v.MaHocSinh) : null;
+                const status = v.TrangThai || 'DA_XAC_NHAN';
+                const points = tc ? tc.DiemChuyenDoi : 0;
+                const content = tc ? tc.NoiDung : 'Vi phạm';
+                const hsName = hs ? hs.HoTen : 'Tập thể lớp';
+
+                let statusCell = '';
+                if (status === 'DA_XAC_NHAN') {
+                    statusCell = `
+                        <button
+                            class="btn btn-outline btn-sm btn-dispute-trigger"
+                            data-id="${v.MaChiTiet}"
+                            style="padding: 4px 10px; font-size: 0.75rem; color: var(--warning-color); border-color: var(--warning-color); display: inline-flex; align-items: center; gap: 4px; cursor: pointer; background: transparent;"
+                        >
+                            <span class="material-symbols-rounded" style="font-size: 0.95rem;">campaign</span>
+                            Gửi Khiếu Nại
+                        </button>
+                    `;
+                } else if (status === 'KHIEU_NAI') {
+                    statusCell = `
+                        <div style="display: flex; flex-direction: column; align-items: center; gap: 2px;">
+                            <span class="badge" style="font-size: 0.7rem; background-color: #FEF3C7; color: #D97706; border: 1px solid #FCD34D; text-transform: none;">
+                                Đang khiếu nại
+                            </span>
+                            <span style="font-size: 0.65rem; color: var(--text-secondary); font-style: italic; max-width: 160px; overflow: hidden; text-overflow: ellipsis; display: inline-block; white-space: nowrap;" title="${v.LyDoKhieuNai || ''}">
+                                "${v.LyDoKhieuNai || ''}"
+                            </span>
+                        </div>
+                    `;
+                } else {
+                    statusCell = `
+                        <span class="badge badge-success" style="font-size: 0.7rem;">Đã giải quyết</span>
+                    `;
+                }
+
+                tableHTML += `
+                    <tr>
+                        <td class="family-pt-mono">Thứ ${v.ThuTrongTuan}</td>
+                        <td><strong>${hsName}</strong></td>
+                        <td>${content}</td>
+                        <td><span style="font-size: 0.85rem; color: var(--text-muted);">${v.GhiChuChiTiet || '-'}</span></td>
+                        <td style="text-align: center; font-weight: 700; color: var(--danger-color);">
+                            -${points}đ
+                        </td>
+                        <td style="text-align: center;">
+                            ${statusCell}
+                        </td>
+                    </tr>
+                `;
+            });
+
+            tableHTML += `
+                    </tbody>
+                </table>
+            `;
+
+            tableResponsive.innerHTML = tableHTML;
+            cardContainer.appendChild(tableResponsive);
+
+            // Add event listeners
+            tableResponsive.querySelectorAll(".btn-dispute-trigger").forEach(btn => {
+                btn.addEventListener("click", () => {
+                    const id = parseInt(btn.getAttribute("data-id"));
+                    this.openDisputeDialog(id);
+                });
+            });
+        }
+
+        this.gvcnDisputesCard.appendChild(cardContainer);
+    }
+
+    handleResolveDispute(maChiTiet, action) {
+        if (!confirm(`Bạn có chắc chắn muốn ${action === 'APPROVE' ? 'CHẤP NHẬN (Xóa lỗi)' : 'TỪ CHỐI (Giữ nguyên lỗi)'} khiếu nại này không?`)) {
+            return;
+        }
+
+        const viPhams = JSON.parse(localStorage.getItem("TDHD_ChiTietViPhamHocSinh") || "[]");
+        let updatedData = [];
+
+        if (action === "APPROVE") {
+            updatedData = viPhams.filter(item => item.MaChiTiet !== maChiTiet);
+        } else {
+            updatedData = viPhams.map(item => {
+                if (item.MaChiTiet === maChiTiet) {
+                    return { ...item, TrangThai: "DA_XAC_NHAN", LyDoKhieuNai: "" };
+                }
+                return item;
+            });
+        }
+
+        localStorage.setItem("TDHD_ChiTietViPhamHocSinh", JSON.stringify(updatedData));
+        MockDatabase.recalculateAllWeeks();
+        MockDatabase.syncAllTransactionData();
+
+        this.renderAll();
+        alert("Xử lý khiếu nại thành công!");
+    }
+
+    openDisputeDialog(maChiTiet) {
+        const viPhams = JSON.parse(localStorage.getItem("TDHD_ChiTietViPhamHocSinh") || "[]");
+        const v = viPhams.find(item => item.MaChiTiet === maChiTiet);
+        if (!v) return;
+
+        const criteria = JSON.parse(localStorage.getItem("TDHD_QuyDinhThiDua") || "[]");
+        const tc = criteria.find(c => c.MaTieuChi === v.MaTieuChi);
+        const students = JSON.parse(localStorage.getItem("TDHD_DanhSachHocSinh") || "[]");
+        const hs = v.MaHocSinh ? students.find(s => s.MaHocSinh === v.MaHocSinh) : null;
+        const hsName = hs ? hs.HoTen : 'Tập thể lớp';
+        const points = tc ? tc.DiemChuyenDoi : 0;
+        const content = tc ? tc.NoiDung : 'Vi phạm';
+
+        this.disputeViolationInfo.innerHTML = `Lỗi: <strong>${content}</strong> (-${points}đ) của <strong>${hsName}</strong> vào thứ ${v.ThuTrongTuan}`;
+        this.disputeReasonInput.value = "";
+        this.disputingViolationId = maChiTiet;
+
+        this.disputeDialog.showModal();
+    }
+
+    handleSaveDispute() {
+        const reason = this.disputeReasonInput.value.trim();
+        if (!reason) {
+            alert("Vui lòng nhập lý do khiếu nại!");
+            return;
+        }
+
+        const viPhams = JSON.parse(localStorage.getItem("TDHD_ChiTietViPhamHocSinh") || "[]");
+        const updatedData = viPhams.map(item => {
+            if (item.MaChiTiet === this.disputingViolationId) {
+                return { ...item, TrangThai: "KHIEU_NAI", LyDoKhieuNai: reason };
+            }
+            return item;
+        });
+
+        localStorage.setItem("TDHD_ChiTietViPhamHocSinh", JSON.stringify(updatedData));
+        MockDatabase.recalculateAllWeeks();
+        MockDatabase.syncAllTransactionData();
+
+        this.disputeDialog.close();
+        this.disputingViolationId = null;
+        this.disputeReasonInput.value = "";
+
+        this.renderAll();
+        alert("Gửi khiếu nại thành công! Điểm số lỗi này sẽ tạm thời được treo.");
+    }
+
+    // ============================================================================
     // 4. RENDER TAB 1: BẢNG XẾP HẠNG & PODIUM
     // ============================================================================
     renderDashboardTab() {
+        if (this.currentRole === "ADMIN") {
+            this.renderAdminDisputes();
+        } else {
+            if (this.adminDisputesCard) {
+                this.adminDisputesCard.style.display = "none";
+                this.adminDisputesCard.innerHTML = "";
+            }
+        }
+
         const summaries = JSON.parse(localStorage.getItem("TDHD_TongKetThiDuaTuan") || "[]");
         const classes = JSON.parse(localStorage.getItem("TDHD_DanhMucLop") || "[]");
 
@@ -2011,6 +2484,43 @@ class AppStateManager {
             }
         });
 
+        // Render warning banner
+        const isLocked = this.isCurrentWeekLocked();
+        const isScoringLocked = isLocked && this.currentRole !== "ADMIN";
+        const warningDiv = document.getElementById("scoring-lock-warning");
+        if (warningDiv) {
+            if (isLocked) {
+                warningDiv.style.cssText = `
+                    padding: 12px 20px;
+                    background: #FEF2F2;
+                    border-bottom: 1px solid #FEE2E2;
+                    color: #991B1B;
+                    font-size: 0.85rem;
+                    font-weight: 500;
+                    display: flex;
+                    align-items: center;
+                    gap: 8px;
+                    font-family: var(--font-body);
+                    margin-bottom: 1rem;
+                    border-radius: 8px;
+                `;
+                warningDiv.innerHTML = `
+                    <span class="material-symbols-rounded" style="color: #B91C1C; font-size: 1.2rem;">lock</span>
+                    Tuần thi đua này đã chốt sổ dữ liệu. ${this.currentRole !== 'ADMIN' ? 'Bạn không có quyền sửa đổi.' : 'Bạn đang thao tác với vai trò ADMIN.'}
+                `;
+            } else {
+                warningDiv.innerHTML = "";
+                warningDiv.style.display = "none";
+            }
+        }
+
+        // Disable save button
+        if (this.btnSaveMatrix) {
+            this.btnSaveMatrix.disabled = isScoringLocked;
+            this.btnSaveMatrix.style.opacity = isScoringLocked ? "0.5" : "1";
+            this.btnSaveMatrix.style.cursor = isScoringLocked ? "not-allowed" : "pointer";
+        }
+
         this.renderMatrix();
     }
 
@@ -2033,6 +2543,9 @@ class AppStateManager {
         const activeCriteria = criteria.filter(c => c.is_active !== false);
         const activeViolations = activeCriteria.filter(c => c.Loai === "TRU");
         const activeAchievements = activeCriteria.filter(c => c.Loai === "CONG");
+
+        const isLocked = this.isCurrentWeekLocked();
+        const isScoringLocked = isLocked && this.currentRole !== "ADMIN";
 
         // 1. Render Bảng Vi Phạm (Điểm trừ)
         activeViolations.forEach(tc => {
@@ -2065,6 +2578,10 @@ class AppStateManager {
                         }
                     }
 
+                    if (isScoringLocked) {
+                        disabledStr = "disabled";
+                    }
+
                     const td = document.createElement("td");
                     td.style.textAlign = "center";
                     td.innerHTML = `
@@ -2090,7 +2607,7 @@ class AppStateManager {
                     const td = document.createElement("td");
                     td.innerHTML = `
                         <div class="student-pill-container" id="container_${key}"></div>
-                        <select class="codo-select-inline" id="select_${key}">
+                        <select class="codo-select-inline" id="select_${key}" ${isScoringLocked ? 'disabled' : ''}>
                             <option value="" disabled selected>+ HS</option>
                             ${classStudents.map(s => `<option value="${s.MaHocSinh}">${s.HoTen}</option>`).join('')}
                         </select>
@@ -2107,12 +2624,15 @@ class AppStateManager {
                                 pill.className = "student-pill red";
                                 pill.innerHTML = `
                                     ${student.HoTen.split(' ').slice(-1)[0]} 
-                                    <span class="material-symbols-rounded pill-remove">close</span>
+                                    ${isScoringLocked ? '' : '<span class="material-symbols-rounded pill-remove">close</span>'}
                                 `;
-                                pill.querySelector(".pill-remove").addEventListener("click", () => {
-                                    this.matrixState[key] = this.matrixState[key].filter(id => id !== hsId);
-                                    renderPills();
-                                });
+                                const removeBtn = pill.querySelector(".pill-remove");
+                                if (removeBtn) {
+                                    removeBtn.addEventListener("click", () => {
+                                        this.matrixState[key] = this.matrixState[key].filter(id => id !== hsId);
+                                        renderPills();
+                                    });
+                                }
                                 container.appendChild(pill);
                             }
                         });
@@ -2157,7 +2677,7 @@ class AppStateManager {
                     const td = document.createElement("td");
                     td.innerHTML = `
                         <div class="student-pill-container" id="container_${key}"></div>
-                        <select class="codo-select-inline" id="select_${key}">
+                        <select class="codo-select-inline" id="select_${key}" ${isScoringLocked ? 'disabled' : ''}>
                             <option value="" disabled selected>+ HS</option>
                             ${classStudents.map(s => `<option value="${s.MaHocSinh}">${s.HoTen}</option>`).join('')}
                         </select>
@@ -2174,12 +2694,15 @@ class AppStateManager {
                                 pill.className = "student-pill green";
                                 pill.innerHTML = `
                                     ${student.HoTen.split(' ').slice(-1)[0]} 
-                                    <span class="material-symbols-rounded pill-remove">close</span>
+                                    ${isScoringLocked ? '' : '<span class="material-symbols-rounded pill-remove">close</span>'}
                                 `;
-                                pill.querySelector(".pill-remove").addEventListener("click", () => {
-                                    this.matrixState[key] = this.matrixState[key].filter(id => id !== hsId);
-                                    renderPills();
-                                });
+                                const removeBtn = pill.querySelector(".pill-remove");
+                                if (removeBtn) {
+                                    removeBtn.addEventListener("click", () => {
+                                        this.matrixState[key] = this.matrixState[key].filter(id => id !== hsId);
+                                        renderPills();
+                                    });
+                                }
                                 container.appendChild(pill);
                             }
                         });
@@ -2237,9 +2760,9 @@ class AppStateManager {
                     td.style.textAlign = "center";
                     td.innerHTML = `
                         <div class="number-counter">
-                            <button type="button" class="btn-dec" ${value <= 0 ? 'disabled' : ''}>-</button>
+                            <button type="button" class="btn-dec" ${(value <= 0 || isScoringLocked) ? 'disabled' : ''}>-</button>
                             <span class="counter-value">${value}</span>
-                            <button type="button" class="btn-inc" ${isIncDisabled ? 'disabled' : ''}>+</button>
+                            <button type="button" class="btn-inc" ${(isIncDisabled || isScoringLocked) ? 'disabled' : ''}>+</button>
                         </div>
                     `;
 
@@ -2567,17 +3090,62 @@ class AppStateManager {
         // Đồng bộ hóa giá trị bộ chọn tuần
         this.summarySelectWeek.value = this.currentWeekId;
 
-        // Điền dữ liệu vào bộ chọn Lớp học
-        this.summarySelectLop.innerHTML = '<option value="" disabled selected>-- Chọn lớp xem thống kê --</option>';
-        classes.forEach(lop => {
-            const opt = document.createElement("option");
-            opt.value = lop.MaLop;
-            opt.textContent = lop.TenLop;
-            this.summarySelectLop.appendChild(opt);
-        });
-
         // Ẩn ma trận cho đến khi lớp được chọn
         this.summaryMatrixContainer.style.display = "none";
+
+        if (this.currentRole === "HOC_SINH" || this.currentRole === "GIAO_VIEN") {
+            const userClassId = this.currentUser ? this.currentUser.MaLop : null;
+            this.summarySelectLop.innerHTML = "";
+            if (userClassId) {
+                const lop = classes.find(c => c.MaLop === userClassId);
+                if (lop) {
+                    const opt = document.createElement("option");
+                    opt.value = lop.MaLop;
+                    opt.textContent = lop.TenLop;
+                    this.summarySelectLop.appendChild(opt);
+                    this.summarySelectLop.value = lop.MaLop;
+                    this.summarySelectLop.disabled = true;
+                    this.loadSummaryMatrixData();
+                }
+            }
+
+            if (this.currentRole === "GIAO_VIEN") {
+                this.renderGvcnDisputes();
+            } else {
+                if (this.gvcnDisputesCard) {
+                    this.gvcnDisputesCard.style.display = "none";
+                    this.gvcnDisputesCard.innerHTML = "";
+                }
+            }
+        } else {
+            // ADMIN hoặc CO_DO: có quyền xem tất cả các lớp
+            this.summarySelectLop.disabled = false;
+            
+            // Lưu lại lớp đã chọn trước đó nếu có
+            const prevSelectedVal = this.summarySelectLop.value;
+
+            this.summarySelectLop.innerHTML = '<option value="" disabled selected>-- Chọn lớp xem thống kê --</option>';
+            classes.forEach(lop => {
+                const opt = document.createElement("option");
+                opt.value = lop.MaLop;
+                opt.textContent = lop.TenLop;
+                this.summarySelectLop.appendChild(opt);
+            });
+
+            // Phục hồi lớp đã chọn hoặc chọn lớp đầu tiên nếu chưa chọn
+            if (prevSelectedVal && classes.some(c => c.MaLop.toString() === prevSelectedVal)) {
+                this.summarySelectLop.value = prevSelectedVal;
+                this.loadSummaryMatrixData();
+            } else if (classes.length > 0) {
+                this.summarySelectLop.value = classes[0].MaLop;
+                this.loadSummaryMatrixData();
+            }
+
+            if (this.gvcnDisputesCard) {
+                this.gvcnDisputesCard.style.display = "none";
+                this.gvcnDisputesCard.innerHTML = "";
+            }
+        }
     }
 
     loadSummaryMatrixData() {

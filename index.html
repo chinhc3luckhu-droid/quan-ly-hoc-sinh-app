@@ -92,6 +92,7 @@
                             <option value="2">Tuần 2</option>
                             <option value="3">Tuần 3</option>
                         </select>
+                        <div id="week-lock-container" style="display: inline-flex; align-items: center; margin-left: 0.5rem;"></div>
                     </div>
                     
                     <!-- Role Switcher (Simulator Only) -->
@@ -113,6 +114,9 @@
                     <h2>Bảng Tổng Sắp Thi Đua Tuần</h2>
                     <p>Cập nhật số liệu tự động và trực quan từ sổ trực hàng ngày</p>
                 </div>
+
+                <!-- Admin Dispute Inbox Widget -->
+                <div id="admin-disputes-card" style="display: none; margin-bottom: 1.5rem;"></div>
 
                 <!-- TOP 3 Podium -->
                 <div class="podium-section">
@@ -328,6 +332,7 @@
 
                 <!-- Ma trận ghi điểm (Chỉ hiển thị khi đã chọn Lớp) -->
                 <div id="scoring-matrix-container" style="display: none;">
+                    <div id="scoring-lock-warning"></div>
                     
                     <!-- Section I: Bảng vi phạm (Điểm trừ) -->
                     <div class="dashboard-card matrix-card">
@@ -462,6 +467,9 @@
                         </div>
                     </div>
                 </div>
+                
+                <!-- GVCN Dispute Form Widget -->
+                <div id="gvcn-disputes-card" style="display: none; margin-top: 1.5rem;"></div>
             </section>
 
             <!-- Tab: Phân Công Trực (PhanCongCoDo) -->
@@ -876,6 +884,36 @@
                         <!-- Dynamic rows populated via JS -->
                     </tbody>
                 </table>
+            </div>
+        </div>
+    </dialog>
+
+    <!-- Dialog: Khai báo khiếu nại (dispute) -->
+    <dialog id="dispute-dialog" class="glass-dialog form-dialog" style="max-width: 450px; width: 90%;">
+        <div class="dialog-content" style="text-align: left;">
+            <h3 style="font-family: var(--font-heading); font-size: 1.2rem; margin-bottom: 1rem; color: var(--text-primary);">
+                Khai Báo Khiếu Nại Điểm Thi Đua
+            </h3>
+            
+            <div id="dispute-violation-info" style="margin-bottom: 1rem; font-size: 0.85rem; color: var(--text-secondary); background: rgba(255, 255, 255, 0.03); padding: 10px; border-radius: 6px; border: 1px solid var(--border-card);">
+                <!-- Populated dynamically via JS -->
+            </div>
+
+            <div class="form-group" style="margin-bottom: 1.2rem;">
+                <label style="display: block; margin-bottom: 6px; font-weight: 600; font-size: 0.9rem;">
+                    Lý do khiếu nại <span class="required">*</span>
+                </label>
+                <textarea
+                    id="dispute-reason-input"
+                    class="form-control"
+                    style="width: 100%; min-height: 100px; padding: 8px; border-radius: 6px; border: 1px solid var(--border-card); background: var(--bg-card); color: var(--text-primary); resize: vertical;"
+                    placeholder="Nhập lý do phản hồi chi tiết (ví dụ: học sinh đi muộn có lý do chính đáng...)"
+                ></textarea>
+            </div>
+
+            <div class="dialog-actions" style="display: flex; gap: 0.75rem; justify-content: flex-end;">
+                <button type="button" class="btn btn-outline" id="btn-cancel-dispute-dialog">Hủy bỏ</button>
+                <button type="button" class="btn btn-primary" id="btn-submit-dispute-dialog">Gửi Khiếu Nại</button>
             </div>
         </div>
     </dialog>

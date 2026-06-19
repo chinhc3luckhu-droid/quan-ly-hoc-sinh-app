@@ -667,12 +667,21 @@ export default function Home() {
     return nhatKy.reduce((sum, item) => sum + item.TongDiemTruPhatSinh, 0);
   }, [summaryLopId, currentWeekId, dbState]);
 
-  // Tự động chọn lớp đầu tiên cho tab tổng hợp
+  // Tự động chọn lớp tương ứng cho Học sinh và GVCN, hoặc lớp đầu tiên cho Admin/Cờ đỏ
   useEffect(() => {
-    if (dbState && dbState.DanhMucLop.length > 0 && !summaryLopId) {
-      setSummaryLopId(dbState.DanhMucLop[0].MaLop);
+    if (!dbState) return;
+    if (currentRole === "HOC_SINH" || currentRole === "GIAO_VIEN") {
+      const userClassId = currentUser?.MaLop;
+      if (userClassId) {
+        setSummaryLopId(userClassId);
+      }
+    } else {
+      // Admin hoặc Cờ đỏ: nếu chưa chọn lớp thì chọn lớp đầu tiên
+      if (!summaryLopId && dbState.DanhMucLop.length > 0) {
+        setSummaryLopId(dbState.DanhMucLop[0].MaLop);
+      }
     }
-  }, [dbState, summaryLopId]);
+  }, [currentRole, currentUser, dbState, summaryLopId]);
 
   // 5. Logic cho TAB 4: PHÂN CÔNG CO ĐỎ TRỰC
   const handleDeleteAssign = (assignId: number) => {
@@ -1055,6 +1064,28 @@ export default function Home() {
 
     setActiveDialog(null);
     alert("Xử lý khiếu nại thành công!");
+  };
+
+  const handleToggleWeekLock = async (weekId: number) => {
+    if (!dbState) return;
+    const updatedWeeks = dbState.DanhMucTuan.map(w => {
+      if (w.MaTuan === weekId) {
+        return { ...w, DaChotSo: !w.DaChotSo };
+      }
+      return w;
+    });
+
+    const updatedState = {
+      ...dbState,
+      DanhMucTuan: updatedWeeks
+    };
+
+    const computed = recalculateAllWeeks(updatedState);
+    setDbState(computed);
+    setEditWeeks(JSON.parse(JSON.stringify(updatedWeeks)));
+
+    localStorage.setItem("TDHD_DanhMucTuan", JSON.stringify(updatedWeeks));
+    syncTableToSupabase("DanhMucTuan", "MaTuan", updatedWeeks, true);
   };
 
   const handleDownloadTemplate = () => {
@@ -1546,42 +1577,71 @@ export default function Home() {
                   </option>
                 ))}
               </select>
-              {isCurrentWeekLocked ? (
-                <span className="lock-badge locked" style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '0.25rem',
-                  padding: '0.25rem 0.5rem',
-                  borderRadius: '100px',
-                  backgroundColor: '#F1F5F9',
-                  color: '#475569',
-                  fontSize: '0.7rem',
-                  fontWeight: 600,
-                  border: '1px solid #E2E8F0',
-                  marginLeft: '0.5rem',
-                  fontFamily: 'var(--font-body)'
-                }}>
-                  <span className="material-symbols-rounded" style={{ fontSize: '0.85rem' }}>lock</span>
-                  Đã chốt
-                </span>
+              {currentRole === "ADMIN" ? (
+                <button
+                  onClick={() => handleToggleWeekLock(currentWeekId)}
+                  className={`lock-badge ${isCurrentWeekLocked ? 'locked' : 'unlocked'}`}
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '0.25rem',
+                    padding: '0.25rem 0.6rem',
+                    borderRadius: '100px',
+                    backgroundColor: isCurrentWeekLocked ? '#F1F5F9' : '#ECFDF5',
+                    color: isCurrentWeekLocked ? '#475569' : '#047857',
+                    fontSize: '0.7rem',
+                    fontWeight: 600,
+                    border: isCurrentWeekLocked ? '1px solid #E2E8F0' : '1px solid #A7F3D0',
+                    marginLeft: '0.5rem',
+                    cursor: 'pointer',
+                    fontFamily: 'var(--font-body)',
+                    transition: 'all 0.2s ease'
+                  }}
+                  title={isCurrentWeekLocked ? "Nhấp để mở khóa tuần thi đua" : "Nhấp để khóa chốt sổ tuần thi đua"}
+                >
+                  <span className="material-symbols-rounded" style={{ fontSize: '0.85rem' }}>
+                    {isCurrentWeekLocked ? 'lock' : 'lock_open'}
+                  </span>
+                  {isCurrentWeekLocked ? '🔒 Đã chốt (Mở khóa)' : '🔓 Đang mở (Khóa sổ)'}
+                </button>
               ) : (
-                <span className="lock-badge unlocked" style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '0.25rem',
-                  padding: '0.25rem 0.5rem',
-                  borderRadius: '100px',
-                  backgroundColor: '#ECFDF5',
-                  color: '#047857',
-                  fontSize: '0.7rem',
-                  fontWeight: 600,
-                  border: '1px solid #A7F3D0',
-                  marginLeft: '0.5rem',
-                  fontFamily: 'var(--font-body)'
-                }}>
-                  <span className="material-symbols-rounded" style={{ fontSize: '0.85rem' }}>lock_open</span>
-                  Đang mở
-                </span>
+                isCurrentWeekLocked ? (
+                  <span className="lock-badge locked" style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '0.25rem',
+                    padding: '0.25rem 0.5rem',
+                    borderRadius: '100px',
+                    backgroundColor: '#F1F5F9',
+                    color: '#475569',
+                    fontSize: '0.7rem',
+                    fontWeight: 600,
+                    border: '1px solid #E2E8F0',
+                    marginLeft: '0.5rem',
+                    fontFamily: 'var(--font-body)'
+                  }}>
+                    <span className="material-symbols-rounded" style={{ fontSize: '0.85rem' }}>lock</span>
+                    Đã chốt
+                  </span>
+                ) : (
+                  <span className="lock-badge unlocked" style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '0.25rem',
+                    padding: '0.25rem 0.5rem',
+                    borderRadius: '100px',
+                    backgroundColor: '#ECFDF5',
+                    color: '#047857',
+                    fontSize: '0.7rem',
+                    fontWeight: 600,
+                    border: '1px solid #A7F3D0',
+                    marginLeft: '0.5rem',
+                    fontFamily: 'var(--font-body)'
+                  }}>
+                    <span className="material-symbols-rounded" style={{ fontSize: '0.85rem' }}>lock_open</span>
+                    Đang mở
+                  </span>
+                )
               )}
             </div>
             
@@ -1691,66 +1751,73 @@ export default function Home() {
           <div className="tab-content active">
             
             {/* Admin Disputes Notification Panel */}
-            {currentRole === "ADMIN" && pendingDisputes.length > 0 && (
-              <div className="card" style={{ marginBottom: '1.5rem', border: '1px solid #FCD34D', background: '#FFFDF5' }}>
-                <div className="card-header" style={{ display: 'flex', alignItems: 'center', gap: '8px', borderBottom: '1px solid #FCD34D' }}>
-                  <span className="material-symbols-rounded" style={{ color: '#D97706' }}>warning</span>
-                  <h3 className="card-title" style={{ color: '#B45309', margin: 0 }}>
-                    Danh Sách Khiếu Nại Thi Đua Chờ Xử Lý ({pendingDisputes.length})
+            {currentRole === "ADMIN" && (
+              <div className="card" style={{ marginBottom: '1.5rem', border: '1px solid var(--border-card)', background: 'var(--bg-card)' }}>
+                <div className="card-header" style={{ display: 'flex', alignItems: 'center', gap: '8px', borderBottom: '1px solid var(--border-card)' }}>
+                  <span className="material-symbols-rounded" style={{ color: 'var(--primary-color)' }}>mail</span>
+                  <h3 className="card-title" style={{ color: 'var(--text-primary)', margin: 0 }}>
+                    Hộp Thư Tiếp Nhận Khiếu Nại Thi Đua ({pendingDisputes.length})
                   </h3>
                 </div>
-                <div className="table-responsive" style={{ padding: '0.5rem' }}>
-                  <table className="data-table">
-                    <thead>
-                      <tr>
-                        <th style={{ width: '80px' }}>Lớp</th>
-                        <th style={{ width: '120px' }}>Học sinh</th>
-                        <th>Nội dung vi phạm</th>
-                        <th>Lý do khiếu nại (từ GVCN)</th>
-                        <th style={{ width: '130px', textAlign: 'center' }}>Thao tác</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {pendingDisputes.map((disp, index) => (
-                        <tr key={index}>
-                          <td><strong>Lớp {disp.className}</strong></td>
-                          <td>{disp.studentName}</td>
-                          <td>
-                            <strong>{disp.criterionName}</strong>
-                            <span className="badge badge-danger" style={{ marginLeft: '6px', fontSize: '0.65rem' }}>
-                              -{disp.points}đ
-                            </span>
-                          </td>
-                          <td>
-                            <span style={{ fontStyle: 'italic', color: 'var(--text-secondary)' }}>
-                              "{disp.reason}"
-                            </span>
-                          </td>
-                          <td style={{ textAlign: 'center' }}>
-                            <div style={{ display: 'flex', gap: '6px', justifyContent: 'center' }}>
-                              <button
-                                className="btn btn-sm"
-                                style={{ padding: '4px 10px', fontSize: '0.7rem', background: '#DCFCE7', color: '#16A34A', border: '1px solid #A7F3D0', borderRadius: '4px', cursor: 'pointer', fontWeight: 600 }}
-                                onClick={() => handleResolveDispute(disp.rawRecord, true, 'APPROVE')}
-                                title="Chấp nhận khiếu nại (Xóa lỗi này)"
-                              >
-                                Duyệt
-                              </button>
-                              <button
-                                className="btn btn-sm"
-                                style={{ padding: '4px 10px', fontSize: '0.7rem', background: '#FEF2F2', color: '#DC2626', border: '1px solid #FCA5A5', borderRadius: '4px', cursor: 'pointer', fontWeight: 600 }}
-                                onClick={() => handleResolveDispute(disp.rawRecord, true, 'REJECT')}
-                                title="Bác bỏ khiếu nại (Giữ nguyên lỗi)"
-                              >
-                                Bác bỏ
-                              </button>
-                            </div>
-                          </td>
+                {pendingDisputes.length === 0 ? (
+                  <div className="no-data" style={{ padding: '2rem 0', textAlign: 'center', color: 'var(--text-muted)', fontSize: '0.85rem' }}>
+                    <span className="material-symbols-rounded" style={{ fontSize: '2rem', display: 'block', marginBottom: '0.5rem', opacity: 0.5 }}>mark_email_read</span>
+                    Không có khiếu nại thi đua nào cần xử lý từ Giáo viên Chủ nhiệm.
+                  </div>
+                ) : (
+                  <div className="table-responsive" style={{ padding: '0.5rem' }}>
+                    <table className="data-table">
+                      <thead>
+                        <tr>
+                          <th style={{ width: '80px' }}>Lớp</th>
+                          <th style={{ width: '120px' }}>Học sinh</th>
+                          <th>Nội dung vi phạm</th>
+                          <th>Lý do khiếu nại (từ GVCN)</th>
+                          <th style={{ width: '130px', textAlign: 'center' }}>Thao tác</th>
                         </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
+                      </thead>
+                      <tbody>
+                        {pendingDisputes.map((disp, index) => (
+                          <tr key={index}>
+                            <td><strong>Lớp {disp.className}</strong></td>
+                            <td>{disp.studentName}</td>
+                            <td>
+                              <strong>{disp.criterionName}</strong>
+                              <span className="badge badge-danger" style={{ marginLeft: '6px', fontSize: '0.65rem' }}>
+                                -{disp.points}đ
+                              </span>
+                            </td>
+                            <td>
+                              <span style={{ fontStyle: 'italic', color: 'var(--text-secondary)' }}>
+                                "{disp.reason}"
+                              </span>
+                            </td>
+                            <td style={{ textAlign: 'center' }}>
+                              <div style={{ display: 'flex', gap: '6px', justifyContent: 'center' }}>
+                                <button
+                                  className="btn btn-sm"
+                                  style={{ padding: '4px 10px', fontSize: '0.7rem', background: '#DCFCE7', color: '#16A34A', border: '1px solid #A7F3D0', borderRadius: '4px', cursor: 'pointer', fontWeight: 600 }}
+                                  onClick={() => handleResolveDispute(disp.rawRecord, true, 'APPROVE')}
+                                  title="Chấp nhận khiếu nại (Xóa lỗi này)"
+                                >
+                                  Duyệt
+                                </button>
+                                <button
+                                  className="btn btn-sm"
+                                  style={{ padding: '4px 10px', fontSize: '0.7rem', background: '#FEF2F2', color: '#DC2626', border: '1px solid #FCA5A5', borderRadius: '4px', cursor: 'pointer', fontWeight: 600 }}
+                                  onClick={() => handleResolveDispute(disp.rawRecord, true, 'REJECT')}
+                                  title="Bác bỏ khiếu nại (Giữ nguyên lỗi)"
+                                >
+                                  Bác bỏ
+                                </button>
+                              </div>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                )}
               </div>
             )}
             
@@ -2493,11 +2560,20 @@ export default function Home() {
                   style={{ padding: '8px 12px', borderRadius: '6px', border: '1px solid var(--border-card)', background: 'var(--bg-card)', color: 'var(--text-primary)', minWidth: '180px' }}
                   value={summaryLopId || ""}
                   onChange={(e) => setSummaryLopId(parseInt(e.target.value))}
+                  disabled={currentRole === "HOC_SINH" || currentRole === "GIAO_VIEN"}
                 >
                   <option value="" disabled>-- Chọn lớp học --</option>
-                  {dbState.DanhMucLop.map(c => (
-                    <option key={c.MaLop} value={c.MaLop}>Lớp {c.TenLop}</option>
-                  ))}
+                  {dbState.DanhMucLop
+                    .filter(c => {
+                      if (currentRole === "HOC_SINH" || currentRole === "GIAO_VIEN") {
+                        return c.MaLop === currentUser?.MaLop;
+                      }
+                      return true;
+                    })
+                    .map(c => (
+                      <option key={c.MaLop} value={c.MaLop}>Lớp {c.TenLop}</option>
+                    ))
+                  }
                 </select>
               </div>
 
@@ -2589,6 +2665,85 @@ export default function Home() {
                 </div>
               )}
             </div>
+
+            {/* GVCN Dispute Panel */}
+            {currentRole === "GIAO_VIEN" && currentUser && (
+              <div className="card" style={{ marginTop: '1.5rem' }}>
+                <div className="card-header" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <span className="material-symbols-rounded" style={{ color: 'var(--warning-color)' }}>shield_alert</span>
+                  <h3 className="card-title" style={{ margin: 0 }}>
+                    Khai Báo Khiếu Nại Điểm Thi Đua - Lớp {dbState.DanhMucLop.find(c => c.MaLop === currentUser.MaLop)?.TenLop}
+                  </h3>
+                </div>
+                
+                <div className="table-responsive">
+                  <table className="data-table">
+                    <thead>
+                      <tr>
+                        <th style={{ width: '80px' }}>Thời gian</th>
+                        <th style={{ width: '120px' }}>Đối tượng</th>
+                        <th>Nội dung vi phạm</th>
+                        <th>Ghi chú cờ đỏ</th>
+                        <th style={{ width: '80px', textAlign: 'center' }}>Điểm trừ</th>
+                        <th style={{ width: '180px', textAlign: 'center' }}>Trạng thái khiếu nại</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {dbState.ChiTietViPhamHocSinh.filter(v => v.MaLop === currentUser.MaLop && v.MaTuan === currentWeekId).length === 0 ? (
+                        <tr>
+                          <td colSpan={6} className="no-data" style={{ textAlign: 'center', color: 'var(--text-muted)', padding: '2rem 0' }}>
+                            Không có lỗi vi phạm nào được ghi nhận cho lớp bạn trong tuần này.
+                          </td>
+                        </tr>
+                      ) : (
+                        dbState.ChiTietViPhamHocSinh
+                          .filter(v => v.MaLop === currentUser.MaLop && v.MaTuan === currentWeekId)
+                          .map((v, index) => {
+                            const tc = dbState.QuyDinhThiDua.find(c => c.MaTieuChi === v.MaTieuChi);
+                            const hs = v.MaHocSinh ? dbState.DanhSachHocSinh.find(s => s.MaHocSinh === v.MaHocSinh) : null;
+                            const status = v.TrangThai || 'DA_XAC_NHAN';
+                            
+                            return (
+                              <tr key={v.MaChiTiet || index}>
+                                <td className="family-pt-mono">Thứ {v.ThuTrongTuan}</td>
+                                <td><strong>{hs ? hs.HoTen : 'Tập thể lớp'}</strong></td>
+                                <td>{tc ? tc.NoiDung : 'Vi phạm'}</td>
+                                <td><span style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>{v.GhiChuChiTiet || '-'}</span></td>
+                                <td style={{ textAlign: 'center', fontWeight: '700', color: 'var(--danger-color)' }}>
+                                  -{tc ? tc.DiemChuyenDoi : 0}đ
+                                </td>
+                                <td style={{ textAlign: 'center' }}>
+                                  {status === 'DA_XAC_NHAN' ? (
+                                    <button
+                                      className="btn btn-outline btn-sm"
+                                      style={{ padding: '4px 10px', fontSize: '0.75rem', color: 'var(--warning-color)', borderColor: 'var(--warning-color)', display: 'inline-flex', alignItems: 'center', gap: '4px', cursor: 'pointer' }}
+                                      onClick={() => handleDisputeClick(v, true)}
+                                    >
+                                      <span className="material-symbols-rounded" style={{ fontSize: '0.95rem' }}>campaign</span>
+                                      Gửi Khiếu Nại
+                                    </button>
+                                  ) : status === 'KHIEU_NAI' ? (
+                                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '2px' }}>
+                                      <span className="badge" style={{ fontSize: '0.7rem', backgroundColor: '#FEF3C7', color: '#D97706', border: '1px solid #FCD34D' }}>
+                                        Đang khiếu nại
+                                      </span>
+                                      <span style={{ fontSize: '0.65rem', color: 'var(--text-secondary)', fontStyle: 'italic', maxWidth: '160px', overflow: 'hidden', textOverflow: 'ellipsis', display: 'inline-block', whiteSpace: 'nowrap' }} title={v.LyDoKhieuNai}>
+                                        "{v.LyDoKhieuNai}"
+                                      </span>
+                                    </div>
+                                  ) : (
+                                    <span className="badge badge-success" style={{ fontSize: '0.7rem' }}>Đã giải quyết</span>
+                                  )}
+                                </td>
+                              </tr>
+                            );
+                          })
+                      )}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            )}
           </div>
         )}
 
