@@ -21,7 +21,8 @@ CREATE TABLE IF NOT EXISTS "DanhMucTuan" (
     "MaTuan" INT PRIMARY KEY,
     "TenTuan" VARCHAR(50) NOT NULL,
     "NgayBatDau" DATE NOT NULL,
-    "NgayKetThuc" DATE NOT NULL
+    "NgayKetThuc" DATE NOT NULL,
+    "DaChotSo" BOOLEAN DEFAULT FALSE
 );
 
 -- 3. Bảng QuyDinhThiDua
@@ -71,7 +72,9 @@ CREATE TABLE IF NOT EXISTS "ChiTietViPhamHocSinh" (
     "MaTuan" INT REFERENCES "DanhMucTuan"("MaTuan") ON DELETE CASCADE,
     "ThuTrongTuan" INT CHECK ("ThuTrongTuan" BETWEEN 2 AND 7) NOT NULL,
     "MaNguoiDungGhiNhan" INT REFERENCES "NguoiDung"("MaNguoiDung") ON DELETE SET NULL,
-    "GhiChuChiTiet" TEXT
+    "GhiChuChiTiet" TEXT,
+    "TrangThai" VARCHAR(50) DEFAULT 'DA_XAC_NHAN',
+    "LyDoKhieuNai" TEXT
 );
 
 -- 8. Bảng ChiTietThanhTichHocSinh
@@ -84,7 +87,9 @@ CREATE TABLE IF NOT EXISTS "ChiTietThanhTichHocSinh" (
     "ThuTrongTuan" INT CHECK ("ThuTrongTuan" BETWEEN 2 AND 7) NOT NULL,
     "MonHoc" VARCHAR(100),
     "MaNguoiDungGhiNhan" INT REFERENCES "NguoiDung"("MaNguoiDung") ON DELETE SET NULL,
-    "GhiChu" TEXT
+    "GhiChu" TEXT,
+    "TrangThai" VARCHAR(50) DEFAULT 'DA_XAC_NHAN',
+    "LyDoKhieuNai" TEXT
 );
 
 -- 9. Bảng NhatKyViPhamHangNgay

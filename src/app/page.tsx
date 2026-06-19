@@ -56,11 +56,21 @@ export default function Home() {
   const [importError, setImportError] = useState("");
 
   // Dialog overlays states
-  const [activeDialog, setActiveDialog] = useState<string | null>(null); // "alert", "assign", "violation-detail", "student-detail"
+  const [activeDialog, setActiveDialog] = useState<string | null>(null); // "alert", "assign", "violation-detail", "student-detail", "dispute"
   const [violationDetailRows, setViolationDetailRows] = useState<any[]>([]);
   const [violationDetailTitle, setViolationDetailTitle] = useState("");
   const [studentDetailRows, setStudentDetailRows] = useState<any[]>([]);
   const [studentDetailTitle, setStudentDetailTitle] = useState("");
+
+  // Dispute and Week Locking states
+  const [disputingViolation, setDisputingViolation] = useState<any | null>(null);
+  const [disputeReason, setDisputeReason] = useState("");
+
+  const isCurrentWeekLocked = useMemo(() => {
+    if (!dbState) return false;
+    const currentWeek = dbState.DanhMucTuan.find(w => w.MaTuan === currentWeekId);
+    return currentWeek ? !!currentWeek.DaChotSo : false;
+  }, [dbState, currentWeekId]);
 
   // 1. Tải dữ liệu lúc khởi động trang
   useEffect(() => {
@@ -79,7 +89,6 @@ export default function Home() {
     loadData();
   }, []);
 
-  // Đọc danh sách người dùng tương ứng với vai trò đóng vai
   const currentUser = useMemo(() => {
     if (!dbState) return null;
     const users = dbState.NguoiDung;
@@ -93,6 +102,29 @@ export default function Home() {
       return users.find(u => u.VaiTro === "HOC_SINH" && u.MaLop === 5) || users[3];
     }
   }, [currentRole, dbState]);
+
+  const pendingDisputes = useMemo(() => {
+    if (!dbState) return [];
+    const list: any[] = [];
+    dbState.ChiTietViPhamHocSinh.forEach((v: any) => {
+      if (v.TrangThai === 'KHIEU_NAI') {
+        const student = dbState.DanhSachHocSinh.find(s => s.MaHocSinh === v.MaHocSinh);
+        const lop = dbState.DanhMucLop.find(l => l.MaLop === v.MaLop);
+        const tc = dbState.QuyDinhThiDua.find(c => c.MaTieuChi === v.MaTieuChi);
+        list.push({
+          rawRecord: v,
+          isViolation: true,
+          studentName: student ? student.HoTen : 'Tập thể lớp',
+          className: lop ? lop.TenLop : 'Lớp khác',
+          criterionName: tc ? tc.NoiDung : 'Vi phạm',
+          points: tc ? tc.DiemChuyenDoi : 0,
+          day: `Thứ ${v.ThuTrongTuan}`,
+          reason: v.LyDoKhieuNai
+        });
+      }
+    });
+    return list;
+  }, [dbState]);
 
   // Khởi động bảng phân công trực tạm thời khi tuần thay đổi
   useEffect(() => {
@@ -946,6 +978,85 @@ export default function Home() {
     alert("Đã lưu và đồng bộ danh sách học sinh thành công!");
   };
 
+  const handleDisputeClick = (record: any, isViolation: boolean) => {
+    setDisputingViolation({ record, isViolation });
+    setDisputeReason("");
+    setActiveDialog("dispute");
+  };
+
+  const handleSaveDispute = () => {
+    if (!dbState || !disputingViolation) return;
+    const { record, isViolation } = disputingViolation;
+    const reason = disputeReason.trim();
+    if (!reason) {
+      alert("Vui lòng nhập lý do khiếu nại!");
+      return;
+    }
+
+    const targetTable = isViolation ? "ChiTietViPhamHocSinh" : "ChiTietThanhTichHocSinh";
+    const pkName = isViolation ? "MaChiTiet" : "MaChiTietThanhTich";
+
+    const updatedData = dbState[targetTable].map((item: any) => {
+      if (item[pkName] === record[pkName]) {
+        return { ...item, TrangThai: "KHIEU_NAI", LyDoKhieuNai: reason };
+      }
+      return item;
+    });
+
+    const updatedState = {
+      ...dbState,
+      [targetTable]: updatedData
+    };
+
+    const computed = recalculateAllWeeks(updatedState);
+    setDbState(computed);
+
+    localStorage.setItem(`TDHD_${targetTable}`, JSON.stringify(updatedData));
+    syncTableToSupabase(targetTable, pkName, updatedData, true);
+
+    setActiveDialog(null);
+    setDisputingViolation(null);
+    setDisputeReason("");
+    alert("Gửi khiếu nại thành công! Điểm số lỗi này sẽ tạm thời được treo.");
+  };
+
+  const handleResolveDispute = (record: any, isViolation: boolean, action: "APPROVE" | "REJECT") => {
+    if (!dbState) return;
+    if (!confirm(`Bạn có chắc chắn muốn ${action === 'APPROVE' ? 'CHẤP NHẬN' : 'TỪ CHỐI'} khiếu nại này không?`)) {
+      return;
+    }
+
+    const targetTable = isViolation ? "ChiTietViPhamHocSinh" : "ChiTietThanhTichHocSinh";
+    const pkName = isViolation ? "MaChiTiet" : "MaChiTietThanhTich";
+
+    let updatedData: any[];
+
+    if (action === "APPROVE") {
+      updatedData = dbState[targetTable].filter((item: any) => item[pkName] !== record[pkName]);
+    } else {
+      updatedData = dbState[targetTable].map((item: any) => {
+        if (item[pkName] === record[pkName]) {
+          return { ...item, TrangThai: "DA_XAC_NHAN", LyDoKhieuNai: "" };
+        }
+        return item;
+      });
+    }
+
+    const updatedState = {
+      ...dbState,
+      [targetTable]: updatedData
+    };
+
+    const computed = recalculateAllWeeks(updatedState);
+    setDbState(computed);
+
+    localStorage.setItem(`TDHD_${targetTable}`, JSON.stringify(updatedData));
+    syncTableToSupabase(targetTable, pkName, updatedData, false);
+
+    setActiveDialog(null);
+    alert("Xử lý khiếu nại thành công!");
+  };
+
   const handleDownloadTemplate = () => {
     const sep = "sep=,\n";
     const headers = "Họ tên,Ngày sinh,Giới tính\n";
@@ -1238,6 +1349,8 @@ export default function Home() {
     viPhams.forEach(v => {
       const tc = criteria.find(c => c.MaTieuChi === v.MaTieuChi);
       rows.push({
+        rawRecord: v,
+        isViolation: true,
         type: "Vi phạm",
         content: tc?.NoiDung || "Lỗi vi phạm",
         detail: v.GhiChuChiTiet || "-",
@@ -1249,6 +1362,8 @@ export default function Home() {
     thanhTichs.forEach(t => {
       const tc = criteria.find(c => c.MaTieuChi === t.MaTieuChi);
       rows.push({
+        rawRecord: t,
+        isViolation: false,
         type: "Thành tích",
         content: tc?.NoiDung || "Khen thưởng",
         detail: t.GhiChu || "-",
@@ -1419,16 +1534,55 @@ export default function Home() {
           
           <div className="header-actions">
             {/* Week Selector */}
-            <div className="week-selector">
+            <div className="week-selector" style={{ display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
               <span className="material-symbols-rounded">event</span>
               <select 
                 value={currentWeekId} 
                 onChange={(e) => setCurrentWeekId(parseInt(e.target.value))}
               >
                 {dbState.DanhMucTuan.map(w => (
-                  <option key={w.MaTuan} value={w.MaTuan}>{w.TenTuan}</option>
+                  <option key={w.MaTuan} value={w.MaTuan}>
+                    {w.TenTuan} {w.DaChotSo ? " (🔒)" : ""}
+                  </option>
                 ))}
               </select>
+              {isCurrentWeekLocked ? (
+                <span className="lock-badge locked" style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '0.25rem',
+                  padding: '0.25rem 0.5rem',
+                  borderRadius: '100px',
+                  backgroundColor: '#F1F5F9',
+                  color: '#475569',
+                  fontSize: '0.7rem',
+                  fontWeight: 600,
+                  border: '1px solid #E2E8F0',
+                  marginLeft: '0.5rem',
+                  fontFamily: 'var(--font-body)'
+                }}>
+                  <span className="material-symbols-rounded" style={{ fontSize: '0.85rem' }}>lock</span>
+                  Đã chốt
+                </span>
+              ) : (
+                <span className="lock-badge unlocked" style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '0.25rem',
+                  padding: '0.25rem 0.5rem',
+                  borderRadius: '100px',
+                  backgroundColor: '#ECFDF5',
+                  color: '#047857',
+                  fontSize: '0.7rem',
+                  fontWeight: 600,
+                  border: '1px solid #A7F3D0',
+                  marginLeft: '0.5rem',
+                  fontFamily: 'var(--font-body)'
+                }}>
+                  <span className="material-symbols-rounded" style={{ fontSize: '0.85rem' }}>lock_open</span>
+                  Đang mở
+                </span>
+              )}
             </div>
             
             {/* Role Switcher (Simulator Only) */}
@@ -1533,9 +1687,72 @@ export default function Home() {
           </div>
         )}
 
-        {/* 1. Content TAB 1: BẢNG XẾP HẠNG (DASHBOARD) */}
         {searchTerm.trim() === "" && activeTab === "dashboard" && (
           <div className="tab-content active">
+            
+            {/* Admin Disputes Notification Panel */}
+            {currentRole === "ADMIN" && pendingDisputes.length > 0 && (
+              <div className="card" style={{ marginBottom: '1.5rem', border: '1px solid #FCD34D', background: '#FFFDF5' }}>
+                <div className="card-header" style={{ display: 'flex', alignItems: 'center', gap: '8px', borderBottom: '1px solid #FCD34D' }}>
+                  <span className="material-symbols-rounded" style={{ color: '#D97706' }}>warning</span>
+                  <h3 className="card-title" style={{ color: '#B45309', margin: 0 }}>
+                    Danh Sách Khiếu Nại Thi Đua Chờ Xử Lý ({pendingDisputes.length})
+                  </h3>
+                </div>
+                <div className="table-responsive" style={{ padding: '0.5rem' }}>
+                  <table className="data-table">
+                    <thead>
+                      <tr>
+                        <th style={{ width: '80px' }}>Lớp</th>
+                        <th style={{ width: '120px' }}>Học sinh</th>
+                        <th>Nội dung vi phạm</th>
+                        <th>Lý do khiếu nại (từ GVCN)</th>
+                        <th style={{ width: '130px', textAlign: 'center' }}>Thao tác</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {pendingDisputes.map((disp, index) => (
+                        <tr key={index}>
+                          <td><strong>Lớp {disp.className}</strong></td>
+                          <td>{disp.studentName}</td>
+                          <td>
+                            <strong>{disp.criterionName}</strong>
+                            <span className="badge badge-danger" style={{ marginLeft: '6px', fontSize: '0.65rem' }}>
+                              -{disp.points}đ
+                            </span>
+                          </td>
+                          <td>
+                            <span style={{ fontStyle: 'italic', color: 'var(--text-secondary)' }}>
+                              "{disp.reason}"
+                            </span>
+                          </td>
+                          <td style={{ textAlign: 'center' }}>
+                            <div style={{ display: 'flex', gap: '6px', justifyContent: 'center' }}>
+                              <button
+                                className="btn btn-sm"
+                                style={{ padding: '4px 10px', fontSize: '0.7rem', background: '#DCFCE7', color: '#16A34A', border: '1px solid #A7F3D0', borderRadius: '4px', cursor: 'pointer', fontWeight: 600 }}
+                                onClick={() => handleResolveDispute(disp.rawRecord, true, 'APPROVE')}
+                                title="Chấp nhận khiếu nại (Xóa lỗi này)"
+                              >
+                                Duyệt
+                              </button>
+                              <button
+                                className="btn btn-sm"
+                                style={{ padding: '4px 10px', fontSize: '0.7rem', background: '#FEF2F2', color: '#DC2626', border: '1px solid #FCA5A5', borderRadius: '4px', cursor: 'pointer', fontWeight: 600 }}
+                                onClick={() => handleResolveDispute(disp.rawRecord, true, 'REJECT')}
+                                title="Bác bỏ khiếu nại (Giữ nguyên lỗi)"
+                              >
+                                Bác bỏ
+                              </button>
+                            </div>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            )}
             
             {/* Top 3 Podium Cards */}
             <div className="podium-section">
@@ -1935,6 +2152,24 @@ export default function Home() {
                 </div>
               ) : (
                 <div>
+                  {/* Warning banner if week is locked */}
+                  {isCurrentWeekLocked && (
+                    <div style={{
+                      padding: '12px 20px',
+                      background: '#FEF2F2',
+                      borderBottom: '1px solid #FEE2E2',
+                      color: '#991B1B',
+                      fontSize: '0.85rem',
+                      fontWeight: '500',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '8px',
+                      fontFamily: 'var(--font-body)'
+                    }}>
+                      <span className="material-symbols-rounded" style={{ color: '#B91C1C', fontSize: '1.2rem' }}>lock</span>
+                      Tuần thi đua này đã chốt sổ dữ liệu. {currentRole !== 'ADMIN' ? 'Bạn không có quyền sửa đổi.' : 'Bạn đang thao tác với quyền ADMIN (được phép sửa).'}
+                    </div>
+                  )}
                   
                   {/* Info alert helper */}
                   {currentRole === "CO_DO" && (
@@ -1988,7 +2223,8 @@ export default function Home() {
                                                          (matrixState[`23_${thu}`] ? 1 : 0);
                                     
                                     const checked = matrixState[key] === true;
-                                    const isDisabled = (totalPeriods >= maxP && !checked);
+                                    const isScoringLocked = isCurrentWeekLocked && currentRole !== "ADMIN";
+                                    const isDisabled = (totalPeriods >= maxP && !checked) || isScoringLocked;
 
                                     return (
                                       <td key={thu} style={{ textAlign: 'center' }}>
@@ -2004,6 +2240,7 @@ export default function Home() {
                                   } else {
                                     // Chọn danh sách học sinh vi phạm cá nhân
                                     const selectedHocSinhs = Array.isArray(matrixState[key]) ? matrixState[key] : [];
+                                    const isScoringLocked = isCurrentWeekLocked && currentRole !== "ADMIN";
                                     return (
                                       <td key={thu}>
                                         <div className="student-pill-container">
@@ -2012,13 +2249,15 @@ export default function Home() {
                                             return (
                                               <span key={hsId} className="student-pill">
                                                 {student ? student.HoTen : `HS ${hsId}`}
-                                                <span 
-                                                  className="material-symbols-rounded" 
-                                                  onClick={() => handleMatrixRemoveStudent(key, hsId)}
-                                                  style={{ fontSize: '0.9rem', cursor: 'pointer', verticalAlign: 'middle', marginLeft: '2px' }}
-                                                >
-                                                  close
-                                                </span>
+                                                {!isScoringLocked && (
+                                                  <span 
+                                                    className="material-symbols-rounded" 
+                                                    onClick={() => handleMatrixRemoveStudent(key, hsId)}
+                                                    style={{ fontSize: '0.9rem', cursor: 'pointer', verticalAlign: 'middle', marginLeft: '2px' }}
+                                                  >
+                                                    close
+                                                  </span>
+                                                )}
                                               </span>
                                             );
                                           })}
@@ -2026,6 +2265,7 @@ export default function Home() {
                                         <select 
                                           className="codo-select-inline"
                                           value=""
+                                          disabled={isScoringLocked}
                                           onChange={(e) => handleMatrixSelectStudent(key, e.target.value)}
                                         >
                                           <option value="" disabled>+ HS</option>
@@ -2083,6 +2323,7 @@ export default function Home() {
                                   if (isStudentAchievement) {
                                     // Chọn danh sách học sinh có thành tích
                                     const selectedHocSinhs = Array.isArray(matrixState[key]) ? matrixState[key] : [];
+                                    const isScoringLocked = isCurrentWeekLocked && currentRole !== "ADMIN";
                                     return (
                                       <td key={thu}>
                                         <div className="student-pill-container">
@@ -2091,13 +2332,15 @@ export default function Home() {
                                             return (
                                               <span key={hsId} className="student-pill">
                                                 {student ? student.HoTen : `HS ${hsId}`}
-                                                <span 
-                                                  className="material-symbols-rounded" 
-                                                  onClick={() => handleMatrixRemoveStudent(key, hsId)}
-                                                  style={{ fontSize: '0.9rem', cursor: 'pointer', verticalAlign: 'middle', marginLeft: '2px' }}
-                                                >
-                                                  close
-                                                </span>
+                                                {!isScoringLocked && (
+                                                  <span 
+                                                    className="material-symbols-rounded" 
+                                                    onClick={() => handleMatrixRemoveStudent(key, hsId)}
+                                                    style={{ fontSize: '0.9rem', cursor: 'pointer', verticalAlign: 'middle', marginLeft: '2px' }}
+                                                  >
+                                                    close
+                                                  </span>
+                                                )}
                                               </span>
                                             );
                                           })}
@@ -2105,6 +2348,7 @@ export default function Home() {
                                         <select 
                                           className="codo-select-inline"
                                           value=""
+                                          disabled={isScoringLocked}
                                           onChange={(e) => handleMatrixSelectStudent(key, e.target.value)}
                                         >
                                           <option value="" disabled>+ HS</option>
@@ -2140,7 +2384,8 @@ export default function Home() {
                                                          (matrixState[`22_${thu}`] ? 1 : 0) + 
                                                          (matrixState[`23_${thu}`] ? 1 : 0);
                                     
-                                    const isIncDisabled = (totalPeriods >= maxP);
+                                    const isScoringLocked = isCurrentWeekLocked && currentRole !== "ADMIN";
+                                    const isIncDisabled = (totalPeriods >= maxP) || isScoringLocked;
 
                                     return (
                                       <td key={thu} style={{ textAlign: 'center' }}>
@@ -2148,7 +2393,7 @@ export default function Home() {
                                           <button 
                                             type="button" 
                                             className="btn-dec" 
-                                            disabled={value <= 0}
+                                            disabled={value <= 0 || isScoringLocked}
                                             onClick={() => handleMatrixCounter(key, "dec", maxP)}
                                           >
                                             -
@@ -2180,6 +2425,7 @@ export default function Home() {
                     <button 
                       type="button" 
                       className="btn btn-primary"
+                      disabled={isCurrentWeekLocked && currentRole !== "ADMIN"}
                       onClick={handleSaveMatrixData}
                     >
                       <span className="material-symbols-rounded" style={{ verticalAlign: 'middle', marginRight: '6px' }}>save</span>
@@ -2736,10 +2982,11 @@ export default function Home() {
                   <thead>
                     <tr>
                       <th style={{ width: '15%' }}>Mã Tuần</th>
-                      <th style={{ width: '30%' }}>Tên Tuần</th>
-                      <th style={{ width: '25%' }}>Ngày Bắt Đầu</th>
+                      <th style={{ width: '25%' }}>Tên Tuần</th>
+                      <th style={{ width: '20%' }}>Ngày Bắt Đầu</th>
                       <th style={{ width: '20%' }}>Ngày Kết Thúc</th>
-                      <th style={{ width: '10%', textAlign: 'center' }}>Thao tác</th>
+                      <th style={{ width: '15%', textAlign: 'center' }}>Khóa sổ</th>
+                      <th style={{ width: '5%', textAlign: 'center' }}>Thao tác</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -2784,6 +3031,41 @@ export default function Home() {
                             />
                           ) : (
                             <span className="family-pt-mono">{row.NgayKetThuc || "-"}</span>
+                          )}
+                        </td>
+                        <td style={{ textAlign: 'center' }}>
+                          {currentRole === "ADMIN" ? (
+                            <button
+                              type="button"
+                              className={`btn btn-sm ${row.DaChotSo ? 'btn-danger' : 'btn-outline'}`}
+                              style={{
+                                padding: '4px 10px',
+                                fontSize: '0.7rem',
+                                display: 'inline-flex',
+                                alignItems: 'center',
+                                gap: '4px',
+                                background: row.DaChotSo ? '#FEF2F2' : 'transparent',
+                                border: row.DaChotSo ? '1px solid #FCA5A5' : '1px solid var(--border-card)',
+                                color: row.DaChotSo ? '#DC2626' : 'var(--text-secondary)',
+                                borderRadius: '4px',
+                                cursor: row.isNew ? 'not-allowed' : 'pointer'
+                              }}
+                              disabled={row.isNew}
+                              onClick={() => {
+                                const newWeeks = [...editWeeks];
+                                newWeeks[index] = { ...row, DaChotSo: !row.DaChotSo };
+                                setEditWeeks(newWeeks);
+                              }}
+                            >
+                              <span className="material-symbols-rounded" style={{ fontSize: '0.95rem' }}>
+                                {row.DaChotSo ? "lock" : "lock_open"}
+                              </span>
+                              {row.DaChotSo ? "Khóa" : "Mở"}
+                            </button>
+                          ) : (
+                            <span className={`badge ${row.DaChotSo ? 'badge-danger' : 'badge-success'}`} style={{ fontSize: '0.7rem', padding: '3px 8px', borderRadius: '12px' }}>
+                              {row.DaChotSo ? "Đã khóa" : "Đang mở"}
+                            </span>
                           )}
                         </td>
                         <td style={{ textAlign: 'center' }}>
@@ -3092,39 +3374,149 @@ export default function Home() {
                 <table className="data-table">
                   <thead>
                     <tr>
-                      <th style={{ width: '100px' }}>Thời gian</th>
-                      <th style={{ width: '120px', textAlign: 'center' }}>Phân loại</th>
+                      <th style={{ width: '90px' }}>Thời gian</th>
+                      <th style={{ width: '100px', textAlign: 'center' }}>Phân loại</th>
                       <th>Nội dung sự việc</th>
                       <th>Ghi chú thêm</th>
-                      <th style={{ width: '100px', textAlign: 'center' }}>Số điểm</th>
+                      <th style={{ width: '80px', textAlign: 'center' }}>Số điểm</th>
+                      <th style={{ width: '130px', textAlign: 'center' }}>Trạng thái</th>
                     </tr>
                   </thead>
                   <tbody>
                     {studentDetailRows.length === 0 ? (
                       <tr>
-                        <td colSpan={5} className="no-data" style={{ textAlign: 'center', color: 'var(--text-muted)', padding: '2rem 0' }}>
+                        <td colSpan={6} className="no-data" style={{ textAlign: 'center', color: 'var(--text-muted)', padding: '2rem 0' }}>
                           Học sinh không có ghi chép khen thưởng hay kỷ luật nào trong tuần này.
                         </td>
                       </tr>
                     ) : (
-                      studentDetailRows.map((item, idx) => (
-                        <tr key={idx}>
-                          <td className="family-pt-mono">{item.day}</td>
-                          <td style={{ textAlign: 'center' }}>
-                            <span className={`badge ${item.type === 'Vi phạm' ? 'badge-danger' : 'badge-success'}`}>
-                              {item.type}
-                            </span>
-                          </td>
-                          <td><strong>{item.content}</strong></td>
-                          <td><span style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>{item.detail}</span></td>
-                          <td style={{ textAlign: 'center', fontWeight: 700, color: item.type === 'Vi phạm' ? 'var(--danger-color)' : 'var(--success-color)' }}>
-                            {item.points}
-                          </td>
-                        </tr>
-                      ))
+                      studentDetailRows.map((item, idx) => {
+                        const status = item.rawRecord?.TrangThai || 'DA_XAC_NHAN';
+                        return (
+                          <tr key={idx}>
+                            <td className="family-pt-mono">{item.day}</td>
+                            <td style={{ textAlign: 'center' }}>
+                              <span className={`badge ${item.type === 'Vi phạm' ? 'badge-danger' : 'badge-success'}`}>
+                                {item.type}
+                              </span>
+                            </td>
+                            <td><strong>{item.content}</strong></td>
+                            <td><span style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>{item.detail}</span></td>
+                            <td style={{ textAlign: 'center', fontWeight: 700, color: item.type === 'Vi phạm' ? 'var(--danger-color)' : 'var(--success-color)' }}>
+                              {item.points}
+                            </td>
+                            <td style={{ textAlign: 'center' }}>
+                              {item.type === 'Vi phạm' ? (
+                                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px' }}>
+                                  {status === 'DA_XAC_NHAN' && (
+                                    <>
+                                      <span className="badge badge-secondary" style={{ fontSize: '0.65rem' }}>Đã ghi nhận</span>
+                                      {currentRole === 'GIAO_VIEN' && (
+                                        <button
+                                          className="btn btn-outline btn-sm"
+                                          style={{ padding: '2px 8px', fontSize: '0.65rem', color: 'var(--warning-color)', borderColor: 'var(--warning-color)', marginTop: '2px' }}
+                                          onClick={() => handleDisputeClick(item.rawRecord, true)}
+                                        >
+                                          Khiếu nại
+                                        </button>
+                                      )}
+                                    </>
+                                  )}
+                                  {status === 'KHIEU_NAI' && (
+                                    <>
+                                      <span className="badge" style={{ fontSize: '0.65rem', backgroundColor: '#FEF3C7', color: '#D97706', border: '1px solid #FCD34D' }}>
+                                        Khiếu nại
+                                      </span>
+                                      {item.rawRecord.LyDoKhieuNai && (
+                                        <span style={{ fontSize: '0.65rem', color: 'var(--text-muted)', display: 'block', maxWidth: '120px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }} title={item.rawRecord.LyDoKhieuNai}>
+                                          {item.rawRecord.LyDoKhieuNai}
+                                        </span>
+                                      )}
+                                      {currentRole === 'ADMIN' && (
+                                        <div style={{ display: 'flex', gap: '4px', marginTop: '2px' }}>
+                                          <button
+                                            className="btn btn-sm"
+                                            style={{ padding: '2px 6px', fontSize: '0.65rem', background: '#DCFCE7', color: '#16A34A', border: '1px solid #A7F3D0', cursor: 'pointer' }}
+                                            onClick={() => handleResolveDispute(item.rawRecord, true, 'APPROVE')}
+                                            title="Chấp nhận khiếu nại (Hủy lỗi)"
+                                          >
+                                            Duyệt
+                                          </button>
+                                          <button
+                                            className="btn btn-sm"
+                                            style={{ padding: '2px 6px', fontSize: '0.65rem', background: '#FEF2F2', color: '#DC2626', border: '1px solid #FCA5A5', cursor: 'pointer' }}
+                                            onClick={() => handleResolveDispute(item.rawRecord, true, 'REJECT')}
+                                            title="Bác bỏ khiếu nại (Giữ lỗi)"
+                                          >
+                                            Bác bỏ
+                                          </button>
+                                        </div>
+                                      )}
+                                    </>
+                                  )}
+                                </div>
+                              ) : (
+                                <span style={{ color: 'var(--text-muted)', fontSize: '0.8rem' }}>-</span>
+                              )}
+                            </td>
+                          </tr>
+                        );
+                      })
                     )}
                   </tbody>
                 </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Dialog: Khai báo khiếu nại (dispute) */}
+      {activeDialog === "dispute" && disputingViolation && (
+        <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, backgroundColor: 'rgba(0, 0, 0, 0.6)', backdropFilter: 'blur(4px)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1010 }} onClick={() => { setActiveDialog(null); setDisputingViolation(null); }}>
+          <div className="glass-dialog form-dialog" onClick={(e) => e.stopPropagation()} style={{ maxWidth: '450px', width: '90%', display: 'block' }}>
+            <div className="dialog-content" style={{ textAlign: 'left' }}>
+              <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.2rem', marginBottom: '1rem', color: 'var(--text-primary)' }}>
+                Khai Báo Khiếu Nại Điểm Thi Đua
+              </h3>
+              
+              <div style={{ marginBottom: '1rem', fontSize: '0.85rem', color: 'var(--text-secondary)', background: '#F8FAFC', padding: '10px', borderRadius: '6px', border: '1px solid var(--border-card)' }}>
+                <div><strong>Lỗi phạt:</strong> {dbState?.QuyDinhThiDua.find(c => c.MaTieuChi === disputingViolation.record.MaTieuChi)?.NoiDung}</div>
+                <div><strong>Điểm trừ:</strong> -{dbState?.QuyDinhThiDua.find(c => c.MaTieuChi === disputingViolation.record.MaTieuChi)?.DiemChuyenDoi}đ</div>
+                {disputingViolation.record.MaHocSinh && (
+                  <div><strong>Học sinh:</strong> {dbState?.DanhSachHocSinh.find(s => s.MaHocSinh === disputingViolation.record.MaHocSinh)?.HoTen}</div>
+                )}
+                <div><strong>Ghi chú cờ đỏ:</strong> {disputingViolation.record.GhiChuChiTiet || "-"}</div>
+              </div>
+
+              <div className="form-group" style={{ marginBottom: '1.2rem' }}>
+                <label style={{ display: 'block', marginBottom: '6px', fontWeight: 600, fontSize: '0.9rem' }}>
+                  Lý do khiếu nại <span className="required">*</span>
+                </label>
+                <textarea
+                  className="form-control"
+                  style={{ width: '100%', minHeight: '100px', padding: '8px', borderRadius: '6px', border: '1px solid var(--border-card)', background: 'var(--bg-card)', color: 'var(--text-primary)', resize: 'vertical' }}
+                  placeholder="Nhập lý do phản hồi chi tiết (ví dụ: học sinh đi muộn có lý do chính đáng...)"
+                  value={disputeReason}
+                  onChange={(e) => setDisputeReason(e.target.value)}
+                />
+              </div>
+
+              <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'flex-end' }}>
+                <button
+                  type="button"
+                  className="btn btn-outline"
+                  onClick={() => { setActiveDialog(null); setDisputingViolation(null); }}
+                >
+                  Hủy bỏ
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-primary"
+                  onClick={handleSaveDispute}
+                >
+                  Gửi Khiếu Nại
+                </button>
               </div>
             </div>
           </div>

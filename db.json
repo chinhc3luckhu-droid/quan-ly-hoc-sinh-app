@@ -98,19 +98,22 @@
             "MaTuan": 1,
             "TenTuan": "Tuần 1",
             "NgayBatDau": "2025-09-01",
-            "NgayKetThuc": "2025-09-06"
+            "NgayKetThuc": "2025-09-06",
+            "DaChotSo": false
         },
         {
             "MaTuan": 2,
             "TenTuan": "Tuần 2",
             "NgayBatDau": "2025-09-08",
-            "NgayKetThuc": "2025-09-13"
+            "NgayKetThuc": "2025-09-13",
+            "DaChotSo": false
         },
         {
             "MaTuan": 3,
             "TenTuan": "Tuần 3",
             "NgayBatDau": "2025-09-15",
-            "NgayKetThuc": "2025-09-20"
+            "NgayKetThuc": "2025-09-20",
+            "DaChotSo": false
         }
     ],
     "TDHD_QuyDinhThiDua": [

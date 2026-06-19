@@ -171,9 +171,9 @@ export function recalculateAllWeeks(state: DatabaseState): DatabaseState {
   weeks.forEach(tuan => {
     const weekId = tuan.MaTuan;
 
-    // 1. Tổng hợp điểm trừ hàng ngày
+    // 1. Tổng hợp điểm trừ hàng ngày (chỉ tính những vi phạm KHÔNG ở trạng thái KHIEU_NAI)
     classes.forEach(lop => {
-      const lopVps = viPhams.filter(v => v.MaLop === lop.MaLop && v.MaTuan === weekId);
+      const lopVps = viPhams.filter(v => v.MaLop === lop.MaLop && v.MaTuan === weekId && (v.TrangThai || 'DA_XAC_NHAN') !== 'KHIEU_NAI');
       const groupedVps: Record<string, any> = {};
 
       lopVps.forEach(v => {
@@ -199,9 +199,9 @@ export function recalculateAllWeeks(state: DatabaseState): DatabaseState {
       });
     });
 
-    // 2. Tổng hợp điểm cộng hàng ngày
+    // 2. Tổng hợp điểm cộng hàng ngày (chỉ tính những thành tích KHÔNG ở trạng thái KHIEU_NAI)
     classes.forEach(lop => {
-      const lopTts = thanhTichs.filter(t => t.MaLop === lop.MaLop && t.MaTuan === weekId);
+      const lopTts = thanhTichs.filter(t => t.MaLop === lop.MaLop && t.MaTuan === weekId && (t.TrangThai || 'DA_XAC_NHAN') !== 'KHIEU_NAI');
       const groupedTts: Record<string, any> = {};
 
       lopTts.forEach(t => {
